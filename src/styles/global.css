@@ -3,152 +3,274 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+  --font-display: Barlow_Condensed;
+  --font-body: Montserrat;
+  --font-mono: Oxygen_Mono;
+  --color-background-base: #161a30;
+  --color-primary-base: #31304d;
+  --color-secondary-base: #b6bbc4;
+  --color-accent-base: #e88009;
+  --color-accent-secondary-base: #343d51;
 }
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+
+* {
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  min-width: 0;
 }
-@font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-body {
-	font-family: 'Atkinson', sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
-}
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
+
 h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
 h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+  font-family: var(--font-display);
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: "Atkinson", sans-serif;
+  min-height: 100dvh;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+[x-cloak] {
+  visibility: hidden !important;
+}
+
+.prose {
+  @apply mb-6 mt-6 text-base text-primary-800 dark:text-primary-200;
+}
+
+.subtle {
+  @apply text-xs text-primary-400 dark:text-primary-400;
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark code[data-theme*=" "],
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+.dark pre {
+  background: #cdc8ff0d;
+}
+.dark code {
+  background-color: initial;
+}
+
+html:not(.dark) pre {
+  background: #fafaf9;
+}
+html:not(.dark) code {
+  background-color: initial;
+}
+
+[data-rehype-pretty-code-figure] > code:has(span[data-line]) {
+  white-space: nowrap;
+  font-weight: bold;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-inline-start: 4px;
+  padding-inline-end: 4px;
+  border-radius: 4px;
+  display: inline;
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent-secondary-base) 10%,
+    white
+  );
+}
+
+[data-rehype-pretty-code-figure] > code > span[data-line] > span {
+  color: color-mix(in srgb, var(--color-accent-secondary-base) 80%, white);
+}
+
+.dark [data-rehype-pretty-code-figure] > code:has(span[data-line]) {
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent-secondary-base) 100%,
+    white
+  );
+}
+
+.dark [data-rehype-pretty-code-figure] > code > span[data-line] > span {
+  color: color-mix(in srgb, var(--color-accent-secondary-base) 20%, white);
+}
+
+.dark [data-rehype-pretty-code-title] {
+  background-color: rgb(28 28 28 / var(--tw-bg-opacity));
+}
+
+html:not(.dark) [data-rehype-pretty-code-title] {
+  background-color: #f5f5f4;
+  color: #18181b;
+  border-color: #e7e5e4;
+}
+
+[data-rehype-pretty-code-title] {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(51 51 51 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(28 28 28 / var(--tw-bg-opacity));
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, Liberation Mono, Courier New, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(229 229 229 / var(--tw-text-opacity));
+}
+
+[data-rehype-pretty-code-figure]:has(pre) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: -18px;
+  margin-right: -18px;
+
+  @media (min-width: 640px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+[data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0;
+}
+
+[data-rehype-pretty-code-figure] code {
+  display: grid;
+  min-width: 100%;
+  overflow-wrap: break-word;
+  border-radius: 0;
+  border-width: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  counter-reset: line;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+[data-rehype-pretty-code-figure] span {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, Liberation Mono, Courier New, monospace;
+}
+
+.has-focused span[data-line]:not(.focused) {
+  opacity: 0.7;
+  transition: filter 0.35s, opacity 0.35s;
+  filter: blur(0.095rem);
+}
+
+span[data-line][data-highlighted-line] {
+  @apply !bg-primary-100 dark:!bg-background-700;
+}
+
+span[data-line].diff.remove {
+  @apply -mx-6 bg-red-600/[.16] px-6 opacity-70 dark:bg-red-400/[.16];
+}
+span[data-line].diff.remove:before {
+  content: "-";
+  @apply absolute text-red-500 dark:text-red-400;
+}
+
+span[data-line].diff.add {
+  @apply -mx-6 bg-green-400/[.16] px-6 dark:bg-green-400/[.16];
+}
+span[data-line].diff.add:before {
+  content: "+";
+  @apply absolute text-green-500 dark:text-green-400;
+}
+
+pre {
+  overflow-x: auto;
+  font-weight: 400;
+  line-height: 1.7142857;
+  border-radius: 0.375rem;
+  padding: 1.5rem;
+}
+
+mark {
+  --lightness: 80%;
+  --highlighted: 1;
+  --highlight: hsl(var(--accent-hue, 45) 80% var(--lightness));
+  background: transparent;
+}
+
+@supports (animation-timeline: view()) {
+  mark {
+    --highlighted: 0;
+    animation: highlight steps(1) both;
+    animation-timeline: view();
+    animation-range: entry 100% cover 10%;
+  }
+}
+
+.dark mark {
+  --lightness: 35%;
+}
+
+mark span {
+  background: linear-gradient(
+      120deg,
+      var(--highlight, lightblue) 50%,
+      transparent 50%
+    )
+    110% 0 / 200% 100% no-repeat;
+  background-position: calc((1 - var(--highlighted)) * 110%) 0;
+  transition: background-position 1s;
+}
+
+@keyframes highlight {
+  to {
+    --highlighted: 1;
+  }
+}
+
+a {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.title-link:hover > .anchor,
+.title-link:focus > .anchor {
+  visibility: visible;
 }

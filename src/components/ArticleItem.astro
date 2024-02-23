@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+
+const { slug, thumbnail, title, subtitle,  path, shortDescription, pubAt } = Astro.props.frontmatter || Astro.props;
+
+console.log(slug);
+const category = slug?.split('/')[0]
+---
+<article class='flex px-0 py-7'>
+    <a
+      href={`/blog/${slug}`}
+      class='mr-6 block flex-[0_0_100px] max-md:hidden md:flex-[0_0_280px]'
+    >
+      <Image
+        src={thumbnail}
+        width={300}
+        height={300}
+        alt={`${title} image thumbnail`}
+        class='h-[280px] w-[280px]'
+      ></Image>
+</a>
+    <div class='flex flex-col justify-between max-lg:flex-1'>
+      <header>
+        <div class='flex flex-row items-center justify-between'>
+          <h3
+            class='mb-2 ml-0 mr-10 mt-2 font-mono text-sm font-bold italic leading-5 text-accent-secondary-400 dark:text-accent-secondary-300 sm:text-sm'
+          >
+            {subtitle}
+        </h3>
+          <div class='mb-4 mt-2'>
+            <a
+              class='font-mono text-sm font-extrabold underline-offset-8'
+              href={`/blog/${category}`}
+            >
+              {category}
+          </a>
+          </div>
+        </div>
+
+        <h2 class='mb-4'>
+          <a
+            href={`/blog/${slug}`}
+            class='font-display text-4xl font-bold leading-7 text-primary-900 hover:text-primary-900 dark:text-primary-100 dark:hover:text-primary-100'
+          >
+            {title}
+        </a>
+    </h2>
+      </header>
+      <p class='prose mb-0 mt-0 leading-6 max-sm:hidden'>
+        {shortDescription}
+      </p>
+      <footer class='mt-4 flex justify-between'>
+        <!-- <p class='prose m-0'>
+          {formatDate(pubAt)}
+        </p>
+        <p class='subtle m-0'>
+          {readingTime.text}
+        </p> -->
+      </footer>
+    </div>
+  </article>

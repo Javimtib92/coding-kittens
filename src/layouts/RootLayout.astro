@@ -1,0 +1,26 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { title, shortDescription } = Astro.props.frontmatter || Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<BaseHead title={title} description={shortDescription} />
+    </head>
+	<body class="bg-white text-black antialiased transition-colors dark:bg-background-700 dark:text-white">
+        <div class="mb-40 max-w-3xl md:mx-auto">
+            <main class="flex min-w-0 flex-auto flex-col px-2 md:px-0">
+                <Header />
+                <div class='mx-4 md:mx-0'>
+                    <slot />
+                </div>
+            </main>
+        </div>
+		<Footer />
+	</body>
+</html>
