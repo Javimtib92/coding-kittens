@@ -1,12 +1,13 @@
 ---
 import { cn } from '../utils/cn';
 
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1);
 const activeClass =
   'dark:text-white text-neutral-900 underline underline-offset-8';
 const inactiveClass =
   'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200';
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
 ---
 
 <div
@@ -34,6 +35,9 @@ const inactiveClass =
   </a>
 </div>
 <div class='flex sm:hidden'>
-  <button aria-label='Mobile nav menu button' class='-mx-4 -my-2 px-4 py-2'
-  ></button>
+  <button
+    aria-label='Mobile nav menu button'
+    class='-mx-4 -my-2 px-4 py-2'
+    x-on:click='toggleMobileNavigation(true)'>MENUSE</button
+  >
 </div>

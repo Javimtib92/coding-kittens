@@ -1,13 +1,31 @@
 ---
 import { Image } from 'astro:assets';
+import MobileNavMenu from './MobileNavMenu.astro';
 import NavigationLinks from './NavigationLinks.astro';
 import ThemeSwitchButton from './ThemeSwitchButton.astro';
 ---
 
+<script is:inline>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('navbar', () => ({
+      open: false,
+
+      toggleMobileNavigation(state) {
+        if (state) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'visible';
+        }
+        this.open = state;
+      },
+    }));
+  });
+</script>
 <nav
+  x-data='navbar'
   class='navbar sticky top-0 z-10 mb-12 mt-20 flex flex-row items-start py-4 pl-2 pr-4 md:-mx-[28px] md:px-5'
 >
-  <!-- <MobileNavMenu></MobileNavMenu> -->
+  <MobileNavMenu />
 
   <div
     class='backdrop absolute left-[-8px] right-[-8px] top-0 h-20 min-w-full backdrop-blur md:-mx-[28px]'

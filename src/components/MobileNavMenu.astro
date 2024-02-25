@@ -1,0 +1,50 @@
+---
+import { cn } from '../utils/cn';
+// import { MenuIcon } from 'lucide-react';
+
+const activeClass =
+  'dark:text-white text-neutral-900 underline underline-offset-8';
+const inactiveClass =
+  'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200';
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+
+<div
+  :class='open ? "visible" : "hidden"'
+  x-on:click='toggleMobileNavigation(false)'
+  class='fixed top-0 z-40 -mx-4 h-dvh w-dvw backdrop-blur'
+>
+  <div
+    class='h-64 bg-white dark:bg-background-700'
+    x-on:click='(e) => e.stopPropagation()'
+  >
+    <div class='flex flex-row-reverse pr-6 pt-6'>
+      <button class='-m-4 p-4' x-on:click='toggleMobileNavigation(false)'>
+        CLOSE
+        <!-- <MenuIcon class='h-6 w-6' /> -->
+      </button>
+    </div>
+    <div class='flex flex-col gap-y-8 p-6'>
+      <a
+        href='/'
+        class={cn(
+          currentPath === '' ? activeClass : inactiveClass,
+          'flex align-middle transition-all'
+        )}
+      >
+        <span class='relative px-2 py-1'>Me</span>
+      </a>
+      <a
+        href='/blog'
+        class={cn(
+          currentPath === 'blog' ? activeClass : inactiveClass,
+          'flex align-middle transition-all'
+        )}
+      >
+        <span class='relative px-2 py-1'>Blog</span>
+      </a>
+    </div>
+  </div>
+</div>
