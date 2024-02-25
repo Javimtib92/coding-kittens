@@ -72,15 +72,14 @@ const [accentHue, ,] = hexToHsl(accentBaseValue);
     Alpine.data('highlight', () => ({
       highlight: false,
 
-      ...(!hasAnimationTimelineSupport
+      intersect: !hasAnimationTimelineSupport
         ? {
-            intersect: {
-              'x-intersect'() {
-                this.highlight = true;
-              },
+            'x-intersect'() {
+              console.log('hasdfasd');
+              this.highlight = true;
             },
           }
-        : {}),
+        : {},
     }));
   });
 </script>
