@@ -6,35 +6,49 @@ subtitle: 'CSSing like a wizard'
 shortDescription: >
   A practical example of how to use Scroll-Driven Animations to enhance your site.
 ---
+
 import { Callout } from '@/lib/ui/callout';
 import { Highlight } from '@/components/highlight';
 import { Pill } from '@/components/pill';
 import { CodeSandbox } from '@/components/sandpack';
 import { ImageCard } from '@/components/image-card';
 import { getFiles } from '@/examples/navigation-shrink';
-import image01 from '/public/images/post_2_1.png'
+import image01 from '/public/images/post_2_1.png';
 
-<Callout
-title="Warning! Experimental feature" type="warning">At the time of writing this post **`animation-timeline:scroll`** feature is still experimental, so make sure you add a fallback. Check the compatibility list in [caniuse.com](https://caniuse.com/mdn-css_properties_animation-timeline_scroll)</Callout>
+<Callout title='Warning! Experimental feature' type='warning'>
+  At the time of writing this post **`animation-timeline:scroll`** feature is
+  still experimental, so make sure you add a fallback. Check the compatibility
+  list in
+  [caniuse.com](https://caniuse.com/mdn-css_properties_animation-timeline_scroll)
+</Callout>
 
 ## A bit of context
 
 I worked on many iterations for this site's navbar to achieve a look and feel that I would be happy with. I wanted a logo that would stand out and a navigation menu always visible — especially for mobile — so that you, the person reading this, could interact at all times with it.
 
-For this reason, I decided to have a navbar that would stick to the top on scroll and I added the site's logo with the site name and the tagline. Everything was beautiful — from my point of view — and I was happy with the result. 
+For this reason, I decided to have a navbar that would stick to the top on scroll and I added the site's logo with the site name and the tagline. Everything was beautiful — from my point of view — and I was happy with the result.
 
 ```bash
 git commit -m "implement absolute perfect non-AI Navbar"
 ```
 
-After the automatic deploy, I grabbed my phone and navigated to my site. Everything looked good until I started reading my first post [How to fix Stack-Size limit error of a recursive function using iteration in JavaScript](/blog/javascript/how-to-fix-stack-size-limit-error-of-a-recursive-function-using-iteration-in-javascript) and I realized that on my tiny phone with my tiny screen the navbar was occuping a lot of the reading space. 
+After the automatic deploy, I grabbed my phone and navigated to my site. Everything looked good until I started reading my first post [How to fix Stack-Size limit error of a recursive function using iteration in JavaScript](/blog/javascript/how-to-fix-stack-size-limit-error-of-a-recursive-function-using-iteration-in-javascript) and I realized that on my tiny phone with my tiny screen the navbar was occuping a lot of the reading space.
 
-I have a 4.7 inch iphone SE so I usually don't have a lot of space to read  and this annoys me every time so I didn't want my site to annoy people.
+I have a 4.7 inch iphone SE so I usually don't have a lot of space to read and this annoys me every time so I didn't want my site to annoy people.
 
 Look at this.
 
-<ImageCard id="image01" key="image01" src={image01} alt="image of Coding Kittens with navbar occuping a big percentage of the screen" width={250} height={450} caption={{ text: 'The Navbar takes a big percentage of the screen on a small device'}}/>
-
+<ImageCard
+  id='image01'
+  key='image01'
+  src={image01}
+  alt='image of Coding Kittens with navbar occuping a big percentage of the screen'
+  width={250}
+  height={450}
+  caption={{
+    text: 'The Navbar takes a big percentage of the screen on a small device',
+  }}
+/>
 
 It might be just me, but I feel something similar to claustrophobia when I have the text contained within such a small space.
 
@@ -54,15 +68,17 @@ The HTML and CSS sections are basic layout of a navbar. The interesting part is 
 
 ```js
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  scrollFunction();
+};
 
 function scrollFunction() {
   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-    document.getElementById("navbar").style.padding = "30px 10px";
-    document.getElementById("logo").style.fontSize = "25px";
+    document.getElementById('navbar').style.padding = '30px 10px';
+    document.getElementById('logo').style.fontSize = '25px';
   } else {
-    document.getElementById("navbar").style.padding = "80px 10px";
-    document.getElementById("logo").style.fontSize = "35px";
+    document.getElementById('navbar').style.padding = '80px 10px';
+    document.getElementById('logo').style.fontSize = '35px';
   }
 }
 ```
@@ -103,7 +119,7 @@ To put it simple, it allows us to trigger an animation based on scrolling positi
 
 > Integrating scroll-driven animations with two existing APIs, means that they benefit from the advantages of these APIs. That includes the ability to have these animations run off the main thread. Yes, read that correctly: you can now have silky smooth animations, driven by scroll, running off the main thread, with just a few lines of extra code. What's not to like?!
 
-This is mind blowing 🤯 
+This is mind blowing 🤯
 
 It means that this animation will not block the main thread, bye bye junky animations!
 
@@ -121,7 +137,7 @@ I'm creating a similar navbar as the one I've built for Coding Kittens. We'll st
   <div class="backdrop"></div>
   <div class="navbar-content">
     <a href="/" class="logo-link">
-      <!--Logo SVG or image goes here -->       
+      <!--Logo SVG or image goes here -->
       <div class="site-name">
         <p>Your site</p>
       </div>
@@ -170,7 +186,7 @@ Next, we'll need to add some styles for this element to make them look like a na
     margin-left: -28px;
   }
 }
-  
+
 .navbar-content {
   display: flex;
   z-index: 10;
@@ -237,43 +253,44 @@ Next, we'll need to add some styles for this element to make them look like a na
 
 Once we have these pieces put together, we'll have something like this:
 
-<CodeSandbox files={
-  getFiles({ animationStyles: false})
-} />
+<CodeSandbox files={getFiles({ animationStyles: false })} />
 
 We have our first version of the navbar, similar to the one I mentioned [at the begining of this post](#a-bit-of-context). It doesn't animate and occupies a considerable amount of the screen. We can do better.
 
 We are going to apply some CSS spells to it. 🪄
 
 ```css title="styles.css"
-  @keyframes shrink { /* [!code focus]*//* [!code ++] */
-    0% {/* [!code focus]*//* [!code ++] */
-      --navbar-shrink: 0;/* [!code focus]*//* [!code ++] */
-    }/* [!code focus]*//* [!code ++] */
-    10%,/* [!code focus]*//* [!code ++] */
-    100% {/* [!code focus]*//* [!code ++] */
-      --navbar-shrink: 1;/* [!code focus]*//* [!code ++] */
-    }/* [!code focus]*//* [!code ++] */
-  }/* [!code focus]*//* [!code ++] */
+@keyframes shrink {
+  /* [!code focus]*/ /* [!code ++] */
+  0% {
+    /* [!code focus]*/ /* [!code ++] */
+    --navbar-shrink: 0; /* [!code focus]*/ /* [!code ++] */
+  } /* [!code focus]*/ /* [!code ++] */
+  10%,/* [!code focus]*//* [!code ++] */
+    100% {
+    /* [!code focus]*/ /* [!code ++] */
+    --navbar-shrink: 1; /* [!code focus]*/ /* [!code ++] */
+  } /* [!code focus]*/ /* [!code ++] */
+} /* [!code focus]*/ /* [!code ++] */
 
 .navbar {
-    display: flex;
-    position: sticky;
-    padding: 1rem 0.5rem;
-    margin-bottom: 3rem;
-    margin-top: 5rem;
-    flex-direction: row;
-    align-items: flex-start;
-    top: 0;
-  
-    @media (min-width: 768px) {
-      padding: 1rem 1.25rem;
-    }
+  display: flex;
+  position: sticky;
+  padding: 1rem 0.5rem;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
+  flex-direction: row;
+  align-items: flex-start;
+  top: 0;
 
-    --navbar-shrink: 0; /* [!code focus]*//* [!code ++] */
-    animation: shrink; /* [!code focus]*//* [!code ++] */
-    animation-timing-function: ease; /* [!code focus]*//* [!code ++] */
-    animation-timeline: scroll(nearest block); /* [!code focus]*//* [!code ++] */
+  @media (min-width: 768px) {
+    padding: 1rem 1.25rem;
+  }
+
+  --navbar-shrink: 0; /* [!code focus]*/ /* [!code ++] */
+  animation: shrink; /* [!code focus]*/ /* [!code ++] */
+  animation-timing-function: ease; /* [!code focus]*/ /* [!code ++] */
+  animation-timeline: scroll(nearest block); /* [!code focus]*/ /* [!code ++] */
 }
 ```
 
@@ -289,18 +306,17 @@ I'll explain step by step what we are doing here:
 
 5. We define the `animation-timeline` to call the `scroll` CSS function with **nearest** as the `scrollable` and **block** as the `axis`.
 
-
-<Callout title="Remember" type="warning">**`animation-timeline`** must be declared after the **`animation`** shorthand as the shorthand will reset non-included longhands to their initial value.</Callout>
+<Callout title='Remember' type='warning'>
+  **`animation-timeline`** must be declared after the **`animation`** shorthand
+  as the shorthand will reset non-included longhands to their initial value.
+</Callout>
 
 The code we just added gives us access to a boolean CSS variable that will allow us to apply different states to our navbar based on scroll position. How cool is that?
 
 Now lets add some juicy animations.
 
-
 ```css title="styles.css"
-... our .navbar styles...
-
-.navbar .navbar-content {
+... our .navbar styles... .navbar .navbar-content {
   transition: transform 0.3s ease;
   transform: translateY(calc(0px - var(--navbar-shrink) * 12px));
   /* calc(initial_position - (0 * 12 || 1 * 12))  */
@@ -322,7 +338,7 @@ Now lets add some juicy animations.
   opacity: calc(1 - var(--navbar-shrink));
   /* calc(initial_opacity - (0 || 1))  */
 }
-... more styles ...
+... more styles ...;
 ```
 
 We use the CSS property `--navbar-shrink` to dynamically calculate the value using `calc` CSS function. This is what we are doing:
@@ -360,25 +376,28 @@ We'll start by adding the **CSS Supports at rule** to check if there's browser s
 
   @media (min-width: 768px) {
     padding: 1rem 1.25rem;
-  } 
+  }
 
-   --navbar-shrink: 0;/* [!code --] *//* [!code focus]*/
-  /* [!code --] *//* [!code focus]*/
-    animation: shrink;/* [!code --] *//* [!code focus]*/
-    animation-timeline: scroll(nearest block);/* [!code --] *//* [!code focus]*/
-    animation-timing-function: ease;/* [!code --] *//* [!code focus]*/
+  --navbar-shrink: 0; /* [!code --] */ /* [!code focus]*/
+  /* [!code --] */ /* [!code focus]*/
+  animation: shrink; /* [!code --] */ /* [!code focus]*/
+  animation-timeline: scroll(nearest block); /* [!code --] */ /* [!code focus]*/
+  animation-timing-function: ease; /* [!code --] */ /* [!code focus]*/
 }
 
-  @supports (animation-timeline: scroll()) {/* [!code ++] *//* [!code focus]*/
-    .navbar {/* [!code ++] *//* [!code focus]*/
-      --navbar-shrink: 0;/* [!code ++] *//* [!code focus]*/
-      /* [!code ++] *//* [!code focus]*/
-      animation: shrink;/* [!code ++] *//* [!code focus]*/
-      animation-timeline: scroll(nearest block);/* [!code ++] *//* [!code focus]*/
-      animation-timing-function: ease;/* [!code ++] *//* [!code focus]*/
-    }/* [!code ++] *//* [!code focus]*/
-  }/* [!code ++] *//* [!code focus]*/
-    
+@supports (animation-timeline: scroll()) {
+  /* [!code ++] */ /* [!code focus]*/
+  .navbar {
+    /* [!code ++] */ /* [!code focus]*/
+    --navbar-shrink: 0; /* [!code ++] */ /* [!code focus]*/
+    /* [!code ++] */ /* [!code focus]*/
+    animation: shrink; /* [!code ++] */ /* [!code focus]*/
+    animation-timeline: scroll(
+      nearest block
+    ); /* [!code ++] */ /* [!code focus]*/
+    animation-timing-function: ease; /* [!code ++] */ /* [!code focus]*/
+  } /* [!code ++] */ /* [!code focus]*/
+} /* [!code ++] */ /* [!code focus]*/
 ```
 
 Next, if there's no support, we need to toggle the `--navbar-shrink` property anyway because we still need it to dynamically change the styles of the navbar elements.
@@ -391,7 +410,7 @@ We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets
   <div class="backdrop"></div>
   <div class="inner-container">
     <a href="/" class="logo-link">
-      <!--Logo SVG or image goes here -->       
+      <!--Logo SVG or image goes here -->
       <div class="site-name">
         <p>Your site</p>
       </div>
@@ -404,41 +423,46 @@ We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets
     </div>
   </div>
 </nav>
-<script>/* [!code focus]*/
-  (function () {/* [!code focus]*/
-    const navbar = document.querySelector(".navbar");/* [!code focus]*/
+<script>
+  /* [!code focus]*/
+  (function () {
+    /* [!code focus]*/
+    const navbar = document.querySelector('.navbar'); /* [!code focus]*/
 
-    if (!CSS.supports("animation-timeline: scroll()")) {/* [!code focus]*/
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      /* [!code focus]*/
       const threshold = 500; // Adjust this threshold as needed/* [!code focus]*/
 
-      window.addEventListener("scroll", handleScroll);/* [!code focus]*/
+      window.addEventListener('scroll', handleScroll); /* [!code focus]*/
 
-      function handleScroll() {/* [!code focus]*/
-        if (!navbar) {/* [!code focus]*/
-          return;/* [!code focus]*/
-        }/* [!code focus]*/
+      function handleScroll() {
+        /* [!code focus]*/
+        if (!navbar) {
+          /* [!code focus]*/
+          return; /* [!code focus]*/
+        } /* [!code focus]*/
 
-        const scrollY = window.scrollY || window.pageYOffset;/* [!code focus]*/
+        const scrollY = window.scrollY || window.pageYOffset; /* [!code focus]*/
 
-        if (scrollY > threshold) {/* [!code focus]*/
-          navbar.style.setProperty("--navbar-shrink", "1");/* [!code focus]*/
-        } else {/* [!code focus]*/
-          navbar.style.setProperty("--navbar-shrink", "0");/* [!code focus]*/
-        }/* [!code focus]*/
-      }/* [!code focus]*/
-    }/* [!code focus]*/
-  })();/* [!code focus]*/
-</script>/* [!code focus]*/
-... more html code here
+        if (scrollY > threshold) {
+          /* [!code focus]*/
+          navbar.style.setProperty('--navbar-shrink', '1'); /* [!code focus]*/
+        } else {
+          /* [!code focus]*/
+          navbar.style.setProperty('--navbar-shrink', '0'); /* [!code focus]*/
+        } /* [!code focus]*/
+      } /* [!code focus]*/
+    } /* [!code focus]*/
+  })(); /* [!code focus]*/
+</script>
+/* [!code focus]*/ ... more html code here
 ```
 
 This piece of code adds a fallback to the event listener approach we talked about in the [Less fun implementation](#less-fun-implementation).
 
 If you want to see the result of the changes we just applied check this Code Sandbox:
 
-<CodeSandbox files={
-  getFiles({ animationStyles: true })
-} />
+<CodeSandbox files={getFiles({ animationStyles: true })} />
 
 That's it folks!
 

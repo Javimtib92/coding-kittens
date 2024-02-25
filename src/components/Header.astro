@@ -4,22 +4,29 @@ import NavigationLinks from './NavigationLinks.astro';
 import ThemeSwitchButton from './ThemeSwitchButton.astro';
 ---
 
-	<nav
-	class="navbar sticky top-0 z-10 mb-12 mt-20 flex flex-row items-start py-4 pl-2 pr-4 md:-mx-[28px] md:px-5"
-	>
-	<!-- <MobileNavMenu></MobileNavMenu> -->
+<nav
+  class='navbar sticky top-0 z-10 mb-12 mt-20 flex flex-row items-start py-4 pl-2 pr-4 md:-mx-[28px] md:px-5'
+>
+  <!-- <MobileNavMenu></MobileNavMenu> -->
 
-	<div
-		class="backdrop absolute left-[-8px] right-[-8px] top-0 h-20 min-w-full backdrop-blur md:-mx-[28px]"
-	></div>
+  <div
+    class='backdrop absolute left-[-8px] right-[-8px] top-0 h-20 min-w-full backdrop-blur md:-mx-[28px]'
+  >
+  </div>
 
-	<div
-		class="img-container z-10 flex min-w-full flex-row justify-between space-x-0"
-	>
-		<a href="/" class="flex flex-row items-center">
-			<Image src="/logo.png" class="mr-4" alt="Coding Kittens website logo" width="48" height="48"/>
+  <div
+    class='img-container z-10 flex min-w-full flex-row justify-between space-x-0'
+  >
+    <a href='/' class='flex flex-row items-center'>
+      <Image
+        src='/logo.png'
+        class='mr-4'
+        alt='Coding Kittens website logo'
+        width='48'
+        height='48'
+      />
 
-		<!-- <img
+      <!-- <img
 			alt="website logo"
 			loading="lazy"
 			width="48"
@@ -35,63 +42,63 @@ import ThemeSwitchButton from './ThemeSwitchButton.astro';
 			src="/image?url=/static/assets/logo.png&w=96"
 		/> -->
 
-		<div class="flex flex-col">
-			<p
-			class="m-0 font-display text-2xl font-bold text-primary-600 dark:text-2xl dark:text-primary-100 sm:text-2xl sm:dark:text-2xl"
-			>
-			Coding Kittens
-			</p>
-			<p class="subtle m-0">Curiosity Didn&apos;t Kill The Cat</p>
-		</div>
-		</a>
+      <div class='flex flex-col'>
+        <p
+          class='m-0 font-display text-2xl font-bold text-primary-600 dark:text-2xl dark:text-primary-100 sm:text-2xl sm:dark:text-2xl'
+        >
+          Coding Kittens
+        </p>
+        <p class='subtle m-0'>Curiosity Didn&apos;t Kill The Cat</p>
+      </div>
+    </a>
 
-		<div class="flex flex-row-reverse gap-6 sm:flex-row">
-		<NavigationLinks/>
-		<ThemeSwitchButton/>
-		</div>
-	</div>
-	</nav>
+    <div class='flex flex-row-reverse gap-6 sm:flex-row'>
+      <NavigationLinks />
+      <ThemeSwitchButton />
+    </div>
+  </div>
+</nav>
 <style>
-@supports (animation-timeline: scroll()) {
-  .navbar {
-    --navbar-shrink: 0;
+  @supports (animation-timeline: scroll()) {
+    .navbar {
+      --navbar-shrink: 0;
 
-    animation: shrink;
-    animation-timeline: scroll(nearest block);
-    animation-timing-function: ease;
+      animation: shrink;
+      animation-timeline: scroll(nearest block);
+      animation-timing-function: ease;
+    }
   }
-}
 
-.navbar .img-container {
-  transition: transform 0.3s ease;
-  will-change: transform;
-  transform: translateY(calc(0px - var(--navbar-shrink) * 12px));
-}
-.navbar .backdrop {
-  transition: transform 0.3s ease;
-  will-change: transform;
-  transform: translateY(calc(0px - var(--navbar-shrink) * 24px));
-}
-
-.navbar img {
-  transition: transform 0.3s ease;
-  will-change: transform;
-  transform: scale(calc(1 - var(--navbar-shrink) * 0.2));
-}
-
-.navbar h1,
-.navbar p {
-  transition: opacity 0.3s ease;
-  opacity: calc(1 - var(--navbar-shrink));
-}
-
-@keyframes shrink {
-  0% {
-    --navbar-shrink: 0;
+  .navbar .img-container {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    transform: translateY(calc(0px - var(--navbar-shrink) * 12px));
   }
-  10%,
-  100% {
-    --navbar-shrink: 1;
+  .navbar .backdrop {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    transform: translateY(calc(0px - var(--navbar-shrink) * 24px));
   }
-}
+
+  .navbar img {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    transform: scale(calc(1 - var(--navbar-shrink) * 0.2));
+  }
+
+  .navbar h1,
+  .navbar p {
+    transition: opacity 0.3s ease;
+    opacity: calc(1 - var(--navbar-shrink));
+  }
+
+  @keyframes shrink {
+    0% {
+      --navbar-shrink: 0;
+    }
+    10%,
+    100% {
+      --navbar-shrink: 1;
+    }
+  }
 </style>

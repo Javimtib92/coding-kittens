@@ -22,8 +22,11 @@ RangeError: Maximum call stack size exceeded. (Safari)
 I was using a fancy recursive function to traverse this data and I got hit by the max call stack size defined for the node process.
 Bummer. The worst thing is that this compromised production and because we didn't add error handling to this function our users were experiencing a Black Screen of Death.
 
-<Highlight>By the end of this post you will learn how to avoid this situation by converting a recursive function into its iterative counterpart</Highlight>.
-But first I will give you a small introduction to the recursive approach.
+<Highlight>
+  By the end of this post you will learn how to avoid this situation by
+  converting a recursive function into its iterative counterpart
+</Highlight>
+. But first I will give you a small introduction to the recursive approach.
 
 ## The shape of disaster, the recursive attempt
 
@@ -50,7 +53,6 @@ normalizeObject(complexObject);
 ```
 
 This recursion works as follows:
-
 
 1. The function takes an `Object` as its parameter.
 

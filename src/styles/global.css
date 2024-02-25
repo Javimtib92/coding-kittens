@@ -1,6 +1,6 @@
-@import url("/fonts/BarlowCondensed/styles.css");
-@import url("/fonts/Montserrat/styles.css");
-@import url("/fonts/OxygenMono/styles.css");
+@import url('/fonts/BarlowCondensed/styles.css');
+@import url('/fonts/Montserrat/styles.css');
+@import url('/fonts/OxygenMono/styles.css');
 
 :root {
   --font-display: Barlow_Condensed;
@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  font-family: "Atkinson", sans-serif;
+  font-family: 'Atkinson', sans-serif;
   min-height: 100dvh;
 }
 
@@ -52,14 +52,14 @@ p {
   @apply text-xs text-primary-400 dark:text-primary-400;
 }
 
-code[data-theme*=" "],
-code[data-theme*=" "] span {
+code[data-theme*=' '],
+code[data-theme*=' '] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
 
-.dark code[data-theme*=" "],
-.dark code[data-theme*=" "] span {
+.dark code[data-theme*=' '],
+.dark code[data-theme*=' '] span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
@@ -129,8 +129,16 @@ html:not(.dark) [data-rehype-pretty-code-title] {
   --tw-bg-opacity: 1;
   background-color: rgb(28 28 28 / var(--tw-bg-opacity));
   padding: 0.75rem 1rem;
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, Liberation Mono, Courier New, monospace;
+  font-family:
+    var(--font-mono),
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
@@ -173,13 +181,23 @@ html:not(.dark) [data-rehype-pretty-code-title] {
 }
 
 [data-rehype-pretty-code-figure] span {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, Liberation Mono, Courier New, monospace;
+  font-family:
+    var(--font-mono),
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
 }
 
 .has-focused span[data-line]:not(.focused) {
   opacity: 0.7;
-  transition: filter 0.35s, opacity 0.35s;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
   filter: blur(0.095rem);
 }
 
@@ -191,7 +209,7 @@ span[data-line].diff.remove {
   @apply -mx-6 bg-red-600/[.16] px-6 opacity-70 dark:bg-red-400/[.16];
 }
 span[data-line].diff.remove:before {
-  content: "-";
+  content: '-';
   @apply absolute text-red-500 dark:text-red-400;
 }
 
@@ -199,7 +217,7 @@ span[data-line].diff.add {
   @apply -mx-6 bg-green-400/[.16] px-6 dark:bg-green-400/[.16];
 }
 span[data-line].diff.add:before {
-  content: "+";
+  content: '+';
   @apply absolute text-green-500 dark:text-green-400;
 }
 

@@ -7,27 +7,23 @@ import { getCollection } from 'astro:content';
 import RootLayout from '../../../layouts/RootLayout.astro';
 
 export async function getStaticPaths() {
-    const categories: string[] = [];
-	const posts = await getCollection('blog', ({ data }) => {
-        return import.meta.env.PROD ? data.draft !== true : true;
-    });
+  const categories: string[] = [];
+  const posts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
 
+  for (const post of posts) {
+    const category = post.id.split('/')[0];
 
-    for (const post of posts) {
-        const category = post.id.split('/')[0]
-
-        if (!categories.includes(category)) {
-            categories.push(category)
-        }
+    if (!categories.includes(category)) {
+      categories.push(category);
     }
-	return categories.map((category) => ({
-		params: { category },
-		props: category,
-	}));
+  }
+  return categories.map((category) => ({
+    params: { category },
+    props: category,
+  }));
 }
-
 ---
 
-<RootLayout>
-	something
-</RootLayout>
+<RootLayout> something </RootLayout>
