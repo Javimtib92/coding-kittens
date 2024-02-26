@@ -65,10 +65,10 @@ const [accentHue, ,] = hexToHsl(accentBaseValue);
 </style>
 
 <script is:inline>
-  const hasAnimationTimelineSupport = CSS.supports(
-    'animation-timeline: view()'
-  );
   document.addEventListener('alpine:init', () => {
+    const hasAnimationTimelineSupport = CSS.supports(
+      'animation-timeline: view()'
+    );
     Alpine.data('highlight', () => ({
       highlight: false,
 
