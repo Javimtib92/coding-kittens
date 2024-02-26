@@ -2,50 +2,115 @@
 import RootLayout from '../layouts/RootLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Highlight from '../components/Highlight.astro';
+import LatestContent from '../components/LatestContent.astro';
+import { Image } from 'astro:assets';
+import { getYearDiff } from '../utils/date';
+
+const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
 ---
 
 <RootLayout title={SITE_TITLE} shortDescription={SITE_DESCRIPTION}>
-  <h1>🧑‍🚀 Hello, Astronaut!</h1>
-  <p>
-    <Highlight>
-      Welcome to the official <a href='https://astro.build/'>Astro</a> blog starter</Highlight
-    >
-
-    template. This template serves as a lightweight, minimally-styled starting
-    point for anyone looking to build a personal website, blog, or portfolio
-    with Astro.
-  </p>
-  <p>
-    This template comes with a few integrations already configured in your
-    <code>astro.config.mjs</code> file. You can customize your setup with
-    <a href='https://astro.build/integrations'>Astro Integrations</a> to add tools
-    like Tailwind, React, or Vue to your project.
-  </p>
-  <p>Here are a few ideas on how to get started with the template:</p>
-  <ul>
-    <li>Edit this page in <code>src/pages/index.astro</code></li>
-    <li>
-      Edit the site header items in <code>src/components/Header.astro</code>
-    </li>
-    <li>
-      Add your name to the footer in <code>src/components/Footer.astro</code>
-    </li>
-    <li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-    <li>
-      Customize the blog post page layout in <code
-        >src/layouts/BlogPost.astro</code
+  <div>
+    <div class='mb-6 flex flex-row items-center gap-6'>
+      <span
+        class='box-border flex h-20 w-20 items-center justify-center overflow-hidden rounded-full align-middle outline-none
+      ring-2 ring-background-50 ring-slate-500 ring-offset-2 ring-offset-accent-secondary-300
+      dark:ring-background-500 dark:ring-offset-accent-secondary-500'
       >
-    </li>
-  </ul>
-  <p>
-    Have fun! If you get stuck, remember to <a href='https://docs.astro.build/'
-      >read the docs
-    </a> or <a href='https://astro.build/chat'>join us on Discord</a> to ask questions.
-  </p>
-  <p>
-    Looking for a blog template with a bit more personality? Check out <a
-      href='https://github.com/Charca/astro-blog-template'
-      >astro-blog-template
-    </a> by <a href='https://twitter.com/Charca'>Maxi Ferreira</a>.
-  </p>
+        <Image
+          src='/me.jpeg'
+          width={48}
+          height={48}
+          alt='text'
+          class='flex h-full w-full object-cover'
+        />
+      </span>
+
+      <div class='flex flex-col place-self-start'>
+        <h1 class='text-3xl leading-7 sm:text-4xl'>Javier Muñoz Tous</h1>
+        <h2
+          class='italic text-accent-500 underline underline-offset-8 dark:text-accent-400 sm:text-xl'
+        >
+          Full Stack Engineer
+        </h2>
+      </div>
+    </div>
+    <p class='prose'>
+      <Highlight>
+        <b class='font-display text-2xl text-primary-600 dark:text-primary-100'>
+          Hola 👋, Welcome to Coding Kittens!
+        </b>
+      </Highlight>
+    </p>
+    <p class='prose'>
+      I&apos;m Javier Muñoz Tous and this is my own personal blog built with the
+      simple intention of creating tutorials, sharing my thoughts, experimenting
+      with new tools, having fun, and being somehow helpful to our tech
+      community.
+    </p>
+    <p class='prose'>
+      I&apos;m a Fullstack Software Engineer with over{' '}
+      {experienceYears} years of experience. I&apos;m currently specialized in JavaScript,
+      but I&apos;m a man of the world and I can “speak” many languages.
+    </p>
+    <p class='prose'>
+      <Highlight>
+        Coding Kittens&apos;s name idea came from my two adorable cats — Loki
+        and Nym —
+      </Highlight>{' '}
+      who have been with me a lot of my coding time. One could say they code for
+      me and I just watch them. 🤫 My fiance came up with the name idea, she is my
+      most profound inspiration and a huge source of support. 🧡🖤
+    </p>
+    <p class='prose'>
+      I like simple things, I practice Yoga twice a week 🧘‍♂️ I’m passionate about
+      video-games 🎮 I&apos;m a Manga and Anime &quot;Otaku&quot; ⛩️ and my
+      favorite meal is ramen 🍜
+    </p>
+    <p class='prose'>
+      If you want to know me a bit better you can find me on Instagram. I warn
+      you, though, that every now and then I post stories of my cats doing
+      something tremendously silly.
+    </p>
+    <p class='prose'>
+      If my professional career is what interests you, you can check my LinkedIn
+      or Github profiles.
+    </p>
+    <p class='prose'>
+      I hope you find some calm and insight in this little space I&apos;ve
+      built.
+    </p>
+
+    <p class='prose'>Salut! 😄</p>
+    <div class='flex flex-col gap-6 sm:flex-row'>
+      <!-- <SocialLink
+        img={InstagramLogo}
+        name='Instagram'
+        link='https://www.instagram.com/javimtib92'
+      />
+      <SocialLink
+        img={LinkedinLogo}
+        name='LinkedIn'
+        link='https://www.linkedin.com/in/javier-muñoz-tous/'
+      />
+      <SocialLink
+        img={GithubLogo}
+        name='Github'
+        link='https://github.com/Javimtib92'
+      /> -->
+    </div>
+
+    <div class='mt-12'>
+      <h3>The Latest Coding Kittens Posts</h3>
+
+      <LatestContent />
+
+      <div>
+        <a href='/blog' class='flex flex-row items-center gap-2'>
+          Browse all posts
+          <!-- <ArrowRightIcon width={12} height={12} /> -->
+        </a>
+      </div>
+    </div>
+  </div>
 </RootLayout>
