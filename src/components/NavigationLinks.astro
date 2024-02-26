@@ -8,7 +8,7 @@ const inactiveClass =
   'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200';
 
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1);
+const segments = pathname.split('/');
 ---
 
 <div
@@ -20,7 +20,7 @@ const currentPath = pathname.slice(1);
     href='/'
     class={cn(
       'flex align-middle transition-all',
-      currentPath === '' ? activeClass : inactiveClass
+      pathname === '/' ? activeClass : inactiveClass
     )}
   >
     <span class='relative px-2 py-1'>Me</span>
@@ -29,7 +29,7 @@ const currentPath = pathname.slice(1);
     href='/blog'
     class={cn(
       'flex align-middle transition-all',
-      currentPath === 'blog' ? activeClass : inactiveClass
+      segments.includes('blog') ? activeClass : inactiveClass
     )}
   >
     <span class='relative px-2 py-1'>Blog</span>

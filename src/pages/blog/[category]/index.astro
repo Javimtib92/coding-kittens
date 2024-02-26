@@ -1,25 +1,53 @@
 ---
 import { getCollection } from 'astro:content';
 import RootLayout from '../../../layouts/RootLayout.astro';
+import ArticleItem from '../../../components/ArticleItem.astro';
+import CategoriesList from '../../../components/CategoriesList.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
+import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-  const categories: string[] = [];
-  const posts = await getCollection('blog', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
+  const postsByCategory = new Map();
+  const posts = (
+    await getCollection('blog', ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+    })
+  ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   for (const post of posts) {
     const category = post.id.split('/')[0];
 
-    if (!categories.includes(category)) {
-      categories.push(category);
+    if (!postsByCategory.get(category)) {
+      postsByCategory.set(category, []);
     }
+
+    postsByCategory.set(category, [...postsByCategory.get(category), post]);
   }
-  return categories.map((category) => ({
+
+  return Array.from(postsByCategory.entries()).map(([category, posts]) => ({
     params: { category },
-    props: category,
+    props: {
+      posts,
+    },
   }));
 }
+
+type Props = { posts: CollectionEntry<'blog'>[] };
+
+const { posts } = Astro.props;
 ---
 
-<RootLayout> something </RootLayout>
+<RootLayout title={SITE_TITLE} shortDescription={SITE_DESCRIPTION}>
+  <div class='mx-auto my-0 flex max-w-7xl flex-wrap justify-between pb-0'>
+    <main class='flex-1 pb-14 lg:flex-[0_0_770px]'>
+      <div class='divide-y divide-gray-200 dark:divide-gray-700'>
+        <CategoriesList />
+        {
+          posts.map((post) => {
+            return <ArticleItem slug={post.slug} {...post.data} />;
+          })
+        }
+      </div>
+    </main>
+  </div>
+</RootLayout>
