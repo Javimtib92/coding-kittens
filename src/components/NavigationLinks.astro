@@ -1,5 +1,6 @@
 ---
 import { cn } from '../utils/cn';
+import { MenuIcon } from 'lucide-react';
 
 const activeClass =
   'dark:text-white text-neutral-900 underline underline-offset-8';
@@ -38,6 +39,8 @@ const currentPath = pathname.slice(1);
   <button
     aria-label='Mobile nav menu button'
     class='-mx-4 -my-2 px-4 py-2'
-    x-on:click='toggleMobileNavigation(true)'>MENUSE</button
+    x-on:click='toggleMobileNavigation(true)'
   >
+    <MenuIcon class='h-6 w-6' />
+  </button>
 </div>

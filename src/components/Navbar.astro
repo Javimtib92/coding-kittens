@@ -8,7 +8,7 @@ import ThemeSwitchButton from './ThemeSwitchButton.astro';
 <script is:inline>
   document.addEventListener('alpine:init', () => {
     Alpine.data('navbar', () => ({
-      open: false,
+      mobileMenuOpen: false,
 
       toggleMobileNavigation(state) {
         if (state) {
@@ -16,7 +16,7 @@ import ThemeSwitchButton from './ThemeSwitchButton.astro';
         } else {
           document.body.style.overflow = 'visible';
         }
-        this.open = state;
+        this.mobileMenuOpen = state;
       },
     }));
   });

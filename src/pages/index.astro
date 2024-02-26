@@ -5,6 +5,7 @@ import Highlight from '../components/Highlight.astro';
 import LatestContent from '../components/LatestContent.astro';
 import { Image } from 'astro:assets';
 import { getYearDiff } from '../utils/date';
+import { ArrowRight } from 'lucide-react';
 
 const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
 ---
@@ -106,9 +107,9 @@ const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
       <LatestContent />
 
       <div>
-        <a href='/blog' class='flex flex-row items-center gap-2'>
+        <a href='/blog' class='link flex flex-row items-center gap-2'>
           Browse all posts
-          <!-- <ArrowRightIcon width={12} height={12} /> -->
+          <ArrowRight width={12} height={12} />
         </a>
       </div>
     </div>

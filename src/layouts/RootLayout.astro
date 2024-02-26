@@ -6,8 +6,56 @@ import Footer from '../components/Footer.astro';
 const { title, shortDescription } = Astro.props.frontmatter || Astro.props;
 ---
 
-<!doctype html>
-<html lang='en' class='dark'>
+<script is:inline>
+  function getPreferredTheme() {
+    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    return (
+      window.localStorage.getItem('theme') ||
+      (darkQuery.matches ? 'dark' : 'light')
+    );
+  }
+
+  const theme = getPreferredTheme();
+
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+
+  document.documentElement.style.setProperty('--current-theme', theme);
+
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('theme', () => {
+      return {
+        theme,
+        toggleTheme() {
+          document.documentElement.classList.remove(this.theme);
+
+          this.theme = this.theme === 'light' ? 'dark' : 'light';
+          this.savePreferredTheme();
+        },
+        savePreferredTheme() {
+          window.localStorage.setItem('theme', this.theme);
+          document.documentElement.style.setProperty(
+            '--current-theme',
+            this.theme
+          );
+        },
+        init() {
+          // Initialize the theme based on the preferred theme or default to 'light'
+          this.theme = getPreferredTheme();
+        },
+      };
+    });
+  });
+</script>
+
+<html
+  lang='en'
+  x-data='theme'
+  x-bind:class='theme === "dark" ? "dark" : "light"'
+  x-init='init'
+>
   <head>
     <BaseHead title={title} description={shortDescription} />
   </head>

@@ -1,6 +1,6 @@
 ---
 import { cn } from '../utils/cn';
-// import { MenuIcon } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const activeClass =
   'dark:text-white text-neutral-900 underline underline-offset-8';
@@ -12,8 +12,9 @@ const currentPath = pathname.slice(1);
 ---
 
 <div
-  :class='open ? "visible" : "hidden"'
+  x-show='mobileMenuOpen'
   x-on:click='toggleMobileNavigation(false)'
+  x-cloak
   class='fixed top-0 z-40 -mx-4 h-dvh w-dvw backdrop-blur'
 >
   <div
@@ -22,8 +23,7 @@ const currentPath = pathname.slice(1);
   >
     <div class='flex flex-row-reverse pr-6 pt-6'>
       <button class='-m-4 p-4' x-on:click='toggleMobileNavigation(false)'>
-        CLOSE
-        <!-- <MenuIcon class='h-6 w-6' /> -->
+        <X class='h-6 w-6' />
       </button>
     </div>
     <div class='flex flex-col gap-y-8 p-6'>
