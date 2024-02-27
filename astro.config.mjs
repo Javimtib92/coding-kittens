@@ -21,7 +21,8 @@ export default defineConfig({
       experimentalThemes: {
         light: {
           ...catppuccinLate,
-          bg: '#fafaf9',
+          bg: '#FAFAF9',
+          fg: '#FAFAF9',
         },
         dark: {
           ...catppuccinMocha,

@@ -16,8 +16,6 @@ const classByTag: Record<HeadingTag, string> = {
   h4: 'font-display text-lg font-bold text-primary-600 dark:text-primary-100 sm:text-xl',
   h5: 'font-display text-sm font-bold text-primary-600 dark:text-primary-100 sm:text-lg',
 };
-
-console.log(Tag);
 ---
 
 <Tag {...props} class:list={[classByTag[Tag as HeadingTag], extendedClass]}>
