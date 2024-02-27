@@ -2,6 +2,8 @@
 const { underline = false, class: extendedClass, ...props } = Astro.props;
 const content = await Astro.slots.render('default');
 const unstyled = content.startsWith('#unstyled');
+
+const parsedContent = unstyled ? content.replace('#unstyled', '') : content;
 ---
 
 <a
@@ -13,5 +15,5 @@ const unstyled = content.startsWith('#unstyled');
     extendedClass,
   ]}
 >
-  <slot />
+  {parsedContent}
 </a>

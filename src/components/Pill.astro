@@ -1,8 +1,12 @@
 ---
+import type { DefaultColors } from 'tailwindcss/types/generated/colors';
 import { cn } from '../utils/cn';
 import colors from 'tailwindcss/colors';
 
-const { color, ...props } = Astro.props;
+type Props = {
+  color: keyof DefaultColors;
+};
+const { color = 'blue', ...props } = Astro.props;
 ---
 
 <span

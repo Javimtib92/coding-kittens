@@ -27,6 +27,6 @@ export function rgbToHsl(r: number, g: number, b: number) {
 }
 
 export function hexToHsl(color: string) {
-  const rgb = hexToRgb(color);
-  return rgbToHsl(...rgb);
+  const [r, g, b] = hexToRgb(color);
+  return rgbToHsl(r, g, b);
 }

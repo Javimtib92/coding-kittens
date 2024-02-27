@@ -1,9 +1,13 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { Image, LocalImageProps } from 'astro:assets';
+import type { HTMLAttributes, HTMLTag, Polymorphic } from 'astro/types';
+import { Image } from 'astro:assets';
 
-type Props = { caption: { text: string } } & HTMLAttributes<'img'> &
-  LocalImageProps;
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag;
+  alt: string;
+  caption: { text: string };
+}> &
+  HTMLAttributes<'img'>;
 
 const { alt, caption, ...props } = Astro.props;
 ---

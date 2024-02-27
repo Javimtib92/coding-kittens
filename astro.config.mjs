@@ -5,10 +5,9 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import catppuccinLate from './shiki/themes/catppuccin-late.mjs';
 import catppuccinMocha from './shiki/themes/catppuccin-mocha.mjs';
-import {
-  transformerNotationFocus,
-  transformerNotationDiff,
-} from '@shikijs/transformers';
+// import {} from // transformerNotationFocus,
+// // transformerNotationDiff,
+// '@shikijs/transformers';
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,7 +28,7 @@ export default defineConfig({
           fg: '#181B2D',
         },
       },
-      transformers: [transformerNotationFocus(), transformerNotationDiff()],
+      transformers: [],
     },
   },
 });
