@@ -4,7 +4,6 @@ import { Image } from 'astro:assets';
 const { slug, thumbnail, title, subtitle, shortDescription } =
   Astro.props.frontmatter || Astro.props;
 
-console.log(slug);
 const category = slug?.split('/')[0];
 ---
 

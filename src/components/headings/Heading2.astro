@@ -2,15 +2,16 @@
 import { Link } from 'lucide-react';
 import Heading from '../Heading.astro';
 
-const { slug } = Astro.props;
+const { id } = Astro.props;
 ---
 
 <Heading
+  id={id}
   as='h2'
   extendedClass='title-link hover:text-accent-500 dark:hover:text-accent-400 md:inline-flex md:flex-row md:items-center'
   data-anchor
 >
-  <a href={`#${slug}`}>
+  <a href={`#${id}`}>
     <slot />
   </a>
   <Link

@@ -5,7 +5,6 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import catppuccinLate from './shiki/themes/catppuccin-late.mjs';
 import catppuccinMocha from './shiki/themes/catppuccin-mocha.mjs';
-
 import {
   transformerNotationFocus,
   transformerNotationDiff,

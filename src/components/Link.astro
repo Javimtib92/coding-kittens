@@ -1,0 +1,17 @@
+---
+const { underline = false, class: extendedClass, ...props } = Astro.props;
+const content = await Astro.slots.render('default');
+const unstyled = content.startsWith('#unstyled');
+---
+
+<a
+  {...props}
+  class:list={[
+    !unstyled &&
+      'text-md font-body text-accent-500 hover:text-accent-400 dark:text-accent-400 dark:hover:text-accent-300',
+    underline ? 'underline underline-offset-4' : 'no-underline',
+    extendedClass,
+  ]}
+>
+  <slot />
+</a>
