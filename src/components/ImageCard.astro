@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Image, LocalImageProps } from 'astro:assets';
+
+type Props = { caption: { text: string } } & HTMLAttributes<'img'> &
+  LocalImageProps;
+
+const { alt, caption, ...props } = Astro.props;
+---
+
+<div class='flex justify-center'>
+  <div class='w-80 max-w-sm drop-shadow-xl'>
+    <Image
+      {...props}
+      alt={alt ?? ''}
+      class='m-auto h-auto w-full sepia-[.40]'
+    />
+    <div class='bg-primary-50 shadow-lg dark:bg-background-500'>
+      {caption && <p class='prose subtle m-0 p-4'>{caption.text}</p>}
+    </div>
+  </div>
+</div>

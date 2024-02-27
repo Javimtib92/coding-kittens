@@ -1,0 +1,23 @@
+---
+import { cn } from '../utils/cn';
+const {
+  mono = false,
+  subtle = false,
+  class: extendedClass,
+  ...props
+} = Astro.props;
+---
+
+<p
+  class={cn(
+    'mb-6 mt-6',
+    mono ? 'font-mono' : 'font-body',
+    subtle
+      ? 'text-xs text-primary-400 dark:text-primary-400'
+      : 'text-md text-primary-800 dark:text-primary-200',
+    extendedClass
+  )}
+  {...props}
+>
+  <slot />
+</p>

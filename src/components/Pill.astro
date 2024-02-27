@@ -1,0 +1,31 @@
+---
+import { cn } from '../utils/cn';
+import colors from 'tailwindcss/colors';
+
+const { color, ...props } = Astro.props;
+---
+
+<span
+  class={cn(
+    'relative inline-flex items-center rounded-full border-2 bg-primary-50 px-3 py-1 text-sm font-semibold text-white dark:bg-background-500'
+  )}
+  style={{
+    borderColor: colors[color]['500'],
+    color: colors[color]['600'],
+  }}
+  {...props}
+>
+  <span
+    class='absolute left-1/2 h-full -translate-x-1/2 border-[1px] border-red-300'
+    style={{
+      borderColor: colors[color]['500'],
+    }}></span>
+  <span
+    class='pointer-events-none absolute right-0 z-[2] h-full w-1/2 rounded-r-full border-[1px] border-none opacity-20 outline-none'
+    style={{
+      background: `repeating-linear-gradient(45deg, transparent, transparent 2px,${colors[color]['500']} 2px,${colors[color]['500']} 3px)`,
+    }}></span>
+  <span class='z-[1] bg-primary-50 text-xs dark:bg-background-500'>
+    <slot />
+  </span>
+</span>

@@ -7,13 +7,12 @@ shortDescription: >
   A practical example of how to use Scroll-Driven Animations to enhance your site.
 ---
 
-import { Callout } from '@/lib/ui/callout';
-import { Highlight } from '@/components/highlight';
-import { Pill } from '@/components/pill';
-import { CodeSandbox } from '@/components/sandpack';
-import { ImageCard } from '@/components/image-card';
-import { getFiles } from '@/examples/navigation-shrink';
-import image01 from '/public/images/post_2_1.png';
+import Callout from '../../../components/Callout.astro';
+import Highlight from '../../../components/Highlight.astro';
+import Pill from '../../../components/Pill.astro';
+import { CodeSandbox } from '../../../components/Sandpack';
+import ImageCard from '../../../components/ImageCard.astro';
+import { getFiles } from '../../../examples/navigation-shrink';
 
 <Callout title='Warning! Experimental feature' type='warning'>
   At the time of writing this post **`animation-timeline:scroll`** feature is
@@ -41,7 +40,7 @@ Look at this.
 <ImageCard
   id='image01'
   key='image01'
-  src={image01}
+  src="/images/post_2_1.png"
   alt='image of Coding Kittens with navbar occuping a big percentage of the screen'
   width={250}
   height={450}
@@ -253,7 +252,7 @@ Next, we'll need to add some styles for this element to make them look like a na
 
 Once we have these pieces put together, we'll have something like this:
 
-<CodeSandbox files={getFiles({ animationStyles: false })} />
+<CodeSandbox files={getFiles({ animationStyles: false })} client:only="react"/>
 
 We have our first version of the navbar, similar to the one I mentioned [at the begining of this post](#a-bit-of-context). It doesn't animate and occupies a considerable amount of the screen. We can do better.
 
@@ -462,7 +461,7 @@ This piece of code adds a fallback to the event listener approach we talked abou
 
 If you want to see the result of the changes we just applied check this Code Sandbox:
 
-<CodeSandbox files={getFiles({ animationStyles: true })} />
+<CodeSandbox files={getFiles({ animationStyles: true })} client:only="react"/>
 
 That's it folks!
 

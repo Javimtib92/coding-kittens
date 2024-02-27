@@ -1,0 +1,22 @@
+---
+import { cn } from '../utils/cn';
+
+type CalloutType = 'info' | 'success' | 'warning' | 'error';
+
+const stylesByType: Record<CalloutType, string> = {
+  info: 'bg-sky-300 text-sky-700',
+  success: 'bg-lime-200 bg-lime-400 text-lime-700',
+  warning: 'bg-amber-200 dark:bg-amber-300 text-amber-700',
+  error: 'bg-red-400 text-red-700',
+};
+
+const { title, type = 'info' } = Astro.props;
+---
+
+<div
+  class={cn('callout', 'my-12 flex flex-col rounded p-4', stylesByType[type])}
+>
+  {title && <b class='mb-2'>{title}</b>}
+
+  <div><slot /></div>
+</div>

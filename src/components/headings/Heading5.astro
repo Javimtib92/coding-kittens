@@ -1,0 +1,21 @@
+---
+import { Link } from 'lucide-react';
+import Heading from '../Heading.astro';
+
+const { slug } = Astro.props;
+---
+
+<Heading
+  as='h5'
+  extendedClass='title-link hover:text-accent-500 dark:hover:text-accent-400 md:inline-flex md:flex-row md:items-center'
+  data-anchor
+>
+  <a href={`#${slug}`}>
+    <slot />
+  </a>
+  <Link
+    width={28}
+    height={28}
+    className='anchor -mr-2 inline-block cursor-pointer pl-2 no-underline after:text-accent-400 md:invisible'
+  />
+</Heading>
