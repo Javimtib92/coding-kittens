@@ -1,7 +1,7 @@
 ---
 title: 'How I used modern CSS features to improve the UX of Coding Kittens Navbar'
 pubDate: 2024-01-20
-thumbnail: /thumbnails/post_2.jpeg
+thumbnail: ../../../assets/thumbnails/post_2.jpeg
 subtitle: 'CSSing like a wizard'
 shortDescription: >
   A practical example of how to use Scroll-Driven Animations to enhance your site.
@@ -13,6 +13,7 @@ import Pill from '../../../components/Pill.astro';
 import { CodeSandbox } from '../../../components/Sandpack';
 import ImageCard from '../../../components/ImageCard.astro';
 import { getFiles } from '../../../examples/navigation-shrink';
+import cardImage from "../../../assets/images/post_2_1.png";
 
 <Callout title='Warning! Experimental feature' type='warning'>
   At the time of writing this post **`animation-timeline:scroll`** feature is
@@ -39,11 +40,11 @@ Look at this.
 
 <ImageCard
   id='image01'
-  key='image01'
-  src="/images/post_2_1.png"
+  src={cardImage}
   alt='image of Coding Kittens with navbar occuping a big percentage of the screen'
   width={250}
   height={450}
+  quality={80}
   caption={{
     text: 'The Navbar takes a big percentage of the screen on a small device',
   }}

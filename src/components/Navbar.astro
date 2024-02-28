@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import MobileNavMenu from './MobileNavMenu.astro';
 import NavigationLinks from './NavigationLinks.astro';
 import ThemeSwitchButton from './ThemeSwitchButton.astro';
+import logo from '../assets/logo.png';
 ---
 
 <script is:inline>
@@ -37,11 +38,14 @@ import ThemeSwitchButton from './ThemeSwitchButton.astro';
   >
     <a href='/' class='flex flex-row items-center'>
       <Image
-        src='/logo.png'
-        class='mr-4'
+        src={logo}
+        width={96}
+        height={96}
+        quality={75}
+        densities={[1, 2]}
+        class='mr-4 w-12'
         alt='Coding Kittens website logo'
-        width='48'
-        height='48'
+        loading='eager'
       />
 
       <div class='flex flex-col'>

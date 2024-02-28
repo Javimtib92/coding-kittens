@@ -6,6 +6,7 @@ import LatestContent from '../components/LatestContent.astro';
 import { Image } from 'astro:assets';
 import { getYearDiff } from '../utils/date';
 import { ArrowRight } from 'lucide-react';
+import me from '../assets/me.jpeg';
 
 const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
 ---
@@ -19,9 +20,10 @@ const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
       dark:ring-background-500 dark:ring-offset-accent-secondary-500'
       >
         <Image
-          src='/me.jpeg'
+          src={me}
           width={48}
           height={48}
+          quality={80}
           alt='text'
           class='flex h-full w-full object-cover'
         />
