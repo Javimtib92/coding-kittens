@@ -7,11 +7,11 @@ import catppuccinLate from '@catppuccin/vscode/themes/latte.json';
 import catppuccinMocha from '@catppuccin/vscode/themes/mocha.json';
 import { remarkReadingTime } from './remark/remark-reading-time.mjs';
 import rehypePrettyCode from 'rehype-pretty-code';
-
 import {
   transformerNotationFocus,
   transformerNotationDiff,
 } from 'shikiji-transformers';
+import vercel from '@astrojs/vercel/static';
 
 const prettyCodeOptions = {
   keepBackground: false,
@@ -26,10 +26,25 @@ const prettyCodeOptions = {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://coding-kittens.com',
-  integrations: [mdx(), sitemap(), tailwind(), react()],
+  integrations: [
+    mdx(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+    tailwind(),
+    react(),
+  ],
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
   },
+  output: 'static',
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });

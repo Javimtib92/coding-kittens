@@ -2,7 +2,6 @@
 import RootLayout from '../../layouts/RootLayout.astro';
 import ArticleItem from '../../components/ArticleItem.astro';
 import CategoriesList from '../../components/CategoriesList.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (
@@ -12,7 +11,10 @@ const posts = (
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<RootLayout title={SITE_TITLE} shortDescription={SITE_DESCRIPTION}>
+<RootLayout
+  title={'Blog | Javier Muñoz Tous'}
+  shortDescription={'Explore a diverse range of topics, including technology, development, and personal insights on my blog.'}
+>
   <CategoriesList />
   <div class='mx-auto my-0 flex max-w-7xl flex-wrap justify-between pb-0'>
     <main class='flex-1 pb-14 lg:flex-[0_0_770px]'>
@@ -20,7 +22,13 @@ const posts = (
         {
           posts.map(async (post) => {
             const { remarkPluginFrontmatter } = await post.render();
-            return <ArticleItem slug={post.slug} readingTime={remarkPluginFrontmatter.readingTime} {...post.data} />;
+            return (
+              <ArticleItem
+                slug={post.slug}
+                readingTime={remarkPluginFrontmatter.readingTime}
+                {...post.data}
+              />
+            );
           })
         }
       </div>

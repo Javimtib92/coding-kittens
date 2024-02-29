@@ -34,7 +34,11 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<RootLayout>
+<RootLayout
+  title={post.data.title}
+  shortDescription={post.data.shortDescription}
+  image={post.data.thumbnail}
+>
   <section>
     <h1
       class='font-display text-4xl font-bold text-primary-600 dark:text-primary-100 sm:text-5xl'
