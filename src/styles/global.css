@@ -63,11 +63,27 @@ p {
 }
 
 .prose {
-  @apply mb-6 mt-6 text-base text-primary-800 dark:text-primary-200;
+  @apply text-base text-primary-800 dark:text-primary-200;
 }
 
 .subtle {
   @apply text-xs text-primary-400 dark:text-primary-400;
+}
+
+.dark .callout-warning p,.callout-warning p {
+  @apply text-amber-700;
+}
+
+.callout p:first-child {
+  @apply m-0;
+}
+
+.callout p::selection, .callout b::selection,.callout a::selection {
+  background: white;
+}
+
+.callout a {
+  @apply text-black opacity-60 hover:text-black hover:opacity-40 dark:text-black dark:hover:text-black dark:hover:opacity-40 underline underline-offset-4;
 }
 
 .astro-code span {

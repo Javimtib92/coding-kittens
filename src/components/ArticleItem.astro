@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+import { formatDate } from '../utils/date';
 
-const { slug, thumbnail, title, subtitle, shortDescription } =
+const { slug, thumbnail, title, subtitle, shortDescription, pubDate, readingTime } =
   Astro.props.frontmatter || Astro.props;
 
 const category = slug?.split('/')[0];
@@ -52,13 +53,12 @@ const category = slug?.split('/')[0];
       {shortDescription}
     </p>
     <footer class='mt-4 flex justify-between'>
-      <div class='mt-0 flex flex-initial'></div>
-      <!-- <p class='prose m-0'>
-          {formatDate(pubAt)}
-        </p>
-        <p class='subtle m-0'>
-          {readingTime.text}
-        </p> -->
+      <p class='prose subtle font-mono'>
+          {formatDate(pubDate)}
+      </p>
+      <p class='prose subtle font-mono'>
+          {readingTime}
+      </p>
     </footer>
   </div>
 </article>
