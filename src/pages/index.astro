@@ -7,11 +7,16 @@ import { Image } from 'astro:assets';
 import { getYearDiff } from '../utils/date';
 import { ArrowRight } from 'lucide-react';
 import me from '../assets/me.jpeg';
+import logo from '../assets/logo.png';
 
 const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
 ---
 
-<RootLayout title={SITE_TITLE} shortDescription={SITE_DESCRIPTION}>
+<RootLayout
+  title={SITE_TITLE}
+  shortDescription={SITE_DESCRIPTION}
+  image={logo.src}
+>
   <div>
     <div class='mb-6 flex flex-row items-center gap-6'>
       <span

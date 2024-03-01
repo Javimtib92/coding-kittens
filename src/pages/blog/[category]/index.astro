@@ -4,6 +4,7 @@ import RootLayout from '../../../layouts/RootLayout.astro';
 import ArticleItem from '../../../components/ArticleItem.astro';
 import CategoriesList from '../../../components/CategoriesList.astro';
 import type { CollectionEntry } from 'astro:content';
+import logo from '../../../assets/logo.png';
 
 export async function getStaticPaths() {
   const postsByCategory = new Map();
@@ -41,6 +42,7 @@ const { category } = Astro.params;
 <RootLayout
   title={`Blog | ${category} | Javier Muñoz Tous`}
   shortDescription={`Find information and tutorials about ${category} in Coding Kittens.`}
+  image={logo.src}
 >
   <CategoriesList />
   <div class='mx-auto my-0 flex max-w-7xl flex-wrap justify-between pb-0'>

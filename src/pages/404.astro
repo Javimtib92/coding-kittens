@@ -2,9 +2,14 @@
 import RootLayout from '../layouts/RootLayout.astro';
 import LatestContent from '../components/LatestContent.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import logo from '../assets/logo.png';
 ---
 
-<RootLayout title={SITE_TITLE} shortDescription={SITE_DESCRIPTION}>
+<RootLayout
+  title={SITE_TITLE}
+  shortDescription={SITE_DESCRIPTION}
+  image={logo.src}
+>
   <div class='mb-20'>
     <h1
       class='font-display text-5xl font-bold text-primary-600 dark:text-primary-100 sm:text-8xl'

@@ -3,6 +3,7 @@ import RootLayout from '../../layouts/RootLayout.astro';
 import ArticleItem from '../../components/ArticleItem.astro';
 import CategoriesList from '../../components/CategoriesList.astro';
 import { getCollection } from 'astro:content';
+import logo from '../../assets/logo.png';
 
 const posts = (
   await getCollection('blog', ({ data }) => {
@@ -14,6 +15,7 @@ const posts = (
 <RootLayout
   title={'Blog | Javier Muñoz Tous'}
   shortDescription={'Explore a diverse range of topics, including technology, development, and personal insights on my blog.'}
+  image={logo.src}
 >
   <CategoriesList />
   <div class='mx-auto my-0 flex max-w-7xl flex-wrap justify-between pb-0'>
