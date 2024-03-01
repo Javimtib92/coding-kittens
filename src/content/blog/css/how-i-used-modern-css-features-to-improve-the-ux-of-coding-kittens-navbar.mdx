@@ -261,37 +261,34 @@ We have our first version of the navbar, similar to the one I mentioned [at the 
 We are going to apply some CSS spells to it. 🪄
 
 ```css title="styles.css"
-@keyframes shrink {
-  /* [!code focus]*/ /* [!code ++] */
-  0% {
-    /* [!code focus]*/ /* [!code ++] */
-    --navbar-shrink: 0; /* [!code focus]*/ /* [!code ++] */
-  } /* [!code focus]*/ /* [!code ++] */
-  10%,/* [!code focus]*//* [!code ++] */
-    100% {
-    /* [!code focus]*/ /* [!code ++] */
-    --navbar-shrink: 1; /* [!code focus]*/ /* [!code ++] */
-  } /* [!code focus]*/ /* [!code ++] */
-} /* [!code focus]*/ /* [!code ++] */
+  @keyframes shrink { /* [!code focus]*//* [!code ++] */
+    0% {/* [!code focus]*//* [!code ++] */
+      --navbar-shrink: 0;/* [!code focus]*//* [!code ++] */
+    }/* [!code focus]*//* [!code ++] */
+    10%,/* [!code focus]*//* [!code ++] */
+    100% {/* [!code focus]*//* [!code ++] */
+      --navbar-shrink: 1;/* [!code focus]*//* [!code ++] */
+    }/* [!code focus]*//* [!code ++] */
+  }/* [!code focus]*//* [!code ++] */
 
 .navbar {
-  display: flex;
-  position: sticky;
-  padding: 1rem 0.5rem;
-  margin-bottom: 3rem;
-  margin-top: 5rem;
-  flex-direction: row;
-  align-items: flex-start;
-  top: 0;
+    display: flex;
+    position: sticky;
+    padding: 1rem 0.5rem;
+    margin-bottom: 3rem;
+    margin-top: 5rem;
+    flex-direction: row;
+    align-items: flex-start;
+    top: 0;
+  
+    @media (min-width: 768px) {
+      padding: 1rem 1.25rem;
+    }
 
-  @media (min-width: 768px) {
-    padding: 1rem 1.25rem;
-  }
-
-  --navbar-shrink: 0; /* [!code focus]*/ /* [!code ++] */
-  animation: shrink; /* [!code focus]*/ /* [!code ++] */
-  animation-timing-function: ease; /* [!code focus]*/ /* [!code ++] */
-  animation-timeline: scroll(nearest block); /* [!code focus]*/ /* [!code ++] */
+    --navbar-shrink: 0; /* [!code focus]*//* [!code ++] */
+    animation: shrink; /* [!code focus]*//* [!code ++] */
+    animation-timing-function: ease; /* [!code focus]*//* [!code ++] */
+    animation-timeline: scroll(nearest block); /* [!code focus]*//* [!code ++] */
 }
 ```
 
@@ -377,28 +374,25 @@ We'll start by adding the **CSS Supports at rule** to check if there's browser s
 
   @media (min-width: 768px) {
     padding: 1rem 1.25rem;
-  }
+  } 
 
-  --navbar-shrink: 0; /* [!code --] */ /* [!code focus]*/
-  /* [!code --] */ /* [!code focus]*/
-  animation: shrink; /* [!code --] */ /* [!code focus]*/
-  animation-timeline: scroll(nearest block); /* [!code --] */ /* [!code focus]*/
-  animation-timing-function: ease; /* [!code --] */ /* [!code focus]*/
+   --navbar-shrink: 0;/* [!code --] *//* [!code focus]*/
+  /* [!code --] *//* [!code focus]*/
+    animation: shrink;/* [!code --] *//* [!code focus]*/
+    animation-timeline: scroll(nearest block);/* [!code --] *//* [!code focus]*/
+    animation-timing-function: ease;/* [!code --] *//* [!code focus]*/
 }
 
-@supports (animation-timeline: scroll()) {
-  /* [!code ++] */ /* [!code focus]*/
-  .navbar {
-    /* [!code ++] */ /* [!code focus]*/
-    --navbar-shrink: 0; /* [!code ++] */ /* [!code focus]*/
-    /* [!code ++] */ /* [!code focus]*/
-    animation: shrink; /* [!code ++] */ /* [!code focus]*/
-    animation-timeline: scroll(
-      nearest block
-    ); /* [!code ++] */ /* [!code focus]*/
-    animation-timing-function: ease; /* [!code ++] */ /* [!code focus]*/
-  } /* [!code ++] */ /* [!code focus]*/
-} /* [!code ++] */ /* [!code focus]*/
+  @supports (animation-timeline: scroll()) {/* [!code ++] *//* [!code focus]*/
+    .navbar {/* [!code ++] *//* [!code focus]*/
+      --navbar-shrink: 0;/* [!code ++] *//* [!code focus]*/
+      /* [!code ++] *//* [!code focus]*/
+      animation: shrink;/* [!code ++] *//* [!code focus]*/
+      animation-timeline: scroll(nearest block);/* [!code ++] *//* [!code focus]*/
+      animation-timing-function: ease;/* [!code ++] *//* [!code focus]*/
+    }/* [!code ++] *//* [!code focus]*/
+  }/* [!code ++] *//* [!code focus]*/
+    
 ```
 
 Next, if there's no support, we need to toggle the `--navbar-shrink` property anyway because we still need it to dynamically change the styles of the navbar elements.
@@ -411,7 +405,7 @@ We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets
   <div class="backdrop"></div>
   <div class="inner-container">
     <a href="/" class="logo-link">
-      <!--Logo SVG or image goes here -->
+      <!--Logo SVG or image goes here -->       
       <div class="site-name">
         <p>Your site</p>
       </div>
@@ -424,46 +418,41 @@ We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets
     </div>
   </div>
 </nav>
-<script>
-  /* [!code focus]*/
-  (function () {
-    /* [!code focus]*/
-    const navbar = document.querySelector('.navbar'); /* [!code focus]*/
+<script>/* [!code focus]*/
+  (function () {/* [!code focus]*/
+    const navbar = document.querySelector(".navbar");/* [!code focus]*/
 
-    if (!CSS.supports('animation-timeline: scroll()')) {
-      /* [!code focus]*/
+    if (!CSS.supports("animation-timeline: scroll()")) {/* [!code focus]*/
       const threshold = 500; // Adjust this threshold as needed/* [!code focus]*/
 
-      window.addEventListener('scroll', handleScroll); /* [!code focus]*/
+      window.addEventListener("scroll", handleScroll);/* [!code focus]*/
 
-      function handleScroll() {
-        /* [!code focus]*/
-        if (!navbar) {
-          /* [!code focus]*/
-          return; /* [!code focus]*/
-        } /* [!code focus]*/
+      function handleScroll() {/* [!code focus]*/
+        if (!navbar) {/* [!code focus]*/
+          return;/* [!code focus]*/
+        }/* [!code focus]*/
 
-        const scrollY = window.scrollY || window.pageYOffset; /* [!code focus]*/
+        const scrollY = window.scrollY || window.pageYOffset;/* [!code focus]*/
 
-        if (scrollY > threshold) {
-          /* [!code focus]*/
-          navbar.style.setProperty('--navbar-shrink', '1'); /* [!code focus]*/
-        } else {
-          /* [!code focus]*/
-          navbar.style.setProperty('--navbar-shrink', '0'); /* [!code focus]*/
-        } /* [!code focus]*/
-      } /* [!code focus]*/
-    } /* [!code focus]*/
-  })(); /* [!code focus]*/
-</script>
-/* [!code focus]*/ ... more html code here
+        if (scrollY > threshold) {/* [!code focus]*/
+          navbar.style.setProperty("--navbar-shrink", "1");/* [!code focus]*/
+        } else {/* [!code focus]*/
+          navbar.style.setProperty("--navbar-shrink", "0");/* [!code focus]*/
+        }/* [!code focus]*/
+      }/* [!code focus]*/
+    }/* [!code focus]*/
+  })();/* [!code focus]*/
+</script>/* [!code focus]*/
+... more html code here
 ```
 
 This piece of code adds a fallback to the event listener approach we talked about in the [Less fun implementation](#less-fun-implementation).
 
 If you want to see the result of the changes we just applied check this Code Sandbox:
 
-<CodeSandbox files={getFiles({ animationStyles: true })} client:only="react"/>
+<CodeSandbox files={
+  getFiles({ animationStyles: true })
+} />
 
 That's it folks!
 
