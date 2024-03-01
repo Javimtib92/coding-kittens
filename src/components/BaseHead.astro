@@ -5,6 +5,7 @@ import '../styles/global.css';
 import '@fontsource/barlow-condensed';
 import '@fontsource-variable/montserrat';
 import '@fontsource/oxygen-mono';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -79,3 +80,5 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
   is:inline
   defer
   src='https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js'></script>
+
+<ViewTransitions />
