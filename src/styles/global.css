@@ -1,11 +1,7 @@
-@import url('/fonts/BarlowCondensed/styles.css');
-@import url('/fonts/Montserrat/styles.css');
-@import url('/fonts/OxygenMono/styles.css');
-
 :root {
-  --font-display: Barlow_Condensed;
-  --font-body: Montserrat;
-  --font-mono: Oxygen_Mono;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Montserrat Variable', sans-serif;
+  --font-mono: 'Oxygen Mono', monospace;
   --color-background-base: #161a30;
   --color-primary-base: #31304d;
   --color-secondary-base: #b6bbc4;
