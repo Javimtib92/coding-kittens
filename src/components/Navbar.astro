@@ -92,3 +92,28 @@ import logo from '../assets/logo.png';
     }
   }
 </style>
+
+<script type='module'>
+  const threshold = 500; // Adjust this threshold as needed
+
+  function handleScroll() {
+    const navbar = document.querySelector('.navbar');
+
+    console.log('attahcing', navbar);
+    if (!navbar) {
+      return;
+    }
+
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    if (scrollY > threshold) {
+      navbar.style.setProperty('--navbar-shrink', '1');
+    } else {
+      navbar.style.setProperty('--navbar-shrink', '0');
+    }
+  }
+
+  if (!CSS.supports('animation-timeline: scroll()')) {
+    window.addEventListener('scroll', handleScroll);
+  }
+</script>
