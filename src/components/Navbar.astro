@@ -6,22 +6,6 @@ import ThemeSwitchButton from './ThemeSwitchButton.astro';
 import logo from '../assets/logo.png';
 ---
 
-<script is:inline>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('navbar', () => ({
-      mobileMenuOpen: false,
-
-      toggleMobileNavigation(state) {
-        if (state) {
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.body.style.overflow = 'visible';
-        }
-        this.mobileMenuOpen = state;
-      },
-    }));
-  });
-</script>
 <nav
   x-data='navbar'
   class='navbar sticky top-0 z-10 mb-12 mt-20 flex flex-row items-start py-4 pl-2 pr-4 md:-mx-[28px] md:px-5'

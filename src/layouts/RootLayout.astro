@@ -55,6 +55,7 @@ const { title, shortDescription } = Astro.props.frontmatter || Astro.props;
   x-data='theme'
   x-bind:class='theme === "dark" ? "dark" : "light"'
   x-init='init'
+  transition:animate='none'
 >
   <head>
     <BaseHead title={title} description={shortDescription} />
@@ -71,5 +72,39 @@ const { title, shortDescription } = Astro.props.frontmatter || Astro.props;
       </main>
     </div>
     <Footer />
+    <script is:inline transition:persist>
+      document.addEventListener('alpine:init', () => {
+        const hasAnimationTimelineSupport = CSS.supports(
+          'animation-timeline: view()'
+        );
+        Alpine.data('highlight', () => ({
+          highlight: false,
+
+          intersect: !hasAnimationTimelineSupport
+            ? {
+                'x-intersect'() {
+                  this.highlight = true;
+                },
+              }
+            : {},
+        }));
+      });
+    </script>
+    <script is:inline transition:persist>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('navbar', () => ({
+          mobileMenuOpen: false,
+
+          toggleMobileNavigation(state) {
+            if (state) {
+              document.body.style.overflow = 'hidden';
+            } else {
+              document.body.style.overflow = 'visible';
+            }
+            this.mobileMenuOpen = state;
+          },
+        }));
+      });
+    </script>
   </body>
 </html>

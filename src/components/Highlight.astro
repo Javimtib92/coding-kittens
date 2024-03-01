@@ -44,25 +44,6 @@ const [accentHue, ,] = hexToHsl(accentBaseValue);
   }
 </style>
 
-<script is:inline>
-  document.addEventListener('alpine:init', () => {
-    const hasAnimationTimelineSupport = CSS.supports(
-      'animation-timeline: view()'
-    );
-    Alpine.data('highlight', () => ({
-      highlight: false,
-
-      intersect: !hasAnimationTimelineSupport
-        ? {
-            'x-intersect'() {
-              this.highlight = true;
-            },
-          }
-        : {},
-    }));
-  });
-</script>
-
 <mark
   class='text-primary-900 dark:text-primary-100'
   x-data='highlight'
