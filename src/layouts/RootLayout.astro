@@ -106,5 +106,28 @@ const { title, shortDescription } = Astro.props.frontmatter || Astro.props;
         }));
       });
     </script>
+    <script is:inline transition:persist>
+      const threshold = 500; // Adjust this threshold as needed
+
+      function handleScroll() {
+        if (!navbar) {
+          return;
+        }
+
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        if (scrollY > threshold) {
+          navbar.style.setProperty('--navbar-shrink', '1');
+        } else {
+          navbar.style.setProperty('--navbar-shrink', '0');
+        }
+      }
+
+      const navbar = document.querySelector('.navbar');
+
+      if (!CSS.supports('animation-timeline: scroll()')) {
+        window.addEventListener('scroll', handleScroll);
+      }
+    </script>
   </body>
 </html>
