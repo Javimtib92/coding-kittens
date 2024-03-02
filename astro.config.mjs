@@ -11,8 +11,7 @@ import {
   transformerNotationFocus,
   transformerNotationDiff,
 } from 'shikiji-transformers';
-import vercel from '@astrojs/vercel/static';
-
+import cloudflare from '@astrojs/cloudflare';
 const prettyCodeOptions = {
   keepBackground: false,
   theme: {
@@ -42,9 +41,7 @@ export default defineConfig({
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
   },
   output: 'static',
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
+  adapter: cloudflare({
+    imageService: 'compile',
   }),
 });
