@@ -11,7 +11,6 @@ import {
   transformerNotationFocus,
   transformerNotationDiff,
 } from 'shikiji-transformers';
-import cloudflare from '@astrojs/cloudflare';
 const prettyCodeOptions = {
   keepBackground: false,
   theme: {
@@ -41,7 +40,4 @@ export default defineConfig({
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
   },
   output: 'static',
-  adapter: cloudflare({
-    imageService: 'compile',
-  }),
 });
