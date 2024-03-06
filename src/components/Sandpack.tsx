@@ -6,6 +6,7 @@ import {
   SandpackCodeEditor,
   SandpackFileExplorer,
   SandpackPreview,
+  type SandpackFiles,
 } from '@codesandbox/sandpack-react';
 import React from 'react';
 
@@ -18,7 +19,7 @@ class ErrorBoundary extends React.Component<
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: any) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -35,7 +36,7 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-export function CodeSandbox({ files }: { files: any }) {
+export function CodeSandbox({ files }: { files: SandpackFiles }) {
   return (
     <ErrorBoundary fallback={'There was an error loading the CodeSandbox.'}>
       <SandpackProvider
