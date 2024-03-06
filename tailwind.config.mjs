@@ -15,6 +15,9 @@ export default {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      transitionTimingFunction: {
+        'in-out-back': 'cubic-bezier(0.680, -0.550, 0.265, 1.550)',
+      },
       colors: {
         background: {
           50: 'color-mix(in srgb, var(--color-background-base) 20%, white)',
