@@ -7,7 +7,7 @@ const { title, shortDescription, image } =
   Astro.props.frontmatter || Astro.props;
 ---
 
-<script is:inline>
+<script is:inline transition:persist>
   function getPreferredTheme() {
     const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
