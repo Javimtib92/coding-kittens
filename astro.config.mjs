@@ -23,7 +23,7 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://coding-kittens.com',
+  site: 'https://www.coding-kittens.com',
   integrations: [
     mdx(),
     sitemap({
