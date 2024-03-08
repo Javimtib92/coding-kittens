@@ -1,7 +1,7 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import BaseHead from './BaseHead.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
 
 const { title, shortDescription, image } =
   Astro.props.frontmatter || Astro.props;
@@ -66,7 +66,7 @@ const { title, shortDescription, image } =
   >
     <div class='mb-40 max-w-3xl md:mx-auto'>
       <main class='flex min-w-0 flex-auto flex-col px-2 md:px-0'>
-        <Header transition:persist />
+        <Navbar transition:persist />
         <div class='mx-4 md:mx-0'>
           <slot />
         </div>
