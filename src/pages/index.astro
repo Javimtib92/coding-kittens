@@ -1,13 +1,13 @@
 ---
-import RootLayout from '../layouts/RootLayout.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import Highlight from '../components/ui/Highlight.astro';
-import LatestContent from '../components/LatestContent.astro';
+import RootLayout from '~/layouts/RootLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '~/consts';
+import Highlight from '~/components/ui/Highlight.astro';
+import LatestContent from '~/components/LatestContent.astro';
 import { Image } from 'astro:assets';
-import { getYearDiff } from '../utils/date';
+import { getYearDiff } from '~/utils/date';
 import { ArrowRight } from 'lucide-react';
-import me from '../assets/me.jpeg';
-import logo from '../assets/logo.png';
+import me from '~/assets/me.jpeg';
+import logo from '~/assets/logo.png';
 
 const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
 ---

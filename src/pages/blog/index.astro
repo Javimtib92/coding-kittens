@@ -1,9 +1,9 @@
 ---
-import RootLayout from '../../layouts/RootLayout.astro';
-import ArticleItem from '../../components/ArticleItem.astro';
-import CategoriesList from '../../components/CategoriesList.astro';
+import RootLayout from '~/layouts/RootLayout.astro';
+import ArticleItem from '~/components/ArticleItem.astro';
+import CategoriesList from '~/components/CategoriesList.astro';
 import { getCollection } from 'astro:content';
-import logo from '../../assets/logo.png';
+import logo from '~/assets/logo.png';
 
 const posts = (
   await getCollection('blog', ({ data }) => {

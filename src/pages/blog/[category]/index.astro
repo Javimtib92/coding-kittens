@@ -1,10 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
-import RootLayout from '../../../layouts/RootLayout.astro';
-import ArticleItem from '../../../components/ArticleItem.astro';
-import CategoriesList from '../../../components/CategoriesList.astro';
+import RootLayout from '~/layouts/RootLayout.astro';
+import ArticleItem from '~/components/ArticleItem.astro';
+import CategoriesList from '~/components/CategoriesList.astro';
 import type { CollectionEntry } from 'astro:content';
-import logo from '../../../assets/logo.png';
+import logo from '~/assets/logo.png';
 
 export async function getStaticPaths() {
   const postsByCategory = new Map();

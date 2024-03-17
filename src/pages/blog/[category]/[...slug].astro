@@ -1,18 +1,18 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import RootLayout from '../../../layouts/RootLayout.astro';
-import Heading1 from '../../../components/ui/headings/Heading1.astro';
-import Heading2 from '../../../components/ui/headings/Heading2.astro';
-import Heading3 from '../../../components/ui/headings/Heading3.astro';
-import Heading4 from '../../../components/ui/headings/Heading4.astro';
-import Heading5 from '../../../components/ui/headings/Heading5.astro';
-import Paragraph from '../../../components/ui/Paragraph.astro';
-import Quote from '../../../components/ui/Quote.astro';
-import Link from '../../../components/ui/Link.astro';
-import UnorderedList from '../../../components/ui/UnorderedList.astro';
-import OrderedList from '../../../components/ui/OrderedList.astro';
-import ListItem from '../../../components/ui/ListItem.astro';
-import { formatDate } from '../../../utils/date';
+import RootLayout from '~/layouts/RootLayout.astro';
+import Heading1 from '~/components/ui/headings/Heading1.astro';
+import Heading2 from '~/components/ui/headings/Heading2.astro';
+import Heading3 from '~/components/ui/headings/Heading3.astro';
+import Heading4 from '~/components/ui/headings/Heading4.astro';
+import Heading5 from '~/components/ui/headings/Heading5.astro';
+import Paragraph from '~/components/ui/Paragraph.astro';
+import Quote from '~/components/ui/Quote.astro';
+import Link from '~/components/ui/Link.astro';
+import UnorderedList from '~/components/ui/UnorderedList.astro';
+import OrderedList from '~/components/ui/OrderedList.astro';
+import ListItem from '~/components/ui/ListItem.astro';
+import { formatDate } from '~/utils/date';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
