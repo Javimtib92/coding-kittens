@@ -13,5 +13,6 @@
   ],
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
-  }
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
