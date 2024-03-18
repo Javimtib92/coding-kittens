@@ -1,15 +1,18 @@
 ---
 import { cn } from '~/utils/cn';
-import { getCollection } from 'astro:content';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getBlogCollection } from '~/utils/content';
+
+const locale = Astro.currentLocale || 'en';
 
 const categories: string[] = [];
-const posts = await getCollection('blog', ({ data }) => {
+
+const posts = await getBlogCollection(locale, ({ data }) => {
   return import.meta.env.PROD ? data.draft !== true : true;
 });
 
 for (const post of posts) {
-  const category = post.id.split('/')[0];
+  const { category } = post;
 
   if (!categories.includes(category)) {
     categories.push(category);
@@ -19,14 +22,12 @@ for (const post of posts) {
 const pathname = new URL(Astro.request.url).pathname;
 const segments = pathname.split('/');
 
-const categorySegment = segments[2];
+const categorySegment = segments[3];
 
 const activeClass =
   'bg-accent-secondary-500 focus:ring-accent-secondary-300 dark:focus:ring-accent-secondary-700';
 const inactiveClass =
   'bg-primary-300 dark:bg-primary-800 hover:bg-primary-400 dark:hover:bg-primary-500 focus:ring-primary-300 dark:focus:ring-primary-600';
-
-const locale = Astro.currentLocale || 'en';
 ---
 
 <div class='mb-4 flex flex-shrink flex-row flex-wrap'>
