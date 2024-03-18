@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss';
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/constants';
 import { getBlogCollection } from '~/utils/content';
-import languages from '~/i18n/languages';
+import { languages } from '~/i18n/ui';
 
 export const getStaticPaths = () =>
   Object.keys(languages).map((locale) => ({ params: { locale } }));

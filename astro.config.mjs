@@ -26,7 +26,7 @@ export default defineConfig({
   site: 'https://www.coding-kittens.com',
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es'],
+    locales: ['en', 'es', 'ca'],
     routing: {
       prefixDefaultLocale: true,
     },
@@ -39,6 +39,7 @@ export default defineConfig({
         locales: {
           en: 'en',
           es: 'es',
+          ca: 'ca',
         },
       },
       changefreq: 'weekly',

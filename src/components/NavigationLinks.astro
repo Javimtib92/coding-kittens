@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 
 import { cn } from '~/utils/cn';
 import { MenuIcon } from 'lucide-react';
+import { useTranslations } from '~/i18n/utils';
 
 const activeClass =
   'dark:text-white text-neutral-900 underline underline-offset-8';
@@ -13,6 +14,8 @@ const pathname = new URL(Astro.request.url).pathname;
 const segments = pathname.split('/');
 
 const locale = Astro.currentLocale || 'en';
+
+const t = useTranslations(locale);
 ---
 
 <div
@@ -29,7 +32,7 @@ const locale = Astro.currentLocale || 'en';
         : inactiveClass
     )}
   >
-    <span class='relative px-2 py-1'>Me</span>
+    <span class='relative px-2 py-1'>{t('nav.home')}</span>
   </a>
   <a
     href={getRelativeLocaleUrl(locale, '/blog')}
@@ -38,7 +41,7 @@ const locale = Astro.currentLocale || 'en';
       segments.includes('blog') ? activeClass : inactiveClass
     )}
   >
-    <span class='relative px-2 py-1'>Blog</span>
+    <span class='relative px-2 py-1'>{t('nav.blog')}</span>
   </a>
 </div>
 <div class='flex sm:hidden'>

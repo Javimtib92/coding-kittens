@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 type RemoveLocale<S extends string> =
   S extends `${infer Category}/${infer Slug}/${infer _Locale}`
@@ -40,4 +40,8 @@ export async function getBlogCollection(
       }
       return post.locale === locale;
     });
+}
+
+export async function getHomePage(locale = 'en') {
+  return getEntry('home', locale);
 }

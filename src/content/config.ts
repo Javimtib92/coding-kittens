@@ -15,6 +15,10 @@ const blog = defineCollection({
     }),
 });
 
+const home = defineCollection({
+  type: 'content',
+});
+
 export function createIsLangEntry(lang: string) {
   return (entry: CollectionEntry<'blog'>): boolean =>
     entry.slug.startsWith(lang + '/');
@@ -22,4 +26,4 @@ export function createIsLangEntry(lang: string) {
 
 export const isEnglishEntry = createIsLangEntry('en');
 
-export const collections = { blog };
+export const collections = { blog, home };
