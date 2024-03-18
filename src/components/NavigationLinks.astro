@@ -24,7 +24,9 @@ const locale = Astro.currentLocale || 'en';
     href={getRelativeLocaleUrl(locale, '/')}
     class={cn(
       'flex align-middle transition-all',
-      pathname === '/' ? activeClass : inactiveClass
+      pathname === getRelativeLocaleUrl(locale, '/')
+        ? activeClass
+        : inactiveClass
     )}
   >
     <span class='relative px-2 py-1'>Me</span>

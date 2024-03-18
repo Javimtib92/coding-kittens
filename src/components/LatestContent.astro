@@ -1,11 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getBlogCollection } from '~/utils/content';
 
 const ITEMS_COUNT = 5;
 
+const locale = Astro.currentLocale || 'en';
+
 const posts = (
-  await getCollection('blog', ({ data }) => {
+  await getBlogCollection(locale, ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   })
 ).slice(0, ITEMS_COUNT);
@@ -16,7 +19,10 @@ const posts = (
     posts.map((post) => {
       return (
         <a
-          href={`/blog/${post.slug}`}
+          href={getRelativeLocaleUrl(
+            locale,
+            `/blog/${post.category}/${post.slug}`
+          )}
           class='my-8 flex cursor-pointer flex-row items-center gap-4 bg-primary-50 p-4 hover:bg-primary-100 dark:bg-background-600 hover:dark:bg-background-500'
         >
           {post.data.thumbnail && (

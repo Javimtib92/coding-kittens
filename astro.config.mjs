@@ -34,6 +34,13 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          es: 'es',
+        },
+      },
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
