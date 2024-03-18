@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, type CollectionEntry } from 'astro:content';
 
 const blog = defineCollection({
   type: 'content',
@@ -14,5 +14,12 @@ const blog = defineCollection({
       thumbnail: image(),
     }),
 });
+
+export function createIsLangEntry(lang: string) {
+  return (entry: CollectionEntry<'blog'>): boolean =>
+    entry.slug.startsWith(lang + '/');
+}
+
+export const isEnglishEntry = createIsLangEntry('en');
 
 export const collections = { blog };

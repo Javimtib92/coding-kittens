@@ -1,0 +1,155 @@
+---
+import RootLayout from '~/layouts/RootLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
+import Highlight from '~/components/ui/Highlight.astro';
+import LatestContent from '~/components/LatestContent.astro';
+import { Image } from 'astro:assets';
+import { getYearDiff } from '~/utils/date';
+import { ArrowRight } from 'lucide-react';
+import me from '~/assets/me.jpeg';
+import logo from '~/assets/logo.png';
+import languages from '~/i18n/languages';
+
+const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
+
+export const getStaticPaths = () =>
+  Object.keys(languages).map((locale) => ({ params: { locale } }));
+
+const { locale } = Astro.params;
+---
+
+<RootLayout
+  title={SITE_TITLE}
+  shortDescription={SITE_DESCRIPTION}
+  image={logo.src}
+  locale={locale}
+>
+  <div>
+    <div class='mb-6 flex flex-row items-center gap-6'>
+      <span
+        class='box-border flex h-20 w-20 items-center justify-center overflow-hidden rounded-full align-middle outline-none
+      ring-2 ring-background-50 ring-slate-500 ring-offset-2 ring-offset-accent-secondary-300
+      dark:ring-background-500 dark:ring-offset-accent-secondary-500'
+      >
+        <Image
+          src={me}
+          width={128}
+          quality={80}
+          alt='text'
+          class='flex h-full w-full object-cover'
+          loading='eager'
+        />
+      </span>
+
+      <div class='flex flex-col place-self-start'>
+        <h1 class='text-3xl leading-7 sm:text-4xl'>Javier Muñoz Tous</h1>
+        <h2
+          class='italic text-accent-500 underline underline-offset-8 dark:text-accent-400 sm:text-xl'
+        >
+          Full Stack Engineer
+        </h2>
+      </div>
+    </div>
+    <p class='prose my-6'>
+      <Highlight>
+        <b class='font-display text-2xl text-primary-600 dark:text-primary-100'>
+          Hola 👋, Welcome to Coding Kittens!
+        </b>
+      </Highlight>
+    </p>
+    <p class='prose my-6'>I&apos;m Javier and this is my personal blog.</p>
+
+    <p class='prose my-6'>
+      With over {experienceYears} years of experience as a Software Engineer, I found
+      my comfort-zone in JavaScript.
+    </p>
+
+    <p class='prose my-6'>
+      I have worked on many different systems, ranging from a Cryptocurrency
+      Exchange Platform to an Online Travel Agency like eDreams, and to a
+      Healthcare Platform for Biogen.
+    </p>
+
+    <p class='prose my-6'>
+      I created this space to share my thoughts, experiment with new tools, have
+      fun, and contribute to the tech community.
+    </p>
+
+    <p class='prose my-6'>
+      <Highlight>
+        Coding Kittens&apos;s name idea is inspired by my two adorable cats —
+        Loki and Nym —
+      </Highlight>{' '}
+      who have been with me a lot of my coding time. One could say they code for
+      me and I just watch them. 🤫
+    </p>
+    <p class='prose my-6'>
+      Thanks to my fiance for coming up with the name idea. She is my most
+      profound inspiration and a huge source of support. 🧡
+    </p>
+    <p class='prose my-6'>
+      I like simple things. I practice Yoga twice a week 🧘‍♂️. I’m passionate
+      about video-games 🎮, Manga, and Anime ⛩️ and my favorite meal is ramen
+      🍜.
+    </p>
+    <p class='prose my-6'>
+      If you want to know me a bit better you can find me on <a
+        href='https://www.instagram.com/javimtib92'
+        class='text-md font-body text-accent-500 underline underline-offset-4 hover:text-accent-400 dark:text-accent-400 dark:hover:text-accent-300'
+        >Instagram</a
+      >. Every now and then I post stories of my cats doing something silly.
+    </p>
+    <p class='prose my-6'>
+      If my professional career is what interests you, you can check my <a
+        href='https://www.linkedin.com/in/javier-muñoz-tous/'
+        class='text-md font-body text-accent-500 underline underline-offset-4 hover:text-accent-400 dark:text-accent-400 dark:hover:text-accent-300'
+        >LinkedIn</a
+      >
+      or <a
+        href='https://github.com/Javimtib92'
+        class='text-md font-body text-accent-500 underline underline-offset-4 hover:text-accent-400 dark:text-accent-400 dark:hover:text-accent-300'
+        >Github</a
+      > profiles.
+    </p>
+    <p class='prose my-6'>
+      I hope you find some calm and insight in this little space I&apos;ve
+      built.
+    </p>
+
+    <p class='prose'>Salut! 😄</p>
+    <div class='flex flex-col gap-6 sm:flex-row'>
+      <!-- <SocialLink
+        img={InstagramLogo}
+        name='Instagram'
+        link='https://www.instagram.com/javimtib92'
+      />
+      <SocialLink
+        img={LinkedinLogo}
+        name='LinkedIn'
+        link='https://www.linkedin.com/in/javier-muñoz-tous/'
+      />
+      <SocialLink
+        img={GithubLogo}
+        name='Github'
+        link='https://github.com/Javimtib92'
+      /> -->
+    </div>
+
+    <div class='mt-12'>
+      <h3
+        class='font-display text-xl font-bold text-primary-600 dark:text-primary-100 sm:text-2xl'
+      >
+        The Latest Coding Kittens Posts
+      </h3>
+
+      <LatestContent />
+
+      <div>
+        <a href='/blog' class='link flex flex-row items-center gap-2'>
+          Browse all posts
+          <ArrowRight width={12} height={12} />
+        </a>
+      </div>
+    </div>
+  </div>
+</RootLayout>

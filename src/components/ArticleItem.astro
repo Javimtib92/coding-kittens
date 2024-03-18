@@ -1,9 +1,11 @@
 ---
 import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { formatDate } from '~/utils/date';
 
 const {
   slug,
+  category,
   thumbnail,
   title,
   subtitle,
@@ -12,12 +14,12 @@ const {
   readingTime,
 } = Astro.props.frontmatter || Astro.props;
 
-const category = slug?.split('/')[0];
+const locale = Astro.currentLocale || 'en';
 ---
 
 <article class='flex px-0 py-7'>
   <a
-    href={`/blog/${slug}`}
+    href={getRelativeLocaleUrl(locale, `/blog/${slug}`)}
     class='mr-6 block flex-[0_0_100px] max-md:hidden md:flex-[0_0_280px]'
   >
     <Image
@@ -41,7 +43,7 @@ const category = slug?.split('/')[0];
         <div class='mb-4 mt-2'>
           <a
             class='link font-mono text-sm font-extrabold underline underline-offset-8'
-            href={`/blog/${category}`}
+            href={getRelativeLocaleUrl(locale, `/blog/${category}`)}
           >
             {category}
           </a>
@@ -50,7 +52,7 @@ const category = slug?.split('/')[0];
 
       <h2 class='mb-4'>
         <a
-          href={`/blog/${slug}`}
+          href={getRelativeLocaleUrl(locale, `/blog/${category}/${slug}`)}
           class='font-display text-4xl font-bold leading-7 text-primary-900 hover:text-primary-900 dark:text-primary-100 dark:hover:text-primary-100'
         >
           {title}

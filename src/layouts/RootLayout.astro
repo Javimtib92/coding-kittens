@@ -3,7 +3,7 @@ import BaseHead from './BaseHead.astro';
 import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
 
-const { title, shortDescription, image } =
+const { locale, title, shortDescription, image } =
   Astro.props.frontmatter || Astro.props;
 ---
 
@@ -52,7 +52,7 @@ const { title, shortDescription, image } =
 </script>
 
 <html
-  lang='en'
+  lang={locale}
   x-data='theme'
   x-bind:class='theme === "dark" ? "dark" : "light"'
   x-init='init'

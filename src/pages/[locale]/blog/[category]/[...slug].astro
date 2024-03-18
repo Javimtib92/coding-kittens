@@ -1,5 +1,4 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
 import RootLayout from '~/layouts/RootLayout.astro';
 import Heading1 from '~/components/ui/headings/Heading1.astro';
 import Heading2 from '~/components/ui/headings/Heading2.astro';
@@ -13,21 +12,26 @@ import UnorderedList from '~/components/ui/UnorderedList.astro';
 import OrderedList from '~/components/ui/OrderedList.astro';
 import ListItem from '~/components/ui/ListItem.astro';
 import { formatDate } from '~/utils/date';
+import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getBlogCollection();
+
   return posts.map((post) => {
-    const segments = post.slug.split('/');
-    const category = segments[0];
-    const slug = segments[1];
+    const { category, slug, locale } = post;
 
     return {
-      params: { category, slug },
+      params: {
+        category,
+        slug,
+        locale,
+      },
       props: post,
     };
   });
 }
-type Props = CollectionEntry<'blog'>;
+
+type Props = ExtendedBlogEntry;
 
 const post = Astro.props;
 
@@ -38,6 +42,7 @@ const { Content } = await post.render();
   title={post.data.title}
   shortDescription={post.data.shortDescription}
   image={post.data.thumbnail.src}
+  locale={post.locale}
 >
   <section>
     <h1

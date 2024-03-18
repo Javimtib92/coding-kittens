@@ -1,0 +1,22 @@
+---
+// Redirect from base to /en/ pages
+import { englishPages } from './content';
+import { stripLangFromSlug } from './util';
+
+export async function getStaticPaths() {
+  return englishPages.map((page) => {
+    return {
+      params: {
+        enRedirectSlug: stripLangFromSlug(page.slug),
+      },
+      props: {
+        englishSlug: page.slug,
+      },
+    };
+  });
+}
+
+const { englishSlug } = Astro.props;
+---
+
+<meta http-equiv='refresh' content={`0;url=/${englishSlug}`} />
