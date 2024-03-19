@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { translateReadingTime } from 'remark/remark-reading-time.mjs';
 import { formatDate } from '~/utils/date';
 
 const {
@@ -64,10 +65,10 @@ const locale = Astro.currentLocale || 'en';
     </p>
     <footer class='mt-4 flex justify-between'>
       <p class='prose subtle font-mono'>
-        {formatDate(pubDate)}
+        {formatDate(pubDate, locale)}
       </p>
       <p class='prose subtle font-mono'>
-        {readingTime}
+        {translateReadingTime(readingTime, locale)}
       </p>
     </footer>
   </div>

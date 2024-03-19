@@ -23,6 +23,8 @@ export async function getStaticPaths() {
 
 type Props = ExtendedBlogEntry;
 
+const locale = Astro.currentLocale || 'en';
+
 const post = Astro.props;
 
 const { Content } = await post.render();
@@ -45,7 +47,7 @@ const { Content } = await post.render();
         {
           /* Now is computed on the server but probably I need the locale here so that I can format based on locale */
         }
-        {formatDate(post.data.pubDate)}
+        {formatDate(post.data.pubDate, locale)}
       </p>
       <p class='subtle mb-0 mt-0 font-mono'>
         {/* <ViewCount slug={slug} /> */}
