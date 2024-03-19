@@ -8,8 +8,15 @@ import {
 
 export function LanguageSwitchButtonDropdown() {
   const onChangeLanguage = (locale: string) => {
-    window.location.replace(`/${locale}`);
+    const url = new URL(window.location.href);
+
+    url.pathname = url.pathname.replace(/^\/[^/]+/, '/' + locale);
+
+    localStorage.setItem('selectedLanguage', locale);
+
+    window.location.replace(url.href);
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
