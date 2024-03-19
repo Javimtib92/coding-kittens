@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-} from '~/components/ui/DropdownMenu.tsx';
+} from '~/components/react/DropdownMenu';
 
 export function LanguageSwitchButtonDropdown() {
   const onChangeLanguage = (locale: string) => {
