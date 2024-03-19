@@ -55,6 +55,7 @@ const { locale, title, shortDescription, image } =
   lang={locale}
   x-data='theme'
   x-bind:class='theme === "dark" ? "dark" : "light"'
+  x-bind:style="{ '--current-theme': theme }"
   x-init='init'
   transition:animate='none'
 >
