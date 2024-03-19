@@ -29,7 +29,6 @@ h5 {
 }
 
 html {
-  scrollbar-gutter: stable;
   color-scheme: var(--current-theme);
 }
 
