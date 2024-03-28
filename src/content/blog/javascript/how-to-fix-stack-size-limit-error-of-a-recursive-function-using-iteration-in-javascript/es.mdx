@@ -1,0 +1,231 @@
+---
+title: "Cómo arreglar el error \"Maximum call stack exceeded\" de una función recursiva mediante iteración en JavaScript"
+pubDate: 2024-01-05
+thumbnail: ~/assets/thumbnails/abstract.jpeg
+subtitle: Recur... ¿qué?
+shortDescription: >
+  Explora un enfoque distinto para recorrer un objeto utilizando iteración en lugar de recursión y así evitar el error de límite de la pila.
+---
+
+import Highlight from '~/components/ui/Highlight.astro';
+
+Un día en el trabajo tuve que recorrer una estructura de datos compleja para eliminar algunas referencias circulares (Contentful CMS y linked entries, ¿os suena?) y me encontré con este error:
+
+```bash
+RangeError: Maximum call stack size exceeded (Chrome)
+InternalError: too much recursion (Firefox)
+RangeError: Maximum call stack size exceeded. (Safari)
+
+# Algunos navegadores son algo más humanos que otros a la hora de anunciar las malas noticias 👀
+```
+
+Estaba utilizando una función recursiva fantástica para recorrer estos datos, y de repente me di de bruces con la realidad. Fui golpeado por el error "Maximum call stack exceeded". Mala tarde. Lo peor de todo es que este error comprometió producción y, como no estábamos manejando el error, nuestros usuarios estaban experimentando lo que se llama en inglés la "Black Screen of Death".
+
+<Highlight>Al final de esta entrada aprenderás a evitar esta situación convirtiendo una función recursiva en su contraparte iterativa</Highlight>. Pero primero os haré una pequeña introducción al enfoque recursivo.
+
+## Crónica de un desastre anunciado, el intento recursivo
+
+Como referencia, esta es una versión simplificada del código que provocó todo este lío:
+
+```js title="normalize.js"
+function normalizeObject(object) {
+  if (Array.isArray(object)) {
+    for (const item of object) {
+      normalizeObject(item);
+    }
+  } else if (object !== null && typeof object === 'object') {
+    for (const property in object) {
+      // Aquí podemos realizar comprobaciones para ver qué propiedades son candidatas a referencias circulares y así modificarlas o eliminarlas. Cómo por ejemplo:
+      // if (object[property]?.sys?.id === 'internalLink') {
+      //   delete object[property].page;
+      // }
+      normalizeObject(object[property]);
+    }
+  }
+}
+
+normalizeObject(complexObject);
+```
+
+Esta recursividad funciona de la siguiente forma:
+
+1. La función toma un `Object` como parámetro.
+
+2. Primero comprueba si el objeto es un `Array` utilizando `Array.isArray(object)`. Si es así, itera sobre cada elemento de la matriz y llama recursivamente `normalizeObject` sobre cada elemento.
+
+3. En caso contrario, si no es `null` y es de tipo `Object`, significa que es un objeto. &mdash;array y null son de tipo `Object` en Javascript, por eso comprobamos que no sea null&mdash; En este caso, itera sus propiedades utilizando un bucle `for...in`. Para cada propiedad, realiza la operación deseada y llama recursivamente a `normalizeObject` pasando el valor de la propiedad.
+
+Este enfoque funcionó bien hasta que no funcionó.
+
+## Agárrate, que vienen curvas
+
+Después de algunas investigaciones, encontré una opción de node v8 para incrementar el tamaño de la pila llamada `--stack-size`
+pero ajustar esa opción no me pareció bien. No tengo nada en contra de esta opción, si resuelve el
+problema debería estar bien, ¿no es así? Pero esta opción no es fiable, tal y como se dice en [esta incidencia de Github](https://github.com/nodejs/node/issues/6360).
+
+Por lo tanto, de vuelta al problema, después de un rato más de investigación, me encontré con [este artículo](https://exploringjs.com/es6/ch_tail-calls.html) sobre un concepto llamado **Tail Call Optimization**
+
+> ECMAScript 6 offers tail call optimization, where you can make some function calls without growing the call stack.
+
+Eh, esto parece prometedor... pero segundos después me di con la realidad otra vez. 🤯
+
+> Warning: Even though tail call optimization is part of the language specification, it isn’t supported by many engines and that may never change.
+
+Volviendo al caso, tuve que encontrar una alternativa y fue entonces cuando descubrí que una función recursiva podía traducirse a una versión iterativa.
+
+## Nuestro viejo amigo, la iteración
+
+El concepto para el enfoque iterativo es sencillo, <Highlight>utiliza una pila o una cola para procesar secuencialmente elementos de una estructura de datos sin utilizar la recursividad</Highlight>.
+
+```js title="normalize.js"
+function normalizeObject(object) {
+  let queue = [object];
+
+  while (queue.length) {
+    const current = queue.shift();
+
+    if (Array.isArray(current)) {
+      queue = [...queue, ...current];
+    }
+
+    if (current !== null && typeof current === 'object') {
+      for (const property in current) {
+         // Aquí podemos realizar comprobaciones para ver qué propiedades son candidatas a referencias circulares y así modificarlas o eliminarlas. Cómo por ejemplo:
+        // if (object[property]?.sys?.id === 'internalLink') {
+        //   delete object[property].page;
+        // }
+        queue.push(current[property]);
+      }
+    }
+  }
+}
+
+...
+
+normalizeObject(complexObject);
+```
+
+Aquí tenéis un desglose del código:
+
+1. La función toma un `Object` como parámetro.
+
+2. Inicializa una matriz que hará la función de cola y que contiene un único elemento que será el objeto de entrada.
+
+3. El código entra en un bucle `while` que sigue mientras la cola no esté vacía.
+
+4. Dentro del bucle, sacamos de la cola el primer elemento (actual).
+
+5. Si el elemento actual es de tipo `Array`, sus elementos se añaden a la cola.
+
+6. Si el elemento actual es de tipo `Object` (y no null), itera sus propiedades utilizando un bucle `for...in`.
+
+7. Para cada propiedad, realiza los cambios necesarios y después coloca el valor de la propiedad en la cola.
+
+8. El proceso continúa hasta que la cola esté vacía.
+
+Convertir la función recursiva a esa versión iterativa solucionó el error del límite de pila. Tal vez existen otras alternativas que todavía no he descubierto, pero esta solución nos
+funcionó bien en su momento.
+
+Resumiendo, en esta entrada hemos visto que la recursividad puede generar un error si los objetos
+son demasiado complejos y el montón de llamadas de la recursividad crece demasiado. Hemos visto y analizado un ejemplo real de una función recursiva que puede causar ese error. Luego hemos visto cómo se analiza un problema de este tipo y qué barreras nos hemos ido encontrando, desde descubrir "Tail Call Optimization" y darnos cuenta de que no todos los motores de navegadores lo soportan hasta descubrir que podíamos sustituir la recursividad con un equivalente iterativo que finalmente solucionaba nuestro problema.
+
+Sin embargo, ten cuidado y analiza siempre tu problema porque, para nosotros, la versión iterativa a veces era más lenta que la recursiva, dependiendo de las operaciones realizadas en el interior y de otros factores que no entiendo del todo.
+
+Pero esto no importa si la recursividad genera un error, ¿no es así? 😄
+
+## Bonus
+
+Si quieres probarlo, puedes crear el siguiente archivo:
+
+```js title="recursion-test.js"
+const createDeeplyNestedObject = (depth, currentDepth = 0) => {
+  if (currentDepth === depth) {
+    return 'Reached maximum depth';
+  }
+
+  return {
+    nestedObject: createDeeplyNestedObject(depth, currentDepth + 1),
+  };
+};
+
+const iterativeReplacer = (value) => {
+  let queue = [value];
+
+  while (queue.length) {
+    const current = queue.shift();
+
+    if (Array.isArray(current)) {
+      queue = [...queue, ...current];
+    } else if (current !== null && typeof current === 'object') {
+      for (const property in current) {
+        queue.push(current[property]);
+      }
+    }
+  }
+};
+
+const recursiveReplacer = (value) => {
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      recursiveReplacer(item);
+    }
+  } else if (value !== null && typeof value === 'object') {
+    for (const property in value) {
+      recursiveReplacer(value[property]);
+    }
+  }
+};
+
+(() => {
+  /**
+   * He ajustado manualmente la profundidad de este objeto para evitar precisamente el error "Max Call Stack Size" del que hemos hablado.
+   *
+   * Ajusta la profundidad para diferentes resultados.
+   */
+  const deeplyNestedObject = createDeeplyNestedObject(6000);
+
+  const startRecursive = performance.now();
+
+  try {
+    recursiveReplacer(deeplyNestedObject);
+
+    console.log('\x1b[32m%s\x1b[0m', 'Recursive function succeed');
+  } catch (e) {
+    console.log('\x1b[31m%s\x1b[0m', 'Recursive function failed');
+  } finally {
+    const endRecursive = performance.now();
+    const timeSpent = endRecursive - startRecursive;
+
+    console.log(`Time spent processing: ${timeSpent} milliseconds`);
+  }
+
+  console.log('-------------');
+
+  const startIterative = performance.now();
+
+  try {
+    iterativeReplacer(deeplyNestedObject);
+
+    console.log('\x1b[32m%s\x1b[0m', 'Iterative function succeed');
+  } catch (e) {
+    console.log('\x1b[31m%s\x1b[0m', 'Iterative function failed');
+  } finally {
+    const endIterative = performance.now();
+    const timeSpent = endIterative - startIterative;
+
+    console.log(`Time spent processing: ${timeSpent} milliseconds`);
+  }
+})();
+```
+
+La ejecución de este archivo dará el siguiente resultado:
+
+```bash
+node recursion-test.js
+
+Recursive function failed
+Time spent processing: 5.062059998512268 milliseconds
+-------------
+Iterative function succeed
+Time spent processing: 4.321290999650955 milliseconds
+```
