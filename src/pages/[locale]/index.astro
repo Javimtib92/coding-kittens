@@ -1,0 +1,84 @@
+---
+import RootLayout from '~/layouts/RootLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
+import LatestContent from '~/components/LatestContent.astro';
+import { Image } from 'astro:assets';
+import { getYearDiff } from '~/utils/date';
+import { ArrowRight } from 'lucide-react';
+import me from '~/assets/me.jpeg';
+import logo from '~/assets/logo.png';
+import { languages } from '~/i18n/ui';
+import { getHomePage } from '~/utils/content';
+import { mdxComponents } from '~/markdown/mdxComponents';
+import { useTranslations } from '~/i18n/utils';
+
+const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
+
+export const getStaticPaths = () =>
+  Object.keys(languages).map((locale) => ({ params: { locale } }));
+
+const locale = Astro.currentLocale || 'en';
+
+const homePage = await getHomePage(locale);
+
+if (!homePage) {
+  return Astro.redirect('404');
+}
+
+const { Content } = await homePage.render();
+
+const t = useTranslations(locale);
+---
+
+<RootLayout
+  title={SITE_TITLE}
+  shortDescription={SITE_DESCRIPTION}
+  image={logo.src}
+  locale={locale}
+>
+  <div>
+    <div class='mb-6 flex flex-row items-center gap-6'>
+      <span
+        class='box-border flex h-20 w-20 items-center justify-center overflow-hidden rounded-full align-middle outline-none
+      ring-2 ring-background-50 ring-slate-500 ring-offset-2 ring-offset-accent-secondary-300
+      dark:ring-background-500 dark:ring-offset-accent-secondary-500'
+      >
+        <Image
+          src={me}
+          width={128}
+          quality={80}
+          alt='text'
+          class='flex h-full w-full object-cover'
+          loading='eager'
+        />
+      </span>
+
+      <div class='flex flex-col place-self-start'>
+        <h1 class='text-3xl leading-7 sm:text-4xl'>Javier Muñoz Tous</h1>
+        <h2
+          class='italic text-accent-500 underline underline-offset-8 dark:text-accent-400 sm:text-xl'
+        >
+          Full Stack Engineer
+        </h2>
+      </div>
+    </div>
+    <Content components={mdxComponents} />
+
+    <div class='mt-12'>
+      <h3
+        class='font-display text-xl font-bold text-primary-600 dark:text-primary-100 sm:text-2xl'
+      >
+        {t('latest.title')}
+      </h3>
+
+      <LatestContent />
+
+      <div>
+        <a href='/blog' class='link flex flex-row items-center gap-2'>
+          {t('latest.link')}
+          <ArrowRight width={12} height={12} />
+        </a>
+      </div>
+    </div>
+  </div>
+</RootLayout>

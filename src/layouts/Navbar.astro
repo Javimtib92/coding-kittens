@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import MobileNavMenu from '~/components/MobileNavMenu.astro';
 import NavigationLinks from '~/components/NavigationLinks.astro';
 import ThemeSwitchButton from '~/components/ThemeSwitchButton.astro';
+import LanguageSwitchButton from '~/components/LanguageSwitchButton.astro';
 import logo from '~/assets/logo.png';
 ---
 
@@ -44,6 +45,8 @@ import logo from '~/assets/logo.png';
 
     <div class='flex flex-row-reverse gap-6 sm:flex-row'>
       <NavigationLinks />
+
+      <LanguageSwitchButton />
       <ThemeSwitchButton />
     </div>
   </div>
@@ -99,7 +102,6 @@ import logo from '~/assets/logo.png';
   function handleScroll() {
     const navbar = document.querySelector('.navbar');
 
-    console.log('attahcing', navbar);
     if (!navbar) {
       return;
     }

@@ -1,0 +1,61 @@
+---
+import RootLayout from '~/layouts/RootLayout.astro';
+import { mdxComponents } from '~/markdown/mdxComponents';
+import { formatDate } from '~/utils/date';
+import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
+
+export async function getStaticPaths() {
+  const posts = await getBlogCollection();
+
+  return posts.map((post) => {
+    const { category, slug, locale } = post;
+
+    return {
+      params: {
+        category,
+        slug,
+        locale,
+      },
+      props: post,
+    };
+  });
+}
+
+type Props = ExtendedBlogEntry;
+
+const locale = Astro.currentLocale || 'en';
+
+const post = Astro.props;
+
+const { Content } = await post.render();
+---
+
+<RootLayout
+  title={post.data.title}
+  shortDescription={post.data.shortDescription}
+  image={post.data.thumbnail.src}
+  locale={post.locale}
+>
+  <section>
+    <h1
+      class='font-display text-4xl font-bold text-primary-600 dark:text-primary-100 sm:text-5xl'
+    >
+      {post.data.title}
+    </h1>
+    <div class='mb-8 mt-4 flex items-center justify-between text-sm'>
+      <p class='subtle mb-0 mt-0 font-mono'>
+        {
+          /* Now is computed on the server but probably I need the locale here so that I can format based on locale */
+        }
+        {formatDate(post.data.pubDate, locale)}
+      </p>
+      <p class='subtle mb-0 mt-0 font-mono'>
+        {/* <ViewCount slug={slug} /> */}
+      </p>
+    </div>
+
+    <article>
+      <Content components={mdxComponents} />
+    </article>
+  </section>
+</RootLayout>

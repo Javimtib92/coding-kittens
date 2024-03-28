@@ -24,9 +24,24 @@ const prettyCodeOptions = {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.coding-kittens.com',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'ca'],
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
   integrations: [
     mdx(),
     sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          es: 'es',
+          ca: 'ca',
+        },
+      },
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

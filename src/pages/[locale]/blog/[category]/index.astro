@@ -1,48 +1,58 @@
 ---
-import { getCollection } from 'astro:content';
 import RootLayout from '~/layouts/RootLayout.astro';
 import ArticleItem from '~/components/ArticleItem.astro';
 import CategoriesList from '~/components/CategoriesList.astro';
-import type { CollectionEntry } from 'astro:content';
 import logo from '~/assets/logo.png';
+import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
 
 export async function getStaticPaths() {
-  const postsByCategory = new Map();
+  const postsByCategoryLocale = new Map();
+
   const posts = (
-    await getCollection('blog', ({ data }) => {
+    await getBlogCollection(Astro.currentLocale, ({ data }) => {
       return import.meta.env.PROD ? data.draft !== true : true;
     })
   ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   for (const post of posts) {
-    const category = post.id.split('/')[0];
+    const { category, locale } = post;
 
-    if (!postsByCategory.get(category)) {
-      postsByCategory.set(category, []);
+    if (!postsByCategoryLocale.get(category + '_' + locale)) {
+      postsByCategoryLocale.set(category + '_' + locale, []);
     }
 
-    postsByCategory.set(category, [...postsByCategory.get(category), post]);
+    postsByCategoryLocale.set(category + '_' + locale, [
+      ...postsByCategoryLocale.get(category + '_' + locale),
+      post,
+    ]);
   }
 
-  return Array.from(postsByCategory.entries()).map(([category, posts]) => ({
-    params: { category },
-    props: {
-      posts,
-    },
-  }));
+  return Array.from(postsByCategoryLocale.entries()).map(
+    ([categoryAndLocale, posts]) => {
+      const [category, locale] = categoryAndLocale.split('_');
+
+      return {
+        params: { category, locale },
+        props: {
+          posts,
+        },
+      };
+    }
+  );
 }
 
-type Props = { posts: CollectionEntry<'blog'>[] };
+type Props = { posts: ExtendedBlogEntry[] };
 
 const { posts } = Astro.props;
 
-const { category } = Astro.params;
+const { category, locale } = Astro.params;
 ---
 
 <RootLayout
   title={`Blog | ${category} | Javier Muñoz Tous`}
   shortDescription={`Find information and tutorials about ${category} in Coding Kittens.`}
   image={logo.src}
+  locale={locale}
 >
   <CategoriesList />
   <div class='mx-auto my-0 flex max-w-7xl flex-wrap justify-between pb-0'>
@@ -54,6 +64,7 @@ const { category } = Astro.params;
             return (
               <ArticleItem
                 slug={post.slug}
+                category={post.category}
                 readingTime={remarkPluginFrontmatter.readingTime}
                 {...post.data}
               />
