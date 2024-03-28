@@ -6,7 +6,11 @@ import {
   DropdownMenuItem,
 } from '~/components/react/DropdownMenu';
 
-export function LanguageSwitchButtonDropdown({ locale }: string | undefined) {
+export function LanguageSwitchButtonDropdown({
+  locale,
+}: {
+  locale: string | undefined;
+}) {
   const onChangeLanguage = (locale: string) => {
     const url = new URL(window.location.href);
 
