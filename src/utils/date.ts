@@ -1,4 +1,4 @@
-export function formatDate(inputDate: Date) {
+export function formatDate(inputDate: Date, locale: string) {
   // Convert the input date string to a Date object
   const date = new Date(inputDate);
 
@@ -13,7 +13,7 @@ export function formatDate(inputDate: Date) {
       day: 'numeric',
     } as Intl.DateTimeFormatOptions;
 
-    return new Intl.DateTimeFormat('en-GB', options).format(date);
+    return new Intl.DateTimeFormat(locale, options).format(date);
   }
 
   // Check if the input date is today

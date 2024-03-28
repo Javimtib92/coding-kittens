@@ -3,12 +3,19 @@ import RootLayout from '~/layouts/RootLayout.astro';
 import LatestContent from '~/components/LatestContent.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
 import logo from '~/assets/logo.png';
+import { languages } from '~/i18n/ui';
+
+export const getStaticPaths = () =>
+  Object.keys(languages).map((locale) => ({ params: { locale } }));
+
+const { locale } = Astro.params;
 ---
 
 <RootLayout
   title={SITE_TITLE}
   shortDescription={SITE_DESCRIPTION}
   image={logo.src}
+  locale={locale}
 >
   <div class='mb-20'>
     <h1
