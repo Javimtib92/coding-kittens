@@ -7,7 +7,7 @@ const { locale, title, shortDescription, image } =
   Astro.props.frontmatter || Astro.props;
 ---
 
-<script is:inline transition:persist>
+<script is:inline>
   function getPreferredTheme() {
     const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -67,14 +67,14 @@ const { locale, title, shortDescription, image } =
   >
     <div class='mb-40 max-w-3xl md:mx-auto'>
       <main class='flex min-w-0 flex-auto flex-col px-2 md:px-0'>
-        <Navbar transition:persist />
+        <Navbar />
         <div class='mx-4 md:mx-0'>
           <slot />
         </div>
       </main>
     </div>
     <Footer />
-    <script is:inline transition:persist>
+    <script is:inline>
       document.addEventListener('alpine:init', () => {
         const hasAnimationTimelineSupport = CSS.supports(
           'animation-timeline: view()'
@@ -92,7 +92,7 @@ const { locale, title, shortDescription, image } =
         }));
       });
     </script>
-    <script is:inline transition:persist>
+    <script is:inline>
       document.addEventListener('alpine:init', () => {
         Alpine.data('navbar', () => ({
           mobileMenuOpen: false,

@@ -4,9 +4,4 @@ import { LanguageSwitchButtonDropdown } from '~/components/react/LanguageSwitchB
 const locale = Astro.currentLocale || 'en';
 ---
 
-<LanguageSwitchButtonDropdown
-  client:load
-  locale={locale}
-  transition:persist='language-switch-button'
-  transition:persist-props
-/>
+<LanguageSwitchButtonDropdown client:load locale={locale} />
