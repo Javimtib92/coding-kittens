@@ -254,7 +254,7 @@ Después, necesitaremos añadir algunos estilos a este elemento para que sea sim
 
 Una vez tengamos todas estas piezas juntas tendremos lo siguiente:
 
-<CodeSandbox files={getFiles({ animationStyles: false })} client:only="react"/>
+<CodeSandbox files={getFiles({ animationStyles: false })} client:visible={{rootMargin: "200px"}}/>
 
 Tenemos nuestra primera versión de la barra de navegación, similar a la mencionada [al principio de esta entrada del blog](#un-poco-de-contexto). Aún no hemos añadido la animación y ocupa un gran porcentaje de la pantalla. Lo podemos hacer mejor.
 
@@ -453,7 +453,7 @@ Si quieres, puedes comprobar el resultado de los cambios que hemos aplicado en e
 
 <CodeSandbox files={
   getFiles({ animationStyles: true })
-} client:only="react"/>
+} client:visible={{rootMargin: "200px"}}/>
 
 !Esto es todo, amigos! 🥕
 

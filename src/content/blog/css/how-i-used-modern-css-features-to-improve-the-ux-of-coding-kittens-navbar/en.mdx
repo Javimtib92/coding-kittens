@@ -255,7 +255,7 @@ Next, we'll need to add some styling to this element to make it similar to a nav
 
 Once we have all these pieces together we will have the following:
 
-<CodeSandbox files={getFiles({ animationStyles: false })} client:only="react"/>
+<CodeSandbox files={getFiles({ animationStyles: false })} client:visible={{rootMargin: "200px"}}/>
 
 We have our first version of the navigation bar, similar to the one mentioned [at the beginning of this blog post](#a-bit-of-context). We haven't added the animation yet and it takes up a large percentage of the screen. We can do it better.
 
@@ -452,7 +452,7 @@ If you want, you can check the result of the changes we have applied in the foll
 
 <CodeSandbox files={
   getFiles({ animationStyles: true })
-} client:only="react"/>
+} client:visible={{rootMargin: "200px"}}/>
 
 That's all folks! 🥕
 
