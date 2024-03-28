@@ -4,7 +4,7 @@ pubDate: 2024-01-20
 thumbnail: ~/assets/thumbnails/post_2.jpeg
 subtitle: 'CSSing like a wizard'
 shortDescription: >
-  A practical example of how to use Scroll-Driven Animations to enhance your site.
+  A practical example of how to use "Scroll-Driven Animations" to enhance your site.
 ---
 
 import Callout from '~/components/ui/Callout.astro';
@@ -24,17 +24,19 @@ import cardImage from "~/assets/images/post_2_1.png";
 
 ## A bit of context
 
-I worked on many iterations for this site's navbar to achieve a look and feel that I would be happy with. I wanted a logo that would stand out and a navigation menu always visible — especially for mobile — so that you, the person reading this, could interact at all times with it.
+I have worked on many iterations of the navigation bar on this website to achieve a style that I was satisfied with. I wanted a logo that stood out and a navigation always visible — especially for mobile — so that the person reading this post could interact with it at all times.
 
-For this reason, I decided to have a navbar that would stick to the top on scroll and I added the site's logo with the site name and the tagline. Everything was beautiful — from my point of view — and I was happy with the result.
+For this reason I decided that the navigation bar should stick to the top on user scroll and I added the site's logo, name and tagline.
+
+Beautiful, — from my point of view — I was finally happy with the result.
 
 ```bash
 git commit -m "implement absolute perfect non-AI Navbar"
 ```
 
-After the automatic deploy, I grabbed my phone and navigated to my site. Everything looked good until I started reading my first post [How to fix Stack-Size limit error of a recursive function using iteration in JavaScript](/blog/javascript/how-to-fix-stack-size-limit-error-of-a-recursive-function-using-iteration-in-javascript) and I realized that on my tiny phone with my tiny screen the navbar was occuping a lot of the reading space.
+After the automatic deploy, I grab my phone and navigate to my site. Everything was looking good until I started reading my first post [How to fix Stack-Size limit error of a recursive function using iteration in JavaScript](/blog/javascript/how-to-fix-stack-size-limit-error-of-a-recursive-function-using-iteration-in-javascript) and I realized that on my tiny phone with my tiny screen the navbar was occuping a lot of the reading space.
 
-I have a 4.7 inch iphone SE so I usually don't have a lot of space to read and this annoys me every time so I didn't want my site to annoy people.
+Back then I had a 4.7 inch phone so I usually didn't have much space to read.
 
 Look at this.
 
@@ -50,19 +52,19 @@ Look at this.
   }}
 />
 
-It might be just me, but I feel something similar to claustrophobia when I have the text contained within such a small space.
+I feel something similar to claustrophobia when I have the text contained within such a small space.
 
-I didn't want the navbar to stand out less though <Highlight>— the first impression when you land into a page is the most important —</Highlight> but I couldn't leave it this way either.
+However, I didn't want the navigation bar to stand out less <Highlight>— the first impression when you land into a website is the most important —</Highlight> but I couldn't leave it like that.
 
-Then I thought... "ok, if it only bothers me when I scroll down to read the post then I'll make it smaller when the user scrolls down".
+Then I thought... "Okay, if it bothers me when I scroll down to read the blog post then... How about I make the navigation bar smaller when the user is not at the top of the page?"
 
 And that's what I did.
 
-Ok, context given, now let's dive into the land of CSS and JavaScript, where everything is possible and there are many different ways of doing the same thing. 🪄🔮
+Ok, context given, now let's travel to the land of CSS and JavaScript, where everything is possible and there are many different ways of doing the same thing. 🪄🔮
 
-## Less fun implementation
+## Boring implementation
 
-If you do a quick search in google about how to shrink a navigation menu on scroll the first result that will pop up is [How TO - Shrink Navigation Menu on Scroll](https://www.w3schools.com/howto/howto_js_navbar_shrink_scroll.asp) page from w3schools.
+If you do a quick Google search on how to shrink the navigation menu as the user scrolls down, the first result that will come up will surely be this page from W3schools:  [How TO - Shrink Navigation Menu on Scroll](https://www.w3schools.com/howto/howto_js_navbar_shrink_scroll.asp).
 
 The HTML and CSS sections are basic layout of a navbar. The interesting part is this JavaScript piece.
 
@@ -83,29 +85,29 @@ function scrollFunction() {
 }
 ```
 
-This code basically assigns a function handler to the global onscroll event and this function will check how much of the `<body>` or the `<html>` element the user has scrolled. It will apply one set of styles or the other based on the scroll offset.
+This code basically assigns a function handler to the global `onscroll` event and checks what proportion of the `<body>` or the `<html>` the user has scrolled. It will apply one set of styles or the other depending on the scroll offset.
 
-That's it, thanks for reading.
-
-...
+That's all, thanks for reading this post.
 
 ...
 
-For real though, this approach is the simplest, and probably a good option in almost all cases.
+...
 
-The problem is... where is the fun in doing it like this? Coding Kittens is my space to experiment and test new things. <Highlight>I wanted to find something more performant, extensible and CSS-only.</Highlight>
+Now seriously, this attempt to fix the problem is the simplest, and probably a good option in most cases.
 
-What if I told you that there's a futuristic way of approaching this with only CSS? Would you take the <Pill>[#unstyled boring pill](#less-fun-implementation)</Pill> or the <Pill color="red">[#unstyled future pill](#what-is-the-scroll-css-function-and-scrolltimeline)</Pill>?
+The problem is... where is the fun in doing it like this? Coding Kittens is my space to experiment and try new things. <Highlight>I wanted to find something more performant, extensible and CSS-only.</Highlight>
 
-We'll use some experimental features that are not supported in all browsers. Most of the things we'll use have above 96% support, according to [Can I use](https://caniuse.com/).
+What if I told you that there's a futuristic way of approaching this by using only CSS? Would you take the <Pill>[#unstyled boring pill](#less-fun-implementation)</Pill> or the <Pill color="red">[#unstyled future pill](#what-is-the-scroll-css-function-and-scrolltimeline)</Pill>?
 
-On the other hand, `animation-timeline` is less supported but we'll add a JavaScript fallback to it.
+If you are curious I will explain in the next section an experimental function that will help us implement this functionality.
 
-We'll start by explaining shortly what `animation-timeline:scroll` is.
+Most of the functionalities that we will use have 96% support from browsers according to the website [Can I use](https://caniuse.com/). On the other hand, the important functionality, `animation-timeline:scroll`, is less supported, but we will explain how to add an alternative for browsers that do not support it.
 
-## What is the Scroll CSS function and ScrollTimeline?
+So, we will start by explaining what `animation-timeline:scroll` is.
 
-I'll be honest, when writing this I was going to explain what they are and how they work but I realized that everything I can say is properly explained in these sources where I found most of the information:
+## What are CSS Scroll and ScrollTimeline functions?
+
+I'll be honest, at the time of writing this I was going to give a detailed explanation of how it works, but I have realized that everything I can say has already been said as it should in different sources where I have found this information.
 
 - [MDN Web Docs: scroll()](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll#browser_compatibility)
 
@@ -115,21 +117,21 @@ I'll be honest, when writing this I was going to explain what they are and how t
 
 > A Scroll Progress Timeline is an animation timeline that is linked to progress in the scroll position of a scroll container–also called scrollport or scroller–along a particular axis. It converts a position in a scroll range into a percentage of progress.
 
-To put it simple, it allows us to trigger an animation based on scrolling position. Just with CSS.
+To put things simple, it allows us to trigger an animation based on the scroll position. Just with CSS.
 
 > Integrating scroll-driven animations with two existing APIs, means that they benefit from the advantages of these APIs. That includes the ability to have these animations run off the main thread. Yes, read that correctly: you can now have silky smooth animations, driven by scroll, running off the main thread, with just a few lines of extra code. What's not to like?!
 
 This is mind blowing 🤯
 
-It means that this animation will not block the main thread, bye bye junky animations!
+It means that this animation will not block the main thread, bye junky animations!
 
 Check out the performance case study linked above for cool performance comparisons between classic JavaScript vs `animation-timeline`.
 
 ## The Wizarding World of CSS
 
-Now lets begin to do some magic.
+Now let's begin to do some magic.
 
-I'm creating a similar navbar as the one I've built for Coding Kittens. We'll start with the basic HTML.
+In the following example I have created a navigation bar similar to the one I created for the Coding Kittens website. I'll start with the basic HTML.
 
 ```html title="index.html"
 ... html code here
@@ -153,7 +155,7 @@ I'm creating a similar navbar as the one I've built for Coding Kittens. We'll st
 ... more html code here
 ```
 
-Next, we'll need to add some styles for this element to make them look like a navbar.
+Next, we'll need to add some styling to this element to make it similar to a navigation bar.
 
 ```css title="styles.css"
 .navbar {
@@ -251,13 +253,13 @@ Next, we'll need to add some styles for this element to make them look like a na
 }
 ```
 
-Once we have these pieces put together, we'll have something like this:
+Once we have all these pieces together we will have the following:
 
 <CodeSandbox files={getFiles({ animationStyles: false })} client:only="react"/>
 
-We have our first version of the navbar, similar to the one I mentioned [at the begining of this post](#a-bit-of-context). It doesn't animate and occupies a considerable amount of the screen. We can do better.
+We have our first version of the navigation bar, similar to the one mentioned [at the beginning of this blog post](#a-bit-of-context). We haven't added the animation yet and it takes up a large percentage of the screen. We can do it better.
 
-We are going to apply some CSS spells to it. 🪄
+We will apply some CSS spells to it. 🪄
 
 ```css title="styles.css"
   @keyframes shrink { /* [!code focus]*//* [!code ++] */
@@ -291,26 +293,27 @@ We are going to apply some CSS spells to it. 🪄
 }
 ```
 
-I'll explain step by step what we are doing here:
+I will explain step by step what we are doing here:
 
-1. First we define our animation `keyframes` that our scroll animation will use. The keyframes will change a CSS variable called `--navbar-shrink`. We'll use this value as our `boolean` to toggle shrink on and off.
+1. First we define the `keyframes` of our animation. The *keyframes* will change a CSS variable that we have called `--navbar-shrink`. We'll use that value as our conditional value to toggle between shortened or normal navigation.
 
-2. Then we intialize `--navbar-shrink` to `0`
+2. Next we initialize `--navbar-shrink` to `0`
 
-3. We assign `shrink` to be the animation.
+3. Then we assign `shrink` to the animation
 
-4. As timing function we will use `ease`, but you can use anything you want.
+4. As *timing function* we will use `ease`. But you can use whatever value you want [from this list](https://www.w3schools.com/cssref/css3_pr_animation-timing-function.php)
 
-5. We define the `animation-timeline` to call the `scroll` CSS function with **nearest** as the `scrollable` and **block** as the `axis`.
+5. Finally we define `animation-timeline` to call the CSS function `scroll` with **nearest** as `scrollable` and **block** as `axis`.
+We will apply some CSS magic tricks   
 
 <Callout title='Remember' type='warning'>
   **`animation-timeline`** must be declared after the **`animation`** shorthand
   as the shorthand will reset non-included longhands to their initial value.
 </Callout>
 
-The code we just added gives us access to a boolean CSS variable that will allow us to apply different states to our navbar based on scroll position. How cool is that?
+The code we just added allows us to use the conditional CSS variable to apply different states to our navigation bar based on the user's scroll position. How cool is that?
 
-Now lets add some juicy animations.
+Now let's add some juicy animations:
 
 ```css title="styles.css"
 ... our .navbar styles... .navbar .navbar-content {
@@ -338,27 +341,25 @@ Now lets add some juicy animations.
 ... more styles ...;
 ```
 
-We use the CSS property `--navbar-shrink` to dynamically calculate the value using `calc` CSS function. This is what we are doing:
+As we can see we use the `--navbar-shrink` variable to dynamically calculate the value using the CSS `calc` function. This is what it is doing:
 
-- Move the navbar-content a few px off the viewport
+- Move the *navbar-content* and *backdrop* several pixels off the screen.
 
-- Move the backdrop a few px off the viewport
+- Scale down the *logo*
 
-- Scale down the logo
+- Reduce the text opacity
 
-- Reduce all the opacity of the text
+This code can be extended to include all the transitions we want.
 
-This can be **extended** to as many transitions as you want.
+Notice how I used `scale`, `opacity` and `translateY` ​​​​to [take advantage of composite animation](https://web.dev/articles/animations-guide#triggers).
 
-Notice that I used `scale`, `opacity` and `translateY` to [leverage composited animation](https://web.dev/articles/animations-guide#triggers)
+## Fallback for those using old browsers
 
-## Fallback for those who fall under the no support land
+As I mentioned at the beginning of this post, the `animation-timeline` CSS property is not yet supported in all browsers. In fact, in January 2024 only the Chromium and Firfeox browsers (using an experimental configuration option) support this property.
 
-As I mentioned at the beginning of this post, `animation-timeline` is not supported in all browsers. In fact, as of January 2024 this is only supported in Chromium browsers and on Firefox under an experimental flag.
+Don't be afraid, I have the ideal solution for you. We'll make some changes to our CSS and add some JavaScript.
 
-Fear nothing, I have the solution for you. We'll make some changes to our CSS and add a bit of JavaScript.
-
-We'll start by adding the **CSS Supports at rule** to check if there's browser support for `scroll()`
+We'll start by adding the "CSS `@supports`" rule to check if the browser supports the `scroll()` function.
 
 ```css title="styles.css"
 .navbar {
@@ -394,9 +395,10 @@ We'll start by adding the **CSS Supports at rule** to check if there's browser s
     
 ```
 
-Next, if there's no support, we need to toggle the `--navbar-shrink` property anyway because we still need it to dynamically change the styles of the navbar elements.
+Next, if there is no support, we need to toggle the `--navbar-shrink` variable anyway, since we still need to dynamically change the styles to the navbar elements.
+navigation.
 
-We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets executed after the element is rendered into the page.
+We'll add some JavaScript below our `nav` element to be executed after the element is rendered on the page. Ideally, it can also be added just before the closing of the `</body>` tag.
 
 ```html title="index.html" {23, 36, 38}
 ... html code here
@@ -444,10 +446,9 @@ We'll add a bit of JavaScript at the bottom of the `nav` element so that it gets
 </script>/* [!code focus]*/
 ... more html code here
 ```
+This code executes the implementation that I have shown you [at the beginning of this entry](#boring-implementation).
 
-This piece of code adds a fallback to the event listener approach we talked about in the [Less fun implementation](#less-fun-implementation).
-
-If you want to see the result of the changes we just applied check this Code Sandbox:
+If you want, you can check the result of the changes we have applied in the following *Code Sandbox*:
 
 <CodeSandbox files={
   getFiles({ animationStyles: true })
@@ -455,8 +456,8 @@ If you want to see the result of the changes we just applied check this Code San
 
 That's all folks! 🥕
 
-We added some UX flavors to improve readability on the site for small screen devices by applying a shrink animation to our navbar that is **more performant**, **extensible** and almost **CSS-only**.
+We've added some tasteful touches to the UX to improve the experience for users using devices with small screens by applying a navigation bar animation that performs better than the traditional variant, is more extensible and uses CSS. We have also added an alternative for those users who use unsupported browsers.
 
-I encourage you to experiment with the Code Sandbox by adding more keyframe steps, more CSS variables and more variations.
+I encourage you to experiment with the Code Sandbox by adding more keyframes, more CSS variables and ultimately more variations.
 
-I hope you enjoyed this post, have fun coders! 😄
+I hope you enjoyed this post. See you soon! 😄
