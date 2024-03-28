@@ -20,7 +20,7 @@ import cardImage from "~/assets/images/post_2_1.png";
   Asegúrate de que añades una alternativa compatible. Puedes consultar la lista de compatibilidad en  [caniuse.com](https://caniuse.com/mdn-css_properties_animation-timeline_scroll)
 </Callout>
 
-## Una poco de contexto
+## Un poco de contexto
 
 He trabajado en muchas iteraciones de la barra de navegación de esta web para conseguir un estilo que me dejara satisfecho. Quería un logo que destacase y una navegación siempre visible — especialmente en móvil — para que la persona leyendo esta entrada pudiera interactuar con ella en todo momento.
 
@@ -96,7 +96,7 @@ Ahora en serio, este intento de solucionar el problema es el más simple, y prob
 
 El problema es que... ¿dónde está la gracia al hacerlo así? Coding Kittens es un sitio donde me gusta experimentar y probar cosas nuevas. <Highlight>Quiero una solución óptima, extensible y basada exclusivamente en CSS</Highlight>
 
-¿Cómo te quedarías si te digo que existe una manera futurista de enfocar la solución utilizando exclusivamente CSS? Escogerías la <Pill>[#unstyled píldora aburrida](#less-fun-implementation)</Pill> o la <Pill color="red">[#unstyled píldora futurística](#what-is-the-scroll-css-function-and-scrolltimeline)</Pill>?
+¿Cómo te quedarías si te digo que existe una manera futurista de enfocar la solución utilizando exclusivamente CSS? Escogerías la <Pill>[#unstyled píldora aburrida](#implementación-aburrida)</Pill> o la <Pill color="red">[#unstyled píldora futurística](#¿qué-son-las-funciones-de-css-scroll-y-scrolltimeline)</Pill>?
 
 Si sientes curiosidad explicaré en la próxima sección una función experimental que nos ayudará a implementar esta funcionalidad.
 
@@ -256,7 +256,7 @@ Una vez tengamos todas estas piezas juntas tendremos lo siguiente:
 
 <CodeSandbox files={getFiles({ animationStyles: false })} client:only="react"/>
 
-Tenemos nuestra primera versión de la barra de navegación, similar a la mencionada [al principio de esta entrada del blog](#a-bit-of-context). Aún no hemos añadido la animación y ocupa un gran porcentaje de la pantalla. Lo podemos hacer mejor.
+Tenemos nuestra primera versión de la barra de navegación, similar a la mencionada [al principio de esta entrada del blog](#un-poco-de-contexto). Aún no hemos añadido la animación y ocupa un gran porcentaje de la pantalla. Lo podemos hacer mejor.
 
 Aplicaremos algunos trucos de magia de CSS 🪄
 
