@@ -1,12 +1,12 @@
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { Languages } from 'lucide-react';
+import { Languages, Check } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
 } from '~/components/react/DropdownMenu';
 
-export function LanguageSwitchButtonDropdown() {
+export function LanguageSwitchButtonDropdown({ locale }: string | undefined) {
   const onChangeLanguage = (locale: string) => {
     const url = new URL(window.location.href);
 
@@ -31,13 +31,19 @@ export function LanguageSwitchButtonDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => onChangeLanguage('en')}>
-          English
+          <div className='flex flex-row items-center justify-between gap-2'>
+            English {locale === 'en' && <Check className='w-4' />}
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => onChangeLanguage('ca')}>
-          Català
+          <div className='flex flex-row items-center justify-between gap-2'>
+            Català {locale === 'ca' && <Check className='w-4' />}
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => onChangeLanguage('es')}>
-          Español
+          <div className='flex flex-row items-center justify-between gap-2'>
+            Español {locale === 'es' && <Check className='w-4' />}
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
