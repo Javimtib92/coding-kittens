@@ -3,6 +3,7 @@ import RootLayout from '~/layouts/RootLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
 import LatestContent from '~/components/LatestContent.astro';
 import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getYearDiff } from '~/utils/date';
 import { ArrowRight } from 'lucide-react';
 import me from '~/assets/me.jpeg';
@@ -74,7 +75,10 @@ const t = useTranslations(locale);
       <LatestContent />
 
       <div>
-        <a href='/blog' class='link flex flex-row items-center gap-2'>
+        <a
+          href={getRelativeLocaleUrl(locale, `/blog`)}
+          class='link flex flex-row items-center gap-2'
+        >
           {t('latest.link')}
           <ArrowRight width={12} height={12} />
         </a>
