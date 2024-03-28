@@ -1,8 +1,5 @@
-# Redirect URLs that do not contain en, ca, or es to the default URL
 /* https://www.coding-kittens.com/en 301
 
-# Redirect URLs that do not contain en, ca, or es and start with /blog to the default /blog URL
 /blog https://www.coding-kittens.com/en/blog 301
 
-# Redirect URLs that do not contain en, ca, or es and start with /blog/css to the default /blog/css URL
 /blog/:category/* https://www.coding-kittens.com/en/blog/:category/:splat 301
