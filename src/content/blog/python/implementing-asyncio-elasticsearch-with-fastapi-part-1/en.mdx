@@ -1,0 +1,182 @@
+---
+title: 'Implementing Asyncio Elasticsearch with Fastapi (Part 1)'
+pubDate: 2024-04-19
+thumbnail: ~/assets/thumbnails/post_2.jpeg
+subtitle: 'Don"t block me now cause I"m having a good time'
+shortDescription: >
+  First part of a short guide about my way of setting up Elasticsearch in the modern days.
+---
+
+## Introducción
+
+Para que este tutorial sea un poco más ameno voy a dividirlo en **tres partes**.
+
+En esta primera parte vamos a montar nuestra API y el servicio de Elasticsearch. Para montar estos servicios crearemos dos contenedores de [Docker](https://docs.docker.com/build/) y los orquestraremos usando [Docker Compose](https://docs.docker.com/compose/install/#installation-scenarios).
+
+La manera más simple de instalar Docker Compose es instalando [Docker Desktop](https://docs.docker.com/compose/install/#scenario-one-install-docker-desktop)
+
+Para manejar las dependencias usaremos [poetry](https://python-poetry.org). Poetry es un package manager para Python equivalente a NPM para Javascript. Nos permitirá crear nuestro proyecto y manejar sus dependencias de manera sencilla.
+
+Montaremos nuestra API utilizando el framework de Python [FastAPI](https://fastapi.tiangolo.com/). FastAPI es un web framework para montar APIs con **Python 3.8+** basado en el estándard _Python type hints_.
+
+Para la comunicación con el servicio de Elasticsearch usaremos el cliente oficial [Python Elasticsearch Client](https://elasticsearch-py.readthedocs.io/en/v8.13.0/).
+
+Usaremos las [ventajas del código asíncrono](https://fastapi.tiangolo.com/async/?h=async#asynchronous-code), introducidas en Python 3.5, para montar una API que **soporte una gran concurrencia**, ideal para Web APIs.
+
+## Requisitos
+
+- Python 3.8+
+- Poetry
+- Docker Desktop (o docker y docker-compose)
+- Un Editor de código de tu elección 😄
+
+## Creando la estructura del proyecto
+
+Para empezar necesitamos crear nuestro proyecto. Para ello navegaremos al directorio donde querámos crear nuestro proyecto y utilizaremos poetry para crearlo de la siguiente manera:
+
+```bash
+poetry new async-fastapi-project
+```
+
+Este comando creará nuestro proyecto con la siguiente estructura.
+
+```bash
+async-fastapi-project
+├── pyproject.toml
+├── README.md
+├── async-fastapi-project
+│   └── __init__.py
+└── tests
+    └── __init__.py
+```
+
+## Creando los contenedores para Elasticsearch y la API
+
+En la raíz del proyecto crearemos el archivo `docker-compose` con el siguiente contenido:
+
+```yml
+volumes:
+  certs:
+    driver: local
+  esdata01:
+    driver: local
+
+networks:
+  elastic:
+    name: elastic
+    external: false
+
+services:
+  backend:
+    image: '${DOCKER_IMAGE_BACKEND}:${TAG-latest}'
+    restart: always
+    networks:
+      - elastic
+    env_file: .env
+    environment:
+      - DOMAIN=${DOMAIN}
+      - ENVIRONMENT=${ENVIRONMENT}
+    build:
+      context: ./backend
+      args:
+        INSTALL_DEV: false
+    ports:
+      - '127.0.0.1:8080:80'
+    platform: linux/amd64 # Patch for M1 Mac
+
+    volumes:
+      - certs:/usr/share/backend/config/certs
+
+  elastic_setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    volumes:
+      - certs:/usr/share/elasticsearch/config/certs
+    user: '0'
+    command: >
+      bash -c '
+        if [ x${ELASTIC_PASSWORD} == x ]; then
+          echo "Set the ELASTIC_PASSWORD environment variable in the .env file";
+          exit 1;
+        if [ ! -f config/certs/ca.zip ]; then
+          echo "Creating CA";
+          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;
+          unzip config/certs/ca.zip -d config/certs;
+        fi;
+        if [ ! -f config/certs/certs.zip ]; then
+          echo "Creating certs";
+          echo -ne \
+          "instances:\n"\
+          "  - name: es01\n"\
+          "    dns:\n"\
+          "      - es01\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          > config/certs/instances.yml;
+          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;
+          unzip config/certs/certs.zip -d config/certs;
+        fi;
+        echo "Setting file permissions"
+        chown -R root:root config/certs;
+        find . -type d -exec chmod 750 \{\} \;;
+        find . -type f -exec chmod 640 \{\} \;;
+        echo "Waiting for Elasticsearch availability";
+        until curl -s --cacert config/certs/ca/ca.crt https://es01:9200 | grep -q "missing authentication credentials"; do sleep 30; done;
+        echo "All done!";
+      '
+    healthcheck:
+      test: ['CMD-SHELL', '[ -f config/certs/es01/es01.crt ]']
+      interval: 1s
+      timeout: 5s
+      retries: 120
+
+  es01:
+    networks:
+      - elastic
+    depends_on:
+      elastic_setup:
+        condition: service_healthy
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    volumes:
+      - certs:/usr/share/elasticsearch/config/certs
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+    environment:
+      - node.name=es01
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.key=certs/es01/es01.key
+      - xpack.security.http.ssl.certificate=certs/es01/es01.crt
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.key=certs/es01/es01.key
+      - xpack.security.transport.ssl.certificate=certs/es01/es01.crt
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.license.self_generated.type=${LICENSE}
+    mem_limit: ${ES_MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+```
+
+## Instalando FastAPI
+
+## Instalando elasticsearch client
+
+## Wrapup
