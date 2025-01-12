@@ -4,6 +4,7 @@ import ArticleItem from '~/components/ArticleItem.astro';
 import CategoriesList from '~/components/CategoriesList.astro';
 import logo from '~/assets/logo.png';
 import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
+import { render } from 'astro:content';
 
 export async function getStaticPaths() {
   const postsByCategoryLocale = new Map();
@@ -60,10 +61,10 @@ const { category, locale } = Astro.params;
       <div class='divide-y divide-gray-200 dark:divide-gray-700'>
         {
           posts.map(async (post) => {
-            const { remarkPluginFrontmatter } = await post.render();
+            const { remarkPluginFrontmatter } = await render(post);
             return (
               <ArticleItem
-                slug={post.slug}
+                id={post.id}
                 category={post.category}
                 readingTime={remarkPluginFrontmatter.readingTime}
                 {...post.data}

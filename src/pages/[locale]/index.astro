@@ -4,7 +4,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
 import LatestContent from '~/components/LatestContent.astro';
 import { Image } from 'astro:assets';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getYearDiff } from '~/utils/date';
 import { ArrowRight } from 'lucide-react';
 import me from '~/assets/me.jpeg';
 import logo from '~/assets/logo.png';
@@ -12,8 +11,7 @@ import { languages } from '~/i18n/ui';
 import { getHomePage } from '~/utils/content';
 import { mdxComponents } from '~/markdown/mdxComponents';
 import { useTranslations } from '~/i18n/utils';
-
-const experienceYears = getYearDiff(new Date('2015-05-01'), new Date());
+import { render } from 'astro:content';
 
 export const getStaticPaths = () =>
   Object.keys(languages).map((locale) => ({ params: { locale } }));
@@ -26,7 +24,7 @@ if (!homePage) {
   return Astro.redirect('404');
 }
 
-const { Content } = await homePage.render();
+const { Content } = await render(homePage);
 
 const t = useTranslations(locale);
 ---

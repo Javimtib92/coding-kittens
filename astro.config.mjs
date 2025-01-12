@@ -23,7 +23,7 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.coding-kittens.com',
+  site: 'https://coding-kittens.com',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'ca'],
