@@ -1,7 +1,9 @@
 import { defineCollection, z, type CollectionEntry } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),
+
   // Type-check frontmatter using a schema
   schema: ({ image }) =>
     z.object({
@@ -16,12 +18,12 @@ const blog = defineCollection({
 });
 
 const home = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/home" }),
 });
 
 export function createIsLangEntry(lang: string) {
   return (entry: CollectionEntry<'blog'>): boolean =>
-    entry.slug.startsWith(lang + '/');
+    entry.id.startsWith(lang + '/');
 }
 
 export const isEnglishEntry = createIsLangEntry('en');

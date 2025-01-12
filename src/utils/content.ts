@@ -5,14 +5,9 @@ type RemoveLocale<S extends string> =
     ? `${Category}/${Slug}`
     : S;
 
-export type ExtendedBlogEntry = {
-  [K in keyof Omit<
-    CollectionEntry<'blog'>,
-    'slug'
-  >]: CollectionEntry<'blog'>[K];
-} & {
+export type ExtendedBlogEntry = CollectionEntry<'blog'> & {
+  id: RemoveLocale<string>;
   category: string;
-  slug: RemoveLocale<string>;
   locale: string;
 };
 
@@ -22,15 +17,16 @@ export async function getBlogCollection(
 ): Promise<ExtendedBlogEntry[]> {
   return (await getCollection('blog', filter))
     .map((post) => {
-      const segments = post.slug.split('/');
+      const segments = post.id.split('/');
+      
       const category = segments[0];
-      const slug = segments[1] as RemoveLocale<CollectionEntry<'blog'>['slug']>;
+      const id = segments[1] as RemoveLocale<CollectionEntry<'blog'>['id']>;
       const locale = segments[2];
 
       return {
         ...post,
+        id,
         category,
-        slug,
         locale,
       };
     })

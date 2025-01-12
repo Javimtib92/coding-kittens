@@ -3,23 +3,25 @@ import RootLayout from '~/layouts/RootLayout.astro';
 import { mdxComponents } from '~/markdown/mdxComponents';
 import { formatDate } from '~/utils/date';
 import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
+import { render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const posts = await getBlogCollection();
 
   return posts.map((post) => {
-    const { category, slug, locale } = post;
+    const { category, id, locale } = post;
 
     return {
       params: {
         category,
-        slug,
+        id,
         locale,
       },
       props: post,
     };
   });
-}
+}) satisfies GetStaticPaths;
 
 type Props = ExtendedBlogEntry;
 
@@ -27,7 +29,7 @@ const locale = Astro.currentLocale || 'en';
 
 const post = Astro.props;
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <RootLayout
