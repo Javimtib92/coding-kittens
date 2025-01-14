@@ -25,11 +25,11 @@ const locale = Astro.currentLocale || 'en';
   >
     <Image
       src={thumbnail}
-      width={640}
-      height={640}
+      layout='fixed'
+      width={280}
+      height={280}
       quality={80}
       alt={`${title} thumbnail`}
-      class='h-[280px] w-[280px]'
       loading='eager'
     />
   </a>

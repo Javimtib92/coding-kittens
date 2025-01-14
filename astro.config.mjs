@@ -23,6 +23,9 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
+  experimental: {
+    responsiveImages: true,
+  },
   site: 'https://coding-kittens.com',
   i18n: {
     defaultLocale: 'en',
