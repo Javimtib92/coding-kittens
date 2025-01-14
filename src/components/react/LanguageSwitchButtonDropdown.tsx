@@ -1,4 +1,4 @@
-import { Languages, Check } from 'lucide-react';
+import { Check, Languages } from 'lucide-react';
 
 import {
   Button,
@@ -31,7 +31,7 @@ export function LanguageSwitchButtonDropdown({
   const onChangeLanguage = (locale: string) => {
     const url = new URL(window.location.href);
 
-    url.pathname = url.pathname.replace(/^\/[^/]+/, '/' + locale);
+    url.pathname = url.pathname.replace(/^\/[^/]+/, `/${locale}`);
 
     localStorage.setItem('selectedLanguage', locale);
 

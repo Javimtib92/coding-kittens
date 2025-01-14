@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import logo from '~/assets/logo.png';
+import LanguageSwitchButton from '~/components/LanguageSwitchButton.astro';
 import MobileNavMenu from '~/components/MobileNavMenu.astro';
 import NavigationLinks from '~/components/NavigationLinks.astro';
 import ThemeSwitchButton from '~/components/ThemeSwitchButton.astro';
-import LanguageSwitchButton from '~/components/LanguageSwitchButton.astro';
-import logo from '~/assets/logo.png';
 
 const locale = Astro.currentLocale || 'en';
 ---

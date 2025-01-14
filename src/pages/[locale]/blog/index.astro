@@ -1,11 +1,11 @@
 ---
-import RootLayout from '~/layouts/RootLayout.astro';
+import { render } from 'astro:content';
+import logo from '~/assets/logo.png';
 import ArticleItem from '~/components/ArticleItem.astro';
 import CategoriesList from '~/components/CategoriesList.astro';
-import logo from '~/assets/logo.png';
 import { languages } from '~/i18n/ui';
+import RootLayout from '~/layouts/RootLayout.astro';
 import { getBlogCollection } from '~/utils/content';
-import { render } from 'astro:content';
 
 const posts = (
   await getBlogCollection(Astro.currentLocale, ({ data }) => {

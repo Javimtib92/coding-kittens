@@ -1,12 +1,12 @@
 'use client';
 
 import {
-  SandpackProvider,
-  SandpackLayout,
   SandpackCodeEditor,
   SandpackFileExplorer,
-  SandpackPreview,
   type SandpackFiles,
+  SandpackLayout,
+  SandpackPreview,
+  SandpackProvider,
 } from '@codesandbox/sandpack-react';
 import React from 'react';
 
@@ -52,7 +52,7 @@ export function CodeSandbox({ files }: { files: SandpackFiles }) {
             'sp-preview-actions': 'left-4 bottom-4',
           },
           initMode: 'user-visible',
-          initModeObserverOptions: { rootMargin: `1000px 0px` },
+          initModeObserverOptions: { rootMargin: '1000px 0px' },
         }}
         template='static'
       >

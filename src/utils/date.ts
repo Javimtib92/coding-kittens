@@ -23,11 +23,11 @@ export function formatDate(inputDate: Date, locale: string) {
     date.getFullYear() === currentDate.getFullYear()
   ) {
     // Format for "Today"
-    return formatDate(date) + ' (Today)';
-  } else {
-    // Format for other dates
-    return formatDate(date);
+    return `${formatDate(date)}·(Today)`;
   }
+
+  // Format for other dates
+  return formatDate(date);
 }
 
 export function getYearDiff(from: Date, to: Date) {

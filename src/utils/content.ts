@@ -1,4 +1,4 @@
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
 
 type RemoveLocale<S extends string> =
   S extends `${infer Category}/${infer Slug}/${infer _Locale}`
@@ -18,7 +18,7 @@ export async function getBlogCollection(
   return (await getCollection('blog', filter))
     .map((post) => {
       const segments = post.id.split('/');
-      
+
       const category = segments[0];
       const id = segments[1] as RemoveLocale<CollectionEntry<'blog'>['id']>;
       const locale = segments[2];

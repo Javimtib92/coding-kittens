@@ -73,7 +73,7 @@ const CSS = (animationStyles: boolean) => `.navbar {
   }
 }
  `
-     : ``
+     : ''
  } 
 .navbar-content {
   display: flex;
@@ -231,7 +231,7 @@ const HTML = (noScrollableContent: boolean) => `<!DOCTYPE html>
       </script>
       ${
         noScrollableContent
-          ? ``
+          ? ''
           : `<div class="scrollable-container">
       <p>
         Sociosqu netus hac auctor, pulvinar suscipit dictum consectetur?

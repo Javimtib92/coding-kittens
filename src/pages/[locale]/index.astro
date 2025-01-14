@@ -1,17 +1,17 @@
 ---
-import RootLayout from '~/layouts/RootLayout.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
-import LatestContent from '~/components/LatestContent.astro';
 import { Image } from 'astro:assets';
+import { render } from 'astro:content';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { ArrowRight } from 'lucide-react';
-import me from '~/assets/me.jpeg';
 import logo from '~/assets/logo.png';
+import me from '~/assets/me.jpeg';
+import LatestContent from '~/components/LatestContent.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '~/constants';
 import { languages } from '~/i18n/ui';
-import { getHomePage } from '~/utils/content';
-import { mdxComponents } from '~/markdown/mdxComponents';
 import { useTranslations } from '~/i18n/utils';
-import { render } from 'astro:content';
+import RootLayout from '~/layouts/RootLayout.astro';
+import { mdxComponents } from '~/markdown/mdxComponents';
+import { getHomePage } from '~/utils/content';
 
 export const getStaticPaths = () =>
   Object.keys(languages).map((locale) => ({ params: { locale } }));

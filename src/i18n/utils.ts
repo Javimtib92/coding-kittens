@@ -1,4 +1,4 @@
-import { ui, defaultLang } from './ui';
+import { defaultLang, ui } from './ui';
 
 export function useTranslations(lang: string) {
   return function t(key: keyof (typeof ui)[typeof defaultLang]) {

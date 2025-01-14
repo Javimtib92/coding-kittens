@@ -1,10 +1,10 @@
 ---
-import RootLayout from '~/layouts/RootLayout.astro';
-import { mdxComponents } from '~/markdown/mdxComponents';
-import { formatDate } from '~/utils/date';
-import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
 import { render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+import RootLayout from '~/layouts/RootLayout.astro';
+import { mdxComponents } from '~/markdown/mdxComponents';
+import { type ExtendedBlogEntry, getBlogCollection } from '~/utils/content';
+import { formatDate } from '~/utils/date';
 
 export const getStaticPaths = (async () => {
   const posts = await getBlogCollection();

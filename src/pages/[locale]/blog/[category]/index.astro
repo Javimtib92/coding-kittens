@@ -1,10 +1,10 @@
 ---
-import RootLayout from '~/layouts/RootLayout.astro';
+import { render } from 'astro:content';
+import logo from '~/assets/logo.png';
 import ArticleItem from '~/components/ArticleItem.astro';
 import CategoriesList from '~/components/CategoriesList.astro';
-import logo from '~/assets/logo.png';
-import { getBlogCollection, type ExtendedBlogEntry } from '~/utils/content';
-import { render } from 'astro:content';
+import RootLayout from '~/layouts/RootLayout.astro';
+import { type ExtendedBlogEntry, getBlogCollection } from '~/utils/content';
 
 export async function getStaticPaths() {
   const postsByCategoryLocale = new Map();
@@ -18,12 +18,14 @@ export async function getStaticPaths() {
   for (const post of posts) {
     const { category, locale } = post;
 
-    if (!postsByCategoryLocale.get(category + '_' + locale)) {
-      postsByCategoryLocale.set(category + '_' + locale, []);
+    const categoryWithLocale = `${category}_${locale}`;
+
+    if (!postsByCategoryLocale.get(categoryWithLocale)) {
+      postsByCategoryLocale.set(categoryWithLocale, []);
     }
 
-    postsByCategoryLocale.set(category + '_' + locale, [
-      ...postsByCategoryLocale.get(category + '_' + locale),
+    postsByCategoryLocale.set(categoryWithLocale, [
+      ...postsByCategoryLocale.get(categoryWithLocale),
       post,
     ]);
   }

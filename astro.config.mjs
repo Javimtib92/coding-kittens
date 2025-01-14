@@ -1,16 +1,16 @@
-import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
 import catppuccinLate from '@catppuccin/vscode/themes/latte.json';
 import catppuccinMocha from '@catppuccin/vscode/themes/mocha.json';
-import { remarkReadingTime } from './remark/remark-reading-time.mjs';
+import { defineConfig } from 'astro/config';
 import rehypePrettyCode from 'rehype-pretty-code';
 import {
-  transformerNotationFocus,
   transformerNotationDiff,
+  transformerNotationFocus,
 } from 'shikiji-transformers';
+import { remarkReadingTime } from './remark/remark-reading-time.mjs';
 const prettyCodeOptions = {
   keepBackground: false,
   theme: {

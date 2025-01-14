@@ -1,9 +1,9 @@
 ---
-import RootLayout from '~/layouts/RootLayout.astro';
-import LatestContent from '~/components/LatestContent.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '~/constants';
 import logo from '~/assets/logo.png';
+import LatestContent from '~/components/LatestContent.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '~/constants';
 import { languages } from '~/i18n/ui';
+import RootLayout from '~/layouts/RootLayout.astro';
 
 export const getStaticPaths = () =>
   Object.keys(languages).map((locale) => ({ params: { locale } }));
