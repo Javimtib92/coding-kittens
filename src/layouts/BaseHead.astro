@@ -2,10 +2,15 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '~/styles/global.css';
-import '@fontsource/barlow-condensed/400.css';
-import '@fontsource/barlow-condensed/700.css';
-import '@fontsource-variable/montserrat';
-import '@fontsource/oxygen-mono';
+import '@fontsource/barlow-condensed/latin-400.css';
+import '@fontsource/barlow-condensed/latin-700.css';
+import '@fontsource-variable/montserrat/wght.css';
+import '@fontsource/oxygen-mono/latin-400.css';
+
+import barlowCondensed400Woff2 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-400-normal.woff2?url';
+import barlowCondensed700Woff2 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url';
+import oxygenMono400Woff2 from '@fontsource/oxygen-mono/files/oxygen-mono-latin-400-normal.woff2?url';
+import montserratWoff2 from '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -28,28 +33,28 @@ const { title, description, image } = Astro.props;
 <!-- Font preloads -->
 <link
   rel='preload'
-  href='/_astro/montserrat-latin-wght-normal.BDA6280a.woff2'
+  href={montserratWoff2}
   as='font'
   type='font/woff2'
   crossorigin
 />
 <link
   rel='preload'
-  href='/_astro/barlow-condensed-latin-400-normal.CSL47Yq5.woff2'
+  href={barlowCondensed400Woff2}
   as='font'
   type='font/woff2'
   crossorigin
 />
 <link
   rel='preload'
-  href='/_astro/barlow-condensed-latin-700-normal.B9NQhHK3.woff2'
+  href={barlowCondensed700Woff2}
   as='font'
   type='font/woff2'
   crossorigin
 />
 <link
   rel='preload'
-  href='/_astro/oxygen-mono-latin-400-normal.uhEZ8szh.woff2'
+  href={oxygenMono400Woff2}
   as='font'
   type='font/woff2'
   crossorigin
