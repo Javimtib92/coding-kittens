@@ -21,6 +21,7 @@ const t = useTranslations(locale);
 <div class='hidden flex-row items-center sm:flex'>
   <a
     href={getRelativeLocaleUrl(locale, '/')}
+    data-astro-prefetch
     class={cn(
       'flex align-middle transition-all',
       pathname === getRelativeLocaleUrl(locale, '/')
@@ -32,6 +33,7 @@ const t = useTranslations(locale);
   </a>
   <a
     href={getRelativeLocaleUrl(locale, '/blog')}
+    data-astro-prefetch
     class={cn(
       'flex align-middle transition-all',
       segments.includes('blog') ? activeClass : inactiveClass

@@ -21,6 +21,7 @@ const locale = Astro.currentLocale || 'en';
 <article class='flex px-0 py-7'>
   <a
     href={getRelativeLocaleUrl(locale, `/blog/${id}`)}
+    data-astro-prefetch
     class='mr-6 block flex-[0_0_100px] max-md:hidden md:flex-[0_0_280px]'
   >
     <Image

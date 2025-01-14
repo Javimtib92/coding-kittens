@@ -23,7 +23,12 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
   experimental: {
+    clientPrerender: true,
     responsiveImages: true,
   },
   site: 'https://coding-kittens.com',
