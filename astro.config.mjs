@@ -11,6 +11,8 @@ import {
   transformerNotationFocus,
 } from 'shikiji-transformers';
 import { remarkReadingTime } from './remark/remark-reading-time.mjs';
+import cloudflare from '@astrojs/cloudflare';
+
 const prettyCodeOptions = {
   keepBackground: false,
   theme: {
@@ -23,15 +25,29 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport',
-  },
+  adapter: cloudflare({
+    runtime: {
+      mode: "local",
+      type: "pages",
+      bindings: {
+        DB_PREVIEW: {
+          type: "d1",
+        },
+      },
+    },
+    platformProxy: {
+      enabled: true,
+      configPath: 'wrangler.toml',
+      persist: {
+        path: './.cache/wrangler/v3'
+      },
+    },
+    imageService: 'compile'
+	}),
   experimental: {
     clientPrerender: true,
     responsiveImages: true,
   },
-  site: 'https://coding-kittens.com',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'ca'],
@@ -63,4 +79,14 @@ export default defineConfig({
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
   },
   output: 'static',
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
+  site: 'https://coding-kittens.com',
+  vite: {
+    ssr: {
+      external: ['util', 'stream', 'fs', 'os', 'path', 'node:fs/promises', 'events']
+    }
+  }
 });
