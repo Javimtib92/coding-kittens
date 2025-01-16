@@ -11,5 +11,6 @@
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "types": ["bun-types", "@cloudflare/workers-types/2023-07-01"]
 }

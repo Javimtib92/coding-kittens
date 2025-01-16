@@ -1,0 +1,23 @@
+name = "coding-kittens"
+compatibility_date = "2025-01-09"
+compatibility_flags = ["nodejs_compat"]
+observability = { enabled = true}
+
+[[d1_databases]]
+binding = "DB_PREVIEW"                                       
+database_name = "coding-kittens-preview"
+database_id = "a4bdadca-987f-4891-8ce2-9bee6fc8887a"
+
+[env.preview]
+name = "preview"
+[[env.preview.d1_databases]]
+binding = "DB_PREVIEW"                                       
+database_name = "coding-kittens-preview"
+database_id = "a2b2e325-bc14-47e7-9883-22ee46806c4d"
+
+[env.production]
+name = "production"
+[[env.production.d1_databases]]
+binding = "DB"                                    
+database_name = "coding-kittens"
+database_id = "c77e90da-d1bb-4d32-85b0-0fe7f78aa44a"
