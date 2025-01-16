@@ -56,5 +56,9 @@
     "prettier-plugin-tailwindcss": "^0.5.13",
     "shikiji-transformers": "^0.10.2",
     "wrangler": "^3.91.0"
-  }
+  },
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "es5-ext"
+  ]
 }
