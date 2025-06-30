@@ -16,10 +16,7 @@ const t = useTranslations(locale);
       </p>
 
       <span
-        class='box-border flex h-8 w-8 items-center overflow-hidden rounded-full align-middle outline-none
-			  ring-2 ring-background-50 ring-offset-2 ring-offset-accent-secondary-300
-			  dark:ring-background-500 dark:ring-offset-accent-secondary-500
-			  sm:h-12 sm:w-12'
+        class='box-border flex h-8 w-8 items-center overflow-hidden rounded-full align-middle outline-none ring-2 ring-background-50 ring-offset-2 ring-offset-accent-secondary-300 dark:ring-background-500 dark:ring-offset-accent-secondary-500 sm:h-12 sm:w-12'
       >
         <Image
           src={me}
@@ -40,15 +37,15 @@ const t = useTranslations(locale);
       class='flex w-auto flex-col justify-between sm:w-full sm:flex-row sm:items-center'
     >
       <p class='prose subtle px-0 font-mono sm:px-2'>
-        © 2024 Javier Muñoz Tous
+        © {new Date().getFullYear()} Javier Muñoz Tous
       </p>
       <div>
         <p class='subtle mb-6 mt-6 font-mono'>
           <a
-            href='https://twitter.com/Javimt_ib'
+            href='https://bsky.app/profile/javimt.bsky.social'
             class='link -m-2 p-2 font-body font-bold'
           >
-            X (Twitter)
+            Bsky
           </a>
           <span class='mx-2'> · </span>
           <a
