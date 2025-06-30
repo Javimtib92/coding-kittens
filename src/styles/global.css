@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --font-display: "Barlow Condensed", sans-serif;
   --font-body: "Montserrat Variable", sans-serif;
@@ -5,27 +7,189 @@
   --color-background-base: #161a30;
   --color-primary-base: #31304d;
   --color-secondary-base: #b6bbc4;
-  --color-accent-base: #e88009;
+  --color-accent-base: #fe9e30;
   --color-accent-secondary-base: #343d51;
 }
 
-* {
-  font-family: var(--font-body);
-  box-sizing: border-box;
-  min-width: 0;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Font Families */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* Background Colors */
+  --color-background-50: color-mix(
+    in oklch,
+    var(--color-background-base) 20%,
+    white
+  );
+  --color-background-100: color-mix(
+    in oklch,
+    var(--color-background-base) 50%,
+    white
+  );
+  --color-background-200: color-mix(
+    in oklch,
+    var(--color-background-base) 70%,
+    white
+  );
+  --color-background-300: color-mix(
+    in oklch,
+    var(--color-background-base) 80%,
+    white
+  );
+  --color-background-400: color-mix(
+    in oklch,
+    var(--color-background-base) 90%,
+    white
+  );
+  --color-background-500: var(--color-background-base);
+  --color-background-600: color-mix(
+    in oklch,
+    var(--color-background-base),
+    black 10%
+  );
+  --color-background-700: color-mix(
+    in oklch,
+    var(--color-background-base),
+    black 30%
+  );
+  --color-background-800: color-mix(
+    in oklch,
+    var(--color-background-base),
+    black 50%
+  );
+  --color-background-900: color-mix(
+    in oklch,
+    var(--color-background-base),
+    black 70%
+  );
+
+  /* Primary Colors */
+  --color-primary-50: color-mix(in oklch, var(--color-primary-base) 5%, white);
+  --color-primary-100: color-mix(in oklch, var(--color-primary-base) 10%, white);
+  --color-primary-200: color-mix(in oklch, var(--color-primary-base) 30%, white);
+  --color-primary-300: color-mix(in oklch, var(--color-primary-base) 50%, white);
+  --color-primary-400: color-mix(in oklch, var(--color-primary-base) 70%, white);
+  --color-primary-500: var(--color-primary-base);
+  --color-primary-600: color-mix(in oklch, var(--color-primary-base), black 10%);
+  --color-primary-700: color-mix(in oklch, var(--color-primary-base), black 30%);
+  --color-primary-800: color-mix(in oklch, var(--color-primary-base), black 50%);
+  --color-primary-900: color-mix(in oklch, var(--color-primary-base), black 70%);
+
+  /* Secondary Colors */
+  --color-secondary-50: color-mix(
+    in oklch,
+    var(--color-secondary-base) 5%,
+    white
+  );
+  --color-secondary-100: color-mix(
+    in oklch,
+    var(--color-secondary-base) 10%,
+    white
+  );
+  --color-secondary-200: color-mix(
+    in oklch,
+    var(--color-secondary-base) 30%,
+    white
+  );
+  --color-secondary-300: color-mix(
+    in oklch,
+    var(--color-secondary-base) 50%,
+    white
+  );
+  --color-secondary-400: color-mix(
+    in oklch,
+    var(--color-secondary-base) 70%,
+    white
+  );
+  --color-secondary-500: var(--color-secondary-base);
+  --color-secondary-600: color-mix(
+    in oklch,
+    var(--color-secondary-base),
+    black 10%
+  );
+  --color-secondary-700: color-mix(
+    in oklch,
+    var(--color-secondary-base),
+    black 30%
+  );
+  --color-secondary-800: color-mix(
+    in oklch,
+    var(--color-secondary-base),
+    black 50%
+  );
+  --color-secondary-900: color-mix(
+    in oklch,
+    var(--color-secondary-base),
+    black 70%
+  );
+
+  /* Accent Colors */
+  --color-accent-50: color-mix(in oklch, var(--color-accent-base) 5%, dark);
+  --color-accent-100: color-mix(in oklch, var(--color-accent-base) 10%, white);
+  --color-accent-200: color-mix(in oklch, var(--color-accent-base) 30%, white);
+  --color-accent-300: color-mix(in oklch, var(--color-accent-base) 50%, white);
+  --color-accent-400: color-mix(in oklch, var(--color-accent-base) 70%, white);
+  --color-accent-500: var(--color-accent-base);
+  --color-accent-600: color-mix(in oklch, var(--color-accent-base), black 10%);
+  --color-accent-700: color-mix(in oklch, var(--color-accent-base), black 30%);
+  --color-accent-800: color-mix(in oklch, var(--color-accent-base), black 50%);
+  --color-accent-900: color-mix(in oklch, var(--color-accent-base), black 70%);
+
+  /* Accent Secondary Colors */
+  --color-accent-secondary-50: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base) 5%,
+    white
+  );
+  --color-accent-secondary-100: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base) 10%,
+    white
+  );
+  --color-accent-secondary-200: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base) 30%,
+    white
+  );
+  --color-accent-secondary-300: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base) 50%,
+    white
+  );
+  --color-accent-secondary-400: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base) 70%,
+    white
+  );
+  --color-accent-secondary-500: var(--color-accent-secondary-base);
+  --color-accent-secondary-600: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base),
+    black 10%
+  );
+  --color-accent-secondary-700: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base),
+    black 30%
+  );
+  --color-accent-secondary-800: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base),
+    black 50%
+  );
+  --color-accent-secondary-900: color-mix(
+    in oklch,
+    var(--color-accent-secondary-base),
+    black 70%
+  );
 }
 
 [x-cloak] {
   visibility: hidden !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: var(--font-display);
-  @apply font-display font-bold text-primary-600 dark:text-primary-100;
 }
 
 html {
@@ -46,7 +210,11 @@ p {
 }
 
 .prose {
-  @apply text-base text-primary-800 dark:text-primary-200;
+  @apply font-body text-base text-primary-800 dark:text-primary-200;
+}
+
+.prose-mono {
+  @apply font-mono text-base text-primary-800 dark:text-primary-200;
 }
 
 .subtle {
@@ -124,11 +292,11 @@ code:not(:has(span)) {
 }
 
 span[data-line][data-highlighted-line] {
-  @apply !bg-primary-100 dark:!bg-background-700;
+  @apply bg-primary-100! dark:bg-background-700!;
 }
 
 span[data-line].diff.remove {
-  @apply -mx-6 bg-red-600/[.16] px-6 opacity-70 dark:bg-red-400/[.16];
+  @apply -mx-6 bg-red-600/16 px-6 opacity-70 dark:bg-red-400/16;
 }
 span[data-line].diff.remove:before {
   content: "-";
@@ -136,7 +304,7 @@ span[data-line].diff.remove:before {
 }
 
 span[data-line].diff.add {
-  @apply -mx-6 bg-green-400/[.16] px-6 dark:bg-green-400/[.16];
+  @apply -mx-6 bg-green-400/16 px-6 dark:bg-green-400/16;
 }
 span[data-line].diff.add:before {
   content: "+";
@@ -149,12 +317,6 @@ pre {
   line-height: 1.7142857;
   border-radius: 0.375rem;
   padding: 1.5rem;
-}
-
-a {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
 }
 
 .title-link:hover > .anchor,
@@ -294,11 +456,11 @@ html:not(.dark) [data-rehype-pretty-code-title] {
 }
 
 span[data-line][data-highlighted-line] {
-  @apply !bg-primary-100 dark:!bg-background-700;
+  @apply bg-primary-100! dark:bg-background-700!;
 }
 
 span[data-line].diff.remove {
-  @apply -mx-6 bg-red-600/[.16] px-6 opacity-70 dark:bg-red-400/[.16];
+  @apply -mx-6 bg-red-600/16 px-6 opacity-70 dark:bg-red-400/16;
 }
 span[data-line].diff.remove:before {
   content: "-";
@@ -306,7 +468,7 @@ span[data-line].diff.remove:before {
 }
 
 span[data-line].diff.add {
-  @apply -mx-6 bg-green-400/[.16] px-6 dark:bg-green-400/[.16];
+  @apply -mx-6 bg-green-400/16 px-6 dark:bg-green-400/16;
 }
 span[data-line].diff.add:before {
   content: "+";
@@ -314,70 +476,70 @@ span[data-line].diff.add:before {
 }
 
 .custom-wrapper {
-  @apply !relative !font-mono;
+  @apply relative! font-mono!;
 }
 
 .custom-wrapper .cm-line {
-  @apply !text-accent-700 dark:!text-[#FFC777];
+  @apply text-accent-700! dark:text-[#FFC777]!;
 }
 
 .custom-wrapper .cm-line span {
-  @apply !font-mono dark:!font-mono;
+  @apply font-mono! dark:font-mono!;
 }
 
 .custom-wrapper .sp-file-explorer-list span {
-  @apply !font-mono;
+  @apply font-mono!;
 }
 
 .custom-wrapper .sp-syntax-static {
-  @apply !text-accent-500 dark:!text-accent-400;
+  @apply text-accent-500! dark:text-accent-400!;
 }
 
 .custom-wrapper .sp-syntax-property {
-  @apply !text-primary-800 dark:!text-primary-100;
+  @apply text-primary-800! dark:text-primary-100!;
 }
 
 .custom-wrapper .sp-syntax-keyword {
-  @apply !text-red-500 dark:!text-[#FF757F];
+  @apply text-red-500! dark:text-[#FF757F]!;
 }
 
 .custom-wrapper .sp-syntax-punctuation {
-  @apply !text-primary-800 dark:!text-primary-300;
+  @apply text-primary-800! dark:text-primary-300!;
 }
 
 .custom-wrapper .sp-syntax-plain {
-  @apply !text-yellow-500 dark:!text-yellow-400;
+  @apply text-yellow-500! dark:text-yellow-400!;
 }
 
 .custom-wrapper .sp-syntax-definition {
-  @apply !text-lime-600 dark:!text-[#C3E88D];
+  @apply text-lime-600! dark:text-[#C3E88D]!;
 }
 
 .custom-wrapper .sp-syntax-string {
-  @apply !text-accent-700 dark:!text-[#FFC777];
+  @apply text-accent-700! dark:text-[#FFC777]!;
 }
 
 .custom-wrapper .sp-layout {
-  @apply !border-none !bg-primary-50 dark:!bg-background-600;
+  @apply border-none! bg-primary-50! dark:bg-background-600!;
 }
 .custom-wrapper .sp-file-explorer {
-  @apply !bg-primary-50 dark:!bg-background-600;
+  @apply bg-primary-50! dark:bg-background-600!;
 }
 
 .custom-wrapper .sp-explorer[data-active="true"] {
-  @apply !font-bold !text-accent-400;
+  @apply font-bold! text-accent-400!;
 }
 
 .custom-wrapper .sp-explorer:not([data-active="true"]) {
-  @apply hover:!text-primary-800 dark:hover:!text-primary-50;
+  @apply hover:text-primary-800! dark:hover:text-primary-50!;
 }
 
 .custom-wrapper .sp-editor,
 .custom-wrapper .sp-cm,
 .custom-wrapper .cm-editor {
-  @apply !bg-primary-50 dark:!bg-background-600;
+  @apply bg-primary-50! dark:bg-background-600!;
 }
 
 .custom-wrapper .cm-activeLine {
-  @apply !bg-primary-100 dark:!bg-background-400;
+  @apply bg-primary-100! dark:bg-background-400!;
 }

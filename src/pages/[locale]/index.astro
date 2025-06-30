@@ -38,9 +38,7 @@ const t = useTranslations(locale);
   <div>
     <div class='mb-6 flex flex-row items-center gap-6'>
       <span
-        class='box-border flex h-20 w-20 items-center justify-center overflow-hidden rounded-full align-middle outline-none
-      ring-2 ring-background-50 ring-slate-500 ring-offset-2 ring-offset-accent-secondary-300
-      dark:ring-background-500 dark:ring-offset-accent-secondary-500'
+        class='ring-background-50 ring-offset-accent-secondary-300 dark:ring-background-500 dark:ring-offset-accent-secondary-500 box-border flex h-20 w-20 items-center justify-center overflow-hidden rounded-full align-middle ring-2 ring-slate-500 ring-offset-2 outline-none'
       >
         <Image
           src={me}
@@ -53,9 +51,11 @@ const t = useTranslations(locale);
       </span>
 
       <div class='flex flex-col place-self-start'>
-        <h1 class='text-3xl leading-7 sm:text-4xl'>Javier Muñoz Tous</h1>
+        <h1 class='font-display text-3xl font-bold sm:text-4xl'>
+          Javier Muñoz Tous
+        </h1>
         <h2
-          class='italic text-accent-500 underline underline-offset-8 dark:text-accent-400 sm:text-xl'
+          class='text-accent-500! dark:text-accent-400 font-display font-bold italic underline underline-offset-8 sm:text-xl'
         >
           Full Stack Engineer
         </h2>
@@ -65,7 +65,7 @@ const t = useTranslations(locale);
 
     <div class='mt-12'>
       <h3
-        class='font-display text-xl font-bold text-primary-600 dark:text-primary-100 sm:text-2xl'
+        class='font-display text-primary-600 dark:text-primary-100 text-xl font-bold sm:text-2xl'
       >
         {t('latest.title')}
       </h3>
@@ -75,7 +75,7 @@ const t = useTranslations(locale);
       <div>
         <a
           href={getRelativeLocaleUrl(locale, `/blog`)}
-          class='link flex flex-row items-center gap-2'
+          class='font-body link flex flex-row items-center gap-2'
         >
           {t('latest.link')}
           <ArrowRight width={12} height={12} />

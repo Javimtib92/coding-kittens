@@ -1,10 +1,11 @@
 ---
 import colors from 'tailwindcss/colors';
-import type { DefaultColors } from 'tailwindcss/types/generated/colors';
 import { cn } from '~/utils/cn';
 
+type Color = keyof typeof colors;
+
 type Props = {
-  color: keyof DefaultColors;
+  color: Color;
 };
 const { color = 'blue', ...props } = Astro.props;
 ---
@@ -20,16 +21,16 @@ const { color = 'blue', ...props } = Astro.props;
   {...props}
 >
   <span
-    class='absolute left-1/2 h-full -translate-x-1/2 border-[1px] border-red-300'
+    class='absolute left-1/2 h-full -translate-x-1/2 border border-red-300'
     style={{
       borderColor: colors[color]['500'],
     }}></span>
   <span
-    class='pointer-events-none absolute right-0 z-[2] h-full w-1/2 rounded-r-full border-[1px] border-none opacity-20 outline-none'
+    class='pointer-events-none absolute right-0 z-2 h-full w-1/2 rounded-r-full border border-none opacity-20 outline-none'
     style={{
       background: `repeating-linear-gradient(45deg, transparent, transparent 2px,${colors[color]['500']} 2px,${colors[color]['500']} 3px)`,
     }}></span>
-  <span class='z-[1] bg-primary-50 text-xs dark:bg-background-500'>
+  <span class='bg-primary-50 dark:bg-background-500 z-1 text-xs'>
     <slot />
   </span>
 </span>

@@ -2,6 +2,7 @@
 import BaseHead from './BaseHead.astro';
 import Footer from './Footer.astro';
 import Navbar from './Navbar.astro';
+import '../styles/global.css';
 
 const { locale, title, shortDescription, image } =
   Astro.props.frontmatter || Astro.props;
@@ -63,7 +64,7 @@ const { locale, title, shortDescription, image } =
     <BaseHead title={title} description={shortDescription} image={image} />
   </head>
   <body
-    class='bg-white text-black antialiased transition-colors dark:bg-background-700 dark:text-white'
+    class='dark:bg-background-700 bg-white text-black antialiased transition-colors dark:text-white'
   >
     <div class='mb-40 max-w-3xl md:mx-auto'>
       <main class='flex min-w-0 flex-auto flex-col px-2 md:px-0'>
