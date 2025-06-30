@@ -12,12 +12,12 @@ const locale = Astro.currentLocale || 'en';
 
 <nav
   x-data='navbar'
-  class='navbar sticky top-0 z-10 mb-12 mt-20 flex flex-row items-start py-4 pl-2 pr-4 md:-mx-[28px] md:px-5'
+  class='navbar sticky top-0 z-10 mt-20 mb-12 flex flex-row items-start py-4 pr-4 pl-2 md:-mx-[28px] md:px-5'
 >
   <MobileNavMenu />
 
   <div
-    class='backdrop absolute left-[-8px] right-[-8px] top-0 h-20 min-w-full backdrop-blur md:-mx-[28px]'
+    class='backdrop absolute top-0 right-[-8px] left-[-8px] h-20 min-w-full backdrop-blur md:-mx-[28px]'
   >
   </div>
 
@@ -41,12 +41,12 @@ const locale = Astro.currentLocale || 'en';
 
       <div class='flex flex-col'>
         <p
-          class='m-0 font-display text-xl font-bold text-primary-600 dark:text-xl dark:text-primary-100 sm:text-2xl sm:dark:text-2xl'
+          class='font-display text-primary-600 dark:text-primary-100 m-0 text-xl font-bold sm:text-2xl dark:text-xl sm:dark:text-2xl'
         >
           Coding Kittens
         </p>
         <p
-          class='m-0 text-[10px] text-primary-400 dark:text-[10px] dark:text-primary-400 sm:text-xs dark:sm:text-xs'
+          class='font-body text-primary-400 dark:text-primary-400 m-0 text-[10px] sm:text-xs dark:text-[10px] dark:sm:text-xs'
         >
           Curiosity Didn&apos;t Kill The Cat
         </p>
@@ -106,7 +106,7 @@ const locale = Astro.currentLocale || 'en';
   }
 </style>
 
-<script type='module'>
+<script is:inline type='module'>
   const threshold = 500; // Adjust this threshold as needed
 
   function handleScroll() {

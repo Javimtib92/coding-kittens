@@ -8,15 +8,15 @@ const locale = Astro.currentLocale || 'en';
 const t = useTranslations(locale);
 ---
 
-<footer class='h-auto w-full bg-primary-100 dark:bg-background-500'>
+<footer class='bg-primary-100 dark:bg-background-500 h-auto w-full'>
   <div class='flex max-w-3xl flex-col gap-4 px-6 py-4 sm:px-0 md:mx-auto'>
     <div class='flex flex-row items-center gap-4'>
-      <p class='subtle mb-6 mt-6 px-0 font-mono sm:px-2'>
+      <p class='subtle mt-6 mb-6 px-0 font-mono sm:px-2'>
         {t('footer.createdBy')}
       </p>
 
       <span
-        class='box-border flex h-8 w-8 items-center overflow-hidden rounded-full align-middle outline-none ring-2 ring-background-50 ring-offset-2 ring-offset-accent-secondary-300 dark:ring-background-500 dark:ring-offset-accent-secondary-500 sm:h-12 sm:w-12'
+        class='ring-background-50 ring-offset-accent-secondary-300 dark:ring-background-500 dark:ring-offset-accent-secondary-500 box-border flex h-8 w-8 items-center overflow-hidden rounded-full align-middle ring-2 ring-offset-2 outline-none sm:h-12 sm:w-12'
       >
         <Image
           src={me}
@@ -29,42 +29,42 @@ const t = useTranslations(locale);
     </div>
 
     <div
-      class='h-1 w-[90%] border-b border-solid border-b-primary-200 dark:border-b-background-400 sm:w-full'
+      class='border-b-primary-200 dark:border-b-background-400 h-1 w-[90%] border-b border-solid sm:w-full'
     >
     </div>
 
     <div
       class='flex w-auto flex-col justify-between sm:w-full sm:flex-row sm:items-center'
     >
-      <p class='prose subtle px-0 font-mono sm:px-2'>
+      <p class='prose-mono subtle px-0 sm:px-2'>
         © {new Date().getFullYear()} Javier Muñoz Tous
       </p>
       <div>
-        <p class='subtle mb-6 mt-6 font-mono'>
+        <p class='subtle mt-6 mb-6 font-mono'>
           <a
             href='https://bsky.app/profile/javimt.bsky.social'
-            class='link -m-2 p-2 font-body font-bold'
+            class='link font-body -m-2 p-2 font-bold'
           >
             Bsky
           </a>
           <span class='mx-2'> · </span>
           <a
             href='https://github.com/Javimtib92'
-            class='link -m-2 p-2 font-body font-bold'
+            class='link font-body -m-2 p-2 font-bold'
           >
             Github
           </a>
           <span class='mx-2'> · </span>
           <a
             href='https://www.linkedin.com/in/javier-muñoz-tous/'
-            class='link -m-2 p-2 font-body font-bold'
+            class='link font-body -m-2 p-2 font-bold'
           >
             LinkedIn
           </a>
           <span class='mx-2'> · </span>
           <a
             href='https://www.instagram.com/javimtib92'
-            class='link -m-2 p-2 font-body font-bold'
+            class='link font-body -m-2 p-2 font-bold'
           >
             Instagram
           </a>

@@ -25,10 +25,10 @@ const t = useTranslations(locale);
   class='fixed top-0 z-40 -mx-4 h-dvh w-dvw backdrop-blur'
 >
   <div
-    class='h-64 bg-white dark:bg-background-700'
+    class='dark:bg-background-700 h-64 bg-white'
     x-on:click='(e) => e.stopPropagation()'
   >
-    <div class='flex flex-row-reverse pr-6 pt-6'>
+    <div class='flex flex-row-reverse pt-6 pr-6'>
       <button class='-m-4 p-4' x-on:click='toggleMobileNavigation(false)'>
         <X width={24} height={24} />
       </button>
@@ -40,7 +40,7 @@ const t = useTranslations(locale);
           pathname === getRelativeLocaleUrl(locale, '/')
             ? activeClass
             : inactiveClass,
-          'flex align-middle transition-all'
+          'flex align-middle transition-all font-body'
         )}
       >
         <span class='relative px-2 py-1'>{t('nav.home')}</span>
@@ -49,7 +49,7 @@ const t = useTranslations(locale);
         href={getRelativeLocaleUrl(locale, '/blog')}
         class={cn(
           segments.includes('blog') ? activeClass : inactiveClass,
-          'flex align-middle transition-all'
+          'flex align-middle transition-all font-body'
         )}
       >
         <span class='relative px-2 py-1'>{t('nav.blog')}</span>

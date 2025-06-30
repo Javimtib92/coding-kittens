@@ -50,7 +50,7 @@ export function LanguageSwitchButtonDropdown({
       </Button>
       <Popover
         className={cn(
-          'bg-popover text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-md dark:bg-background-700'
+          'bg-popover text-popover-foreground z-50 min-w-32 overflow-hidden rounded-md border bg-white p-1 shadow-md dark:bg-background-700'
         )}
       >
         <Menu items={items} onAction={(id) => onChangeLanguage(id as string)}>
@@ -60,7 +60,7 @@ export function LanguageSwitchButtonDropdown({
                 'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors'
               )}
             >
-              <div className='flex flex-row items-center justify-between gap-2'>
+              <div className='font-body flex flex-row items-center justify-between gap-2'>
                 {item.name} {locale === item.id && <Check className='w-4' />}
               </div>
             </MenuItem>

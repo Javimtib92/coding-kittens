@@ -38,11 +38,11 @@ const locale = Astro.currentLocale || 'en';
     <header>
       <div class='flex flex-row items-center justify-between'>
         <h3
-          class='mb-2 ml-0 mr-10 mt-2 font-mono text-sm font-bold italic leading-5 text-accent-secondary-400 dark:text-accent-secondary-300 sm:text-sm'
+          class='text-accent-secondary-400 dark:text-accent-secondary-300 mt-2 mr-10 mb-2 ml-0 font-mono text-sm leading-5 font-bold italic sm:text-sm'
         >
           {subtitle}
         </h3>
-        <div class='mb-4 mt-2'>
+        <div class='mt-2 mb-4'>
           <a
             class='link font-mono text-sm font-extrabold underline underline-offset-8'
             href={getRelativeLocaleUrl(locale, `/blog/${category}`)}
@@ -55,20 +55,20 @@ const locale = Astro.currentLocale || 'en';
       <h2 class='mb-4'>
         <a
           href={getRelativeLocaleUrl(locale, `/blog/${category}/${id}`)}
-          class='font-display text-4xl font-bold leading-7 text-primary-900 hover:text-primary-900 dark:text-primary-100 dark:hover:text-primary-100'
+          class='font-display text-primary-900 hover:text-primary-900 dark:text-primary-100 dark:hover:text-primary-100 text-4xl leading-7 font-bold'
         >
           {title}
         </a>
       </h2>
     </header>
-    <p class='prose mb-0 mt-0 leading-6 max-sm:hidden'>
+    <p class='prose mt-0 mb-0 leading-6 max-sm:hidden'>
       {shortDescription}
     </p>
     <footer class='mt-4 flex justify-between'>
-      <p class='prose subtle font-mono'>
+      <p class='prose-mono subtle'>
         {formatDate(pubDate, locale)}
       </p>
-      <p class='prose subtle font-mono'>
+      <p class='prose-mono subtle'>
         {translateReadingTime(readingTime, locale)}
       </p>
     </footer>

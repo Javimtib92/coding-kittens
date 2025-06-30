@@ -1,7 +1,6 @@
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import catppuccinLate from '@catppuccin/vscode/themes/latte.json';
 import catppuccinMocha from '@catppuccin/vscode/themes/mocha.json';
 import { defineConfig } from 'astro/config';
@@ -11,6 +10,7 @@ import {
   transformerNotationFocus,
 } from 'shikiji-transformers';
 import { remarkReadingTime } from './remark/remark-reading-time.mjs';
+import tailwindcss from '@tailwindcss/vite';
 const prettyCodeOptions = {
   keepBackground: false,
   theme: {
@@ -27,10 +27,13 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'viewport',
   },
+
   experimental: {
     clientPrerender: true,
   },
+
   site: 'https://coding-kittens.com',
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'ca'],
@@ -38,6 +41,7 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
+
   integrations: [
     mdx(),
     sitemap({
@@ -53,13 +57,18 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
     }),
-    tailwind(),
     react(),
   ],
+
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
   },
+
   output: 'static',
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

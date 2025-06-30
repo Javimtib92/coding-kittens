@@ -23,7 +23,7 @@ const t = useTranslations(locale);
     href={getRelativeLocaleUrl(locale, '/')}
     data-astro-prefetch
     class={cn(
-      'flex align-middle transition-all',
+      'flex align-middle transition-all font-body',
       pathname === getRelativeLocaleUrl(locale, '/')
         ? activeClass
         : inactiveClass
@@ -35,7 +35,7 @@ const t = useTranslations(locale);
     href={getRelativeLocaleUrl(locale, '/blog')}
     data-astro-prefetch
     class={cn(
-      'flex align-middle transition-all',
+      'flex align-middle transition-all font-body',
       segments.includes('blog') ? activeClass : inactiveClass
     )}
   >
