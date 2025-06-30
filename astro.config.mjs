@@ -29,7 +29,6 @@ export default defineConfig({
   },
   experimental: {
     clientPrerender: true,
-    responsiveImages: true,
   },
   site: 'https://coding-kittens.com',
   i18n: {
