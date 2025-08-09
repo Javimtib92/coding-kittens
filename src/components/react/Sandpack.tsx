@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   SandpackCodeEditor,
@@ -7,8 +7,8 @@ import {
   SandpackLayout,
   SandpackPreview,
   SandpackProvider,
-} from '@codesandbox/sandpack-react';
-import React from 'react';
+} from "@codesandbox/sandpack-react";
+import React from "react";
 
 class ErrorBoundary extends React.Component<
   { fallback: React.ReactNode; children?: React.ReactNode },
@@ -26,8 +26,8 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className='mb-8 flex items-center rounded border border-red-700 bg-red-200 p-1 px-4 py-3 text-sm text-red-900'>
-          <div className='callout w-full'>{this.props.fallback}</div>
+        <div className="mb-8 flex items-center rounded border border-red-700 bg-red-200 p-1 px-4 py-3 text-sm text-red-900">
+          <div className="callout w-full">{this.props.fallback}</div>
         </div>
       );
     }
@@ -38,28 +38,28 @@ class ErrorBoundary extends React.Component<
 
 export function CodeSandbox({ files }: { files: SandpackFiles }) {
   return (
-    <ErrorBoundary fallback={'There was an error loading the CodeSandbox.'}>
+    <ErrorBoundary fallback={"There was an error loading the CodeSandbox."}>
       <SandpackProvider
         files={files}
-        theme={'auto'}
+        theme={"auto"}
         options={{
-          bundlerURL: 'https://sandpack-static-server.codesandbox.io',
+          bundlerURL: "https://sandpack-static-server.codesandbox.io",
           classes: {
-            'sp-wrapper': 'custom-wrapper',
-            'sp-preview': 'h-full dark:bg-background-400',
-            'sp-preview-iframe': 'dark:bg-background-400',
-            'sp-preview-container': 'dark:bg-background-400',
-            'sp-preview-actions': 'left-4 bottom-4',
+            "sp-wrapper": "custom-wrapper",
+            "sp-preview": "h-full dark:bg-background-400",
+            "sp-preview-iframe": "dark:bg-background-400",
+            "sp-preview-container": "dark:bg-background-400",
+            "sp-preview-actions": "left-4 bottom-4",
           },
-          initMode: 'user-visible',
-          initModeObserverOptions: { rootMargin: '1000px 0px' },
+          initMode: "user-visible",
+          initModeObserverOptions: { rootMargin: "1000px 0px" },
         }}
-        template='static'
+        template="static"
       >
-        <div className='mt-4 h-80 min-h-80 bg-background-300'>
-          <SandpackPreview className='h-full' />
+        <div className="mt-4 h-80 min-h-80 bg-background-300">
+          <SandpackPreview className="h-full" />
         </div>
-        <SandpackLayout className='mb-8'>
+        <SandpackLayout className="mb-8">
           <SandpackFileExplorer />
           <SandpackCodeEditor showTabs={false} />
         </SandpackLayout>
