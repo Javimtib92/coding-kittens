@@ -1,13 +1,13 @@
-import { toString as mdastToString } from 'mdast-util-to-string';
-import getReadingTime from 'reading-time';
+import { toString as mdastToString } from "mdast-util-to-string";
+import getReadingTime from "reading-time";
 
 export const translateReadingTime = (text, locale) => {
-  if (locale === 'en') {
+  if (locale === "en") {
     return text;
   }
 
-  if (locale === 'es' || locale === 'ca') {
-    return text.replace('read', 'de lectura');
+  if (locale === "es" || locale === "ca") {
+    return text.replace("read", "de lectura");
   }
 };
 

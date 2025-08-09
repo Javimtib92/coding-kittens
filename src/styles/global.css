@@ -69,15 +69,47 @@
 
   /* Primary Colors */
   --color-primary-50: color-mix(in oklch, var(--color-primary-base) 5%, white);
-  --color-primary-100: color-mix(in oklch, var(--color-primary-base) 10%, white);
-  --color-primary-200: color-mix(in oklch, var(--color-primary-base) 30%, white);
-  --color-primary-300: color-mix(in oklch, var(--color-primary-base) 50%, white);
-  --color-primary-400: color-mix(in oklch, var(--color-primary-base) 70%, white);
+  --color-primary-100: color-mix(
+    in oklch,
+    var(--color-primary-base) 10%,
+    white
+  );
+  --color-primary-200: color-mix(
+    in oklch,
+    var(--color-primary-base) 30%,
+    white
+  );
+  --color-primary-300: color-mix(
+    in oklch,
+    var(--color-primary-base) 50%,
+    white
+  );
+  --color-primary-400: color-mix(
+    in oklch,
+    var(--color-primary-base) 70%,
+    white
+  );
   --color-primary-500: var(--color-primary-base);
-  --color-primary-600: color-mix(in oklch, var(--color-primary-base), black 10%);
-  --color-primary-700: color-mix(in oklch, var(--color-primary-base), black 30%);
-  --color-primary-800: color-mix(in oklch, var(--color-primary-base), black 50%);
-  --color-primary-900: color-mix(in oklch, var(--color-primary-base), black 70%);
+  --color-primary-600: color-mix(
+    in oklch,
+    var(--color-primary-base),
+    black 10%
+  );
+  --color-primary-700: color-mix(
+    in oklch,
+    var(--color-primary-base),
+    black 30%
+  );
+  --color-primary-800: color-mix(
+    in oklch,
+    var(--color-primary-base),
+    black 50%
+  );
+  --color-primary-900: color-mix(
+    in oklch,
+    var(--color-primary-base),
+    black 70%
+  );
 
   /* Secondary Colors */
   --color-secondary-50: color-mix(
@@ -210,15 +242,15 @@ p {
 }
 
 .prose {
-  @apply font-body text-base text-primary-800 dark:text-primary-200;
+  @apply font-body text-primary-800 dark:text-primary-200 text-base;
 }
 
 .prose-mono {
-  @apply font-mono text-base text-primary-800 dark:text-primary-200;
+  @apply text-primary-800 dark:text-primary-200 font-mono text-base;
 }
 
 .subtle {
-  @apply text-xs text-primary-400 dark:text-primary-400;
+  @apply text-primary-400 dark:text-primary-400 text-xs;
 }
 
 .dark .callout-warning p,
@@ -255,7 +287,7 @@ p {
 }
 
 .blockquote > p {
-  @apply my-0 font-medium italic leading-relaxed text-primary-500 dark:text-primary-100;
+  @apply text-primary-500 dark:text-primary-100 my-0 leading-relaxed font-medium italic;
 }
 
 .list-item > p {
@@ -287,7 +319,9 @@ code:not(:has(span)) {
 
 .has-focused span[data-line]:not(.focused) {
   opacity: 0.7;
-  transition: filter 0.35s, opacity 0.35s;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
   filter: blur(0.095rem);
 }
 
@@ -401,8 +435,16 @@ html:not(.dark) [data-rehype-pretty-code-title] {
   --tw-bg-opacity: 1;
   background-color: rgb(28 28 28 / var(--tw-bg-opacity));
   padding: 0.75rem 1rem;
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, Liberation Mono, Courier New, monospace;
+  font-family:
+    var(--font-mono),
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
@@ -445,13 +487,23 @@ html:not(.dark) [data-rehype-pretty-code-title] {
 }
 
 [data-rehype-pretty-code-figure] span {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, Liberation Mono, Courier New, monospace;
+  font-family:
+    var(--font-mono),
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
 }
 
 .has-focused span[data-line]:not(.focused) {
   opacity: 0.7;
-  transition: filter 0.35s, opacity 0.35s;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
   filter: blur(0.095rem);
 }
 
@@ -520,14 +572,14 @@ span[data-line].diff.add:before {
 }
 
 .custom-wrapper .sp-layout {
-  @apply border-none! bg-primary-50! dark:bg-background-600!;
+  @apply bg-primary-50! dark:bg-background-600! border-none!;
 }
 .custom-wrapper .sp-file-explorer {
   @apply bg-primary-50! dark:bg-background-600!;
 }
 
 .custom-wrapper .sp-explorer[data-active="true"] {
-  @apply font-bold! text-accent-400!;
+  @apply text-accent-400! font-bold!;
 }
 
 .custom-wrapper .sp-explorer:not([data-active="true"]) {
