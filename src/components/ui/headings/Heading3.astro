@@ -1,14 +1,14 @@
 ---
-import { Link } from 'lucide-react';
-import Heading from '~/components/ui/Heading.astro';
+import { Link } from "lucide-react";
+import Heading from "~/components/ui/Heading.astro";
 
 const { id } = Astro.props;
 ---
 
 <Heading
   id={id}
-  as='h3'
-  extendedClass='title-link hover:text-accent-500 dark:hover:text-accent-400 md:inline-flex md:flex-row md:items-center'
+  as="h3"
+  extendedClass="title-link hover:text-accent-500 dark:hover:text-accent-400 md:inline-flex md:flex-row md:items-center"
   data-anchor
 >
   <a href={`#${id}`}>
@@ -17,6 +17,6 @@ const { id } = Astro.props;
   <Link
     width={28}
     height={28}
-    className='anchor -mr-2 inline-block cursor-pointer pl-2 no-underline after:text-accent-400 md:invisible'
+    className="anchor after:text-accent-400 -mr-2 inline-block cursor-pointer pl-2 no-underline md:invisible"
   />
 </Heading>

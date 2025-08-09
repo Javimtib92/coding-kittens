@@ -8,9 +8,9 @@ export function formatDate(inputDate: Date, locale: string) {
   // Function to format the date
   function formatDate(date: Date) {
     const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     } as Intl.DateTimeFormatOptions;
 
     return new Intl.DateTimeFormat(locale, options).format(date);

@@ -40,18 +40,18 @@ const { Content } = await render(post);
 >
   <section>
     <h1
-      class='font-display text-4xl font-bold text-primary-600 dark:text-primary-100 sm:text-5xl'
+      class='font-display text-primary-600 dark:text-primary-100 text-4xl font-bold sm:text-5xl'
     >
       {post.data.title}
     </h1>
-    <div class='mb-8 mt-4 flex items-center justify-between text-sm'>
-      <p class='subtle mb-0 mt-0 font-mono'>
+    <div class='mt-4 mb-8 flex items-center justify-between text-sm'>
+      <p class='subtle mt-0 mb-0 font-mono'>
         {
           /* Now is computed on the server but probably I need the locale here so that I can format based on locale */
         }
         {formatDate(post.data.pubDate, locale)}
       </p>
-      <p class='subtle mb-0 mt-0 font-mono'>
+      <p class='subtle mt-0 mb-0 font-mono'>
         {/* <ViewCount slug={slug} /> */}
       </p>
     </div>

@@ -1,14 +1,14 @@
-import Link from '~/components/ui/Link.astro';
-import ListItem from '~/components/ui/ListItem.astro';
-import OrderedList from '~/components/ui/OrderedList.astro';
-import Paragraph from '~/components/ui/Paragraph.astro';
-import Quote from '~/components/ui/Quote.astro';
-import UnorderedList from '~/components/ui/UnorderedList.astro';
-import Heading1 from '~/components/ui/headings/Heading1.astro';
-import Heading2 from '~/components/ui/headings/Heading2.astro';
-import Heading3 from '~/components/ui/headings/Heading3.astro';
-import Heading4 from '~/components/ui/headings/Heading4.astro';
-import Heading5 from '~/components/ui/headings/Heading5.astro';
+import Link from "~/components/ui/Link.astro";
+import ListItem from "~/components/ui/ListItem.astro";
+import OrderedList from "~/components/ui/OrderedList.astro";
+import Paragraph from "~/components/ui/Paragraph.astro";
+import Quote from "~/components/ui/Quote.astro";
+import UnorderedList from "~/components/ui/UnorderedList.astro";
+import Heading1 from "~/components/ui/headings/Heading1.astro";
+import Heading2 from "~/components/ui/headings/Heading2.astro";
+import Heading3 from "~/components/ui/headings/Heading3.astro";
+import Heading4 from "~/components/ui/headings/Heading4.astro";
+import Heading5 from "~/components/ui/headings/Heading5.astro";
 
 export const mdxComponents = {
   h1: Heading1,
