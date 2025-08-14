@@ -1,11 +1,11 @@
-/ https://www.coding-kittens.com/en 301
+/ https://www.coding-kittens.com/en/ 301
 
-/blog https://www.coding-kittens.com/en/blog 301
+/blog https://www.coding-kittens.com/en/blog/ 301
 
-/blog/ https://www.coding-kittens.com/en/blog 301
+/blog/ https://www.coding-kittens.com/en/blog/ 301
 
-/blog/:category https://www.coding-kittens.com/en/blog/:category 301
+/blog/:category https://www.coding-kittens.com/en/blog/:category/ 301
 
-/blog/:category/ https://www.coding-kittens.com/en/blog/:category 301
+/blog/:category/ https://www.coding-kittens.com/en/blog/:category/ 301
 
-/blog/:category/* https://www.coding-kittens.com/en/blog/:category/:splat 301
+/blog/:category/* https://www.coding-kittens.com/en/blog/:category/:splat/ 301
