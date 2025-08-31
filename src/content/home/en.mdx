@@ -1,20 +1,29 @@
-import Highlight from '~/components/ui/Highlight.astro';
+import Highlight from "~/components/ui/Highlight.astro";
+import { getYearDiffFromNow } from '~/utils/date';
 
-<Highlight><b class='font-display text-xl text-primary-600 dark:text-primary-100'>Hola 👋, welcome to Coding Kittens!</b></Highlight>
+<Highlight>
+  <b class="font-display text-xl text-primary-600 dark:text-primary-100">
+    Hola 👋, welcome to Coding Kittens!
+  </b>
+</Highlight>
 
 My name is Javier Muñoz Tous and you are reading my personal blog.
 
-With over **8 years of experience** in software development I've worked in all kinds of projects: `SaaS`, `Internal Tools`, `Search Engines`, `Smartphone Apps`, etc.
+With over **{getYearDiffFromNow(new Date("01-05-2015"))} years of experience** in software development I've worked in all kinds of projects: `SaaS`, `Internal Tools`, `Search Engines`, `Smartphone Apps`, etc.
 
 In this blog I will share, among other things, programming ideas, tutorials and experiences I've lived during my professional career.
 
 Almost all the content will be about JavaScript and Web Development; but I will also include other programming languages that I may learn along the way.
 
 ```typescript
-const codingKittens = 'Loki & Nym 🐱';
+const codingKittens = "Loki & Nym 🐱";
 ```
 
-<Highlight>Loki and Nym are my two adorable cats and the source of inspiration for this blog's name.</Highlight> I share office with them at home.
+<Highlight>
+  Loki and Nym are my two adorable cats and the source of inspiration for this
+  blog's name.
+</Highlight>
+I share office with them at home.
 
 It's being said that in reality they are the ones typing the code and the ones who created this blog. 🤫
 

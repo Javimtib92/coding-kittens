@@ -31,9 +31,10 @@ export function formatDate(inputDate: Date, locale: string) {
 }
 
 export function getYearDiff(from: Date, to: Date) {
-  const diff = to.getTime() - from.getTime();
+  const msPerYear = 1000 * 60 * 60 * 24 * 365.25;
+  return Math.floor(Math.abs((to.getTime() - from.getTime()) / msPerYear));
+}
 
-  const date = new Date(diff);
-
-  return Math.abs(date.getFullYear() - 1970);
+export function getYearDiffFromNow(to: Date) {
+  return getYearDiff(new Date(), to);
 }

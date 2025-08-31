@@ -1,11 +1,12 @@
 import Callout from '~/components/ui/Callout.astro';
 import Highlight from '~/components/ui/Highlight.astro';
+import { getYearDiffFromNow } from '~/utils/date';
 
 <Highlight><b class='font-display text-xl text-primary-600 dark:text-primary-100'>Hola 👋, benvolgut a Coding Kittens!</b></Highlight>
 
 El meu nom és Javier Muñoz Tous i ara mateix estàs llegint el meu blog personal.
 
-Amb més de **8 anys d'experiència** en desenvolupament web he treballat a tota mena de projectes: `SaaS`, `Eines internes`, `Motors de recerca`, `Apps de Smartphone`, etc.
+Amb més de **{getYearDiffFromNow(new Date("01-05-2015"))} anys d'experiència** en desenvolupament web he treballat a tota mena de projectes: `SaaS`, `Eines internes`, `Motors de recerca`, `Apps de Smartphone`, etc.
 
 A aquest blog compartiré, entre altres coses, idees sobre programació, tutorials i experiències que he viscut durant la meva carrera professional.
 
