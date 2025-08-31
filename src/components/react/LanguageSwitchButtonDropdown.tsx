@@ -42,7 +42,7 @@ export function LanguageSwitchButtonDropdown({
     <MenuTrigger>
       <Button
         aria-label="Switch language button"
-        className="-mx-4 -my-2 px-4 py-2"
+        className="-mx-4 -my-2 px-4 py-2 cursor-pointer"
       >
         <span className="h-6 w-6 text-primary-600 dark:text-primary-100">
           <Languages />
@@ -50,14 +50,14 @@ export function LanguageSwitchButtonDropdown({
       </Button>
       <Popover
         className={cn(
-          "bg-popover text-popover-foreground z-50 min-w-32 overflow-hidden rounded-md border bg-white p-1 shadow-md dark:bg-background-700",
+          "bg-popover text-popover-foreground z-50 min-w-32 overflow-hidden rounded-md border bg-white p-1 shadow-md dark:bg-background-700"
         )}
       >
         <Menu items={items} onAction={(id) => onChangeLanguage(id as string)}>
           {(item) => (
             <MenuItem
               className={cn(
-                "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors",
+                "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors"
               )}
             >
               <div className="font-body flex flex-row items-center justify-between gap-2">
